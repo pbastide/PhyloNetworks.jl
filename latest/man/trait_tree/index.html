@@ -653,15 +653,15 @@ predint(ancPred) # The prediction interval (default to 95%)
 plot(phy, nodeLabel = ancExpe)
 </code></pre>
 
-<p><img alt="Ancestral State Reconstruction." src="../../assets/figures/trait_tree_ancestral_expe_1.pdf" /></p>
+<p><img alt="Ancestral State Reconstruction." src="../../assets/figures/trait_tree_ancestral_expe_1.png" /></p>
 <pre><code class="julia">ancInt = predintPlot(ancPred) # Format the prediction intervals for the plot
 plot(phy, nodeLabel = ancInt)
 </code></pre>
 
-<p><img alt="Prediction Intervals." src="../../assets/figures/trait_tree_ancestral_predint_1.pdf" /></p>
+<p><img alt="Prediction Intervals." src="../../assets/figures/trait_tree_ancestral_predint_1.png" /></p>
 <p>As we know the true ancestral states here, we can compare them to our estimation. In particular, we can count the number of times the true value lies in the prediction interval. This should be true about 95% of the times.</p>
 <pre><code class="julia">julia&gt; sum((predNodes .&lt; predint(ancPred)[1:99, 2]) &amp; (predNodes .&gt; predint(ancPred)[1:99, 1]))
-94
+95
 
 </code></pre>
 
