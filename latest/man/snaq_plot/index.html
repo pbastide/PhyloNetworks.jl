@@ -537,7 +537,8 @@
 <p><a id='Network-Estimation-1'></a></p>
 <h2 id="network-estimation">Network Estimation</h2>
 <p>After <a href="../inputdata/#Input-for-SNaQ-1">Input for SNaQ</a>, we can estimate the network using the input data <code>d</code> and starting from tree (or network) <code>T</code>:</p>
-<pre><code class="julia">net1=snaq!(T,d,filename=&quot;net1_snaq&quot;);
+<pre><code class="julia">
+net1=snaq!(T,d,filename=&quot;net1_snaq&quot;);
 less(&quot;net1_snaq.err&quot;)
 less(&quot;net1_snaq.out&quot;)
 less(&quot;net1_snaq.networks&quot;)
@@ -547,7 +548,8 @@ net2=snaq!(T,d,hmax=2, filename=&quot;net2_snaq&quot;);
 <p>when viewing the result files "net1_snaq.err" and "net1_snaq.out" with <code>less</code> within Julia, use arrows to scroll down and type <code>q</code> to quit viewing the files. The "net1_snaq.networks" file contains a list of networks obtained from moving the placement of the hybrid node to another node inside the cycle, along with its pseudolikelihood score.</p>
 <p>The option <code>hmax</code> corresponds to the maximum number of hybridizations allowed, 1 by default. The function name <code>snaq!</code> ends with ! because it modifies the argument <code>d</code> by including the expected CF. Type <code>?</code> then <code>snaq!</code> to get help on that function.</p>
 <p>The estimation function creates a <code>.out</code> file (<code>snaq.out</code> by default) with the estimated network in parenthetical format, which you can also print directly to the screen like this:</p>
-<pre><code class="julia">net1
+<pre><code class="julia">
+net1
 writeTopology(net1)                   # topology to screen, full precision for branch lengths and γ
 writeTopology(net1,di=true)           # γ omitted: for dendroscope
 writeTopology(net1, &quot;bestnet_h1.tre&quot;) # topology to file 'bestnet_h1.tre': creates or overwrites file
@@ -558,7 +560,8 @@ less(&quot;bestnet_h1.tre&quot;)                # just view the file
 <p><a id='SNaQ-error-1'></a></p>
 <h3 id="snaq-error">SNaQ error</h3>
 <p>Please report any bugs and errors to <em>claudia@stat.wisc.edu</em>, so we can debug it. The easiest way to do it is by checking the <code>.err</code> file which will show the number of runs that failed by a bug and the corresponding seed to replicate the run. This is an example of what the <code>.err</code> file looks like: <code>Total errors: 1 in seeds [4545]</code>. You need to run the following function with the same settings that caused the error:</p>
-<pre><code class="julia">snaqDebug(T,d,hmax=2,seed=4545)
+<pre><code class="julia">
+snaqDebug(T,d,hmax=2,seed=4545)
 </code></pre>
 
 <p>This will create two files: <em>snaqDebug.log</em> and <em>debug.log</em> which you can then send to <em>claudia@stat.wisc.edu</em> with subject "SNaQ bug found" or something similar. I will not have access to any part of your data, the files simply print out the steps to retrace the bug, and hopefully fix it.</p>
@@ -568,8 +571,10 @@ less(&quot;bestnet_h1.tre&quot;)                # just view the file
 <pre><code class="julia">p = plot(net1, showGamma=true)
 </code></pre>
 
+<p><img alt="Inferred Network." src="../../assets/figures/snaq_plot_net1_1_1.png" /></p>
 <p>This function will open a browser where the plot will appear. To get a pdf version of the plot:</p>
-<pre><code class="julia">using Gadfly
+<pre><code class="julia">
+using Gadfly
 draw(PDF(&quot;bestnet_h1.pdf&quot;, 4inch, 4inch),p)
 </code></pre>
 
@@ -578,6 +583,7 @@ draw(PDF(&quot;bestnet_h1.pdf&quot;, 4inch, 4inch),p)
 plot(net1, showEdgeLength=true, minorHybridEdgeColor=colorant&quot;tan&quot;)
 </code></pre>
 
+<p><img alt="Inferred Network." src="../../assets/figures/snaq_plot_net1_2_1.png" /></p>
 <p><a id='Re-rooting-networks-1'></a></p>
 <h2 id="re-rooting-networks">Re-rooting networks</h2>
 <p>SNaQ infers an unrooted semi-directed network, in the sense that the direction of tree edges cannot be inferred, but the direction of hybrid edges can be inferred. To obtain a representative visualization, it is best to root the network first, using one or more outgroup. If there is a single outgroup, the network can be rooted with this outgroup, if compatible, like this:</p>
@@ -585,6 +591,7 @@ plot(net1, showEdgeLength=true, minorHybridEdgeColor=colorant&quot;tan&quot;)
 plot(net1, showGamma=true)
 </code></pre>
 
+<p><img alt="Re-rooted Network." src="../../assets/figures/snaq_plot_net1_3_1.png" /></p>
 <p>Here we used taxon "4" as outgroup. More options are available, to root the network either at a give node or along a given edge. Use the help mode (type <code>?</code>) to get help on the functions <code>rootatnode!</code> and <code>rootonedge!</code> to get more info.</p>
 <p>If the network is plotted with crossing edges, you may identify ways to rotate the children edges at some nodes to untangle some crossing edges. This can be done using the function <code>rotate!</code>. Type <code>?</code> then <code>rotate!</code> to get help and examples.</p>
 <p><a id='Candidate-Network-Evaluation-1'></a></p>
