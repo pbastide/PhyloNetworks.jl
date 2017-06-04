@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html class="no-js">
+<html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -15,20 +15,20 @@
       
         <link rel="shortcut icon" href="../../assets/images/favicon.png">
       
-      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.5.5">
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.1">
     
     
       
-        <title>Trait Evolution - PhyloNetworks.jl</title>
+        <title>Continuous Trait Evolution - PhyloNetworks.jl</title>
       
     
     
-      <script src="../../assets/javascripts/modernizr-56ade86843.js"></script>
+      <script src="../../assets/javascripts/modernizr-1df76c4e58.js"></script>
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application-b1a1975878.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application-f98ca285f9.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-f78e5cb881.palette.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-8817cfa535.palette.css">
       
     
     
@@ -87,7 +87,7 @@
                 </span>
               
             
-            Trait Evolution
+            Continuous Trait Evolution
           
         </span>
       </div>
@@ -96,7 +96,7 @@
           <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
           
 <div class="md-search" data-md-component="search">
-  <div class="md-search__overlay"></div>
+  <label class="md-search__overlay" for="search"></label>
   <div class="md-search__inner">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
@@ -105,7 +105,7 @@
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
           <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
             Type to start searching
           </div>
@@ -334,11 +334,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Trait Evolution
+        Continuous Trait Evolution
       </label>
     
-    <a href="./" title="Trait Evolution" class="md-nav__link md-nav__link--active">
-      Trait Evolution
+    <a href="./" title="Continuous Trait Evolution" class="md-nav__link md-nav__link--active">
+      Continuous Trait Evolution
     </a>
     
       
@@ -588,8 +588,8 @@
                   <a href="https://github.com/crsl4/PhyloNetworks.jl/edit/master/docs/man/trait_tree.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
                 
                 
-                <p><a id='Trait-Evolution-1'></a></p>
-<h1 id="trait-evolution">Trait Evolution</h1>
+                <p><a id='Continuous-Trait-Evolution-1'></a></p>
+<h1 id="continuous-trait-evolution">Continuous Trait Evolution</h1>
 <p>Once the network is inferred, we can use it for downstream analysis, including for Phylogenetic Comparative Methods (PCM).</p>
 <p>The following examples show how to use functions to analyze trait evolution, in the special case when the evolutionary network is in fact a phylogenetic tree. This tree is assumed to be rooted, fixed, and with branch lengths.</p>
 <p>The examples below use a dataset described in Mahler et al. (2013)<sup id="fnref:fn1"><a class="footnote-ref" href="#fn:fn1" rel="footnote">1</a></sup>, available on Dryad <sup id="fnref:fn2"><a class="footnote-ref" href="#fn:fn2" rel="footnote">2</a></sup>. We can read it in from file <code>examples/lizard_tree.txt</code> <a href="https://github.com/crsl4/PhyloNetworks.jl/blob/master/examples/lizard_tree.txt">(here)</a> in Newick format:</p>
@@ -603,8 +603,9 @@
 <pre><code class="julia">params_simu = ParamsBM(2, 0.5) # BM with mean 2 and variance 0.5
 </code></pre>
 
-<p>We can then simulate according to these parameters on the phylogeny, using function <a href="../../lib/public/#PhyloNetworks.simulate"><code>simulate</code></a>.</p>
-<pre><code class="julia">sim = simulate(phy, params_simu) # simulate a BM on phy
+<p>We can then simulate according to these parameters on the phylogeny, using function <a href="../../lib/public/#PhyloNetworks.simulate"><code>simulate</code></a>. We fix the seed here for reproducibility reasons.</p>
+<pre><code class="julia">srand(18480224)
+sim = simulate(phy, params_simu) # simulate a BM on phy
 </code></pre>
 
 <p>This creates an object of class <a href="../../lib/public/#PhyloNetworks.TraitSimulation"><code>TraitSimulation</code></a>, from which we can extract the data at the tips, thanks to the method <a href="../../lib/public/#Base.getindex-Tuple{PhyloNetworks.TraitSimulation,Symbol}"><code>getindex(::TraitSimulation, ::Symbol)</code></a>:</p>
@@ -620,7 +621,8 @@
 <h2 id="phylogenetic-regression">Phylogenetic Regression</h2>
 <p>The main function that can be used to do phylogenetic regression is the function <a href="../../lib/public/#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a>. It is based on function <code>lm</code> from package <a href="https://github.com/JuliaStats/GLM.jl">GLM</a>, and inherits from a lot of its features.</p>
 <p>In this example, we simulate data for later analysis. We use the predictor simulated above to create a new trait that depends linearly on the predictor, with a noise that has a phylogenetic structure:</p>
-<pre><code class="julia">noise = simulate(phy, ParamsBM(0, 0.1)) # Phylogenetic residuals
+<pre><code class="julia">srand(18700904)
+noise = simulate(phy, ParamsBM(0, 0.1)) # Phylogenetic residuals
 trait = 10 + 2 * pred + noise[:Tips] # Trait to study
 </code></pre>
 
@@ -630,7 +632,7 @@ dat = DataFrame(trait = trait, pred = pred, tipNames = tipLabels(sim))
 </code></pre>
 
 <p>Phylogenetic regression / ANOVA can then be done like with the <a href="https://github.com/JuliaStats/GLM.jl">GLM</a> package, using formulas. We just need to specify the phylogeny we are using:</p>
-<pre><code class="julia">fitTrait = phyloNetworklm(trait ~ pred, dat, phy)
+<pre><code class="julia">fitTrait = phyloNetworklm(@formula(trait ~ pred), dat, phy)
 </code></pre>
 
 <p>This returns an object of type <a href="../../lib/public/#PhyloNetworks.PhyloNetworkLinearModel"><code>PhyloNetworkLinearModel</code></a><code>&lt;:LinPredModel</code>. It is dominated by the GLM type <code>LinPredModel</code>, which means that all base functions from Julia <a href="https://github.com/JuliaStats/StatsBase.jl">StatsBase</a> can be applied to it. See the documentation for this type for a list of all functions that can be used. Some functions allow the user to retrieve directly the estimated parameters of the BM, and are specific to this object.</p>
@@ -667,7 +669,7 @@ plot(phy, nodeLabel = ancInt)
 <p><img alt="Prediction Intervals." src="../../assets/figures/trait_tree_ancestral_predint_1.png" /></p>
 <p>As we know the true ancestral states here, we can compare them to our estimation. In particular, we can count the number of times the true value lies in the prediction interval. This should be true about 95% of the times.</p>
 <pre><code class="julia">julia&gt; sum((predNodes .&lt; predint(ancPred)[1:99, 2]) &amp; (predNodes .&gt; predint(ancPred)[1:99, 1]))
-94
+97
 
 </code></pre>
 
@@ -675,7 +677,7 @@ plot(phy, nodeLabel = ancInt)
 <h3 id="from-estimated-parameters">From estimated parameters</h3>
 <p>In real applications though, we do not have access to the true parameters of the process that generated the data. If we make an assumption on process (like a BM for the residuals here), we can estimate it using the previous function. To fit a regular BM, we just need to do a regression of the trait against a simple intercept:</p>
 <pre><code class="julia">
-fitPred = phyloNetworklm(pred ~ 1, dat, phy)
+fitPred = phyloNetworklm(@formula(pred ~ 1), dat, phy)
 </code></pre>
 
 <p>We can then apply the <a href="../../lib/public/#PhyloNetworks.ancestralStateReconstruction"><code>ancestralStateReconstruction</code></a> function directly to the fitted object:</p>
@@ -736,19 +738,19 @@ dat[:region] = PooledDataArray(dat[:region]); # Pool by region
 
 <p>Then, we just need to apply <a href="../../lib/public/#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a> with the right formula:</p>
 <pre><code class="julia">
-fitAnova = phyloNetworklm(AVG_SVL ~ AVG_ltoe_IV + AVG_lfing_IV * region, dat, phy)
+fitAnova = phyloNetworklm(@formula(AVG_SVL ~ AVG_ltoe_IV + AVG_lfing_IV * region), dat, phy)
 </code></pre>
 
 <p>As before, a summary is shown by default, and all the functions that can be applied to a <code>lm</code> result still apply here.</p>
 <p><a id='Pagel's-Lambda-1'></a></p>
 <h2 id="pagels-lambda">Pagel's Lambda</h2>
-<p>One classical question about trait evolution is the amount of "phylogenetic signal" in a dataset, that is, the importance of the tree structure to explain variation in the observed traits. One way of doing measuring that is to use Pagel's lambda<sup id="fnref:fn3"><a class="footnote-ref" href="#fn:fn3" rel="footnote">3</a></sup> transformation of the branch lengths. This model assumes a BM on a tree where the internal branches are multiplied by a factor $\lambda$, while the external branches are modified so that the total height of the tree is constant. Hence, $\lambda$ varies between $0$ (the tree has no influence on the data) and $1$ (the tree is unchanged).</p>
+<p>One classical question about trait evolution is the amount of "phylogenetic signal" in a dataset, that is, the importance of the tree structure to explain variation in the observed traits. One way of doing measuring that is to use Pagel's lambda<sup id="fnref:fn3"><a class="footnote-ref" href="#fn:fn3" rel="footnote">3</a></sup> transformation of the branch lengths. This model assumes a BM on a tree where the internal branches are multiplied by a factor λ, while the external branches are modified so that the total height of the tree is constant. Hence, λ varies between 0 (the tree has no influence on the data) and 1 (the tree is unchanged).</p>
 <p>We can illustrate this with the predictor trait we used earlier. We use the same function as before, only indicating the model we want to use:</p>
 <pre><code class="julia">
-fitPagel = phyloNetworklm(pred ~ 1, datPred, phy, model = &quot;lambda&quot;)
+fitPagel = phyloNetworklm(@formula(pred ~ 1), datPred, phy, model = &quot;lambda&quot;)
 </code></pre>
 
-<p>As it is indeed generated according to a plain BM on the phylogeny, the estimated $\lambda$ should be close to $1$. It can be extracted with function <code>lambda_estim</code>:</p>
+<p>As it is indeed generated according to a plain BM on the phylogeny, the estimated λ should be close to 1. It can be extracted with function <code>lambda_estim</code>:</p>
 <pre><code class="julia">
 lambda_estim(fitPagel)
 </code></pre>
@@ -837,7 +839,9 @@ lambda_estim(fitPagel)
       
     </div>
     
-      <script src="../../assets/javascripts/application-ad1183cb07.js"></script>
+      <script src="../../assets/javascripts/application-e3caa82af6.js"></script>
+      
+      
       <script>app.initialize({url:{base:"../.."}})</script>
       
         <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
