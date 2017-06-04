@@ -563,7 +563,7 @@
 <strong><code>PhyloNetworks.ANode</code></strong> &mdash; <em>Type</em>.</p>
 <p><code>ANode</code></p>
 <p>Abstract node. An object of type <code>Edge</code> has a <code>node</code> attribute, which is an vector of (2) ANode objects. The object of type <code>Node</code> is an <code>ANode</code>, and has an <code>edge</code> attribute, which is vector of <code>Edge</code> objects.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/types.jl#L17-L24' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/types.jl#L17-L24' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.MatrixTopologicalOrder' href='#PhyloNetworks.MatrixTopologicalOrder'>#</a>
 <strong><code>PhyloNetworks.MatrixTopologicalOrder</code></strong> &mdash; <em>Type</em>.</p>
 <p><code>MatrixTopologicalOrder</code></p>
@@ -571,7 +571,7 @@
 <p>The following functions and extractors can be applied to it: <a href="../public/#PhyloNetworks.tipLabels"><code>tipLabels</code></a>, <code>obj[:Tips]</code>, <code>obj[:InternalNodes]</code>, <code>obj[:TipsNodes]</code> (see documentation for function <a href="./#Base.getindex-Tuple{PhyloNetworks.MatrixTopologicalOrder,Symbol}"><code>getindex(::MatrixTopologicalOrder, ::Symbol)</code></a>).</p>
 <p>Functions <a href="./#PhyloNetworks.sharedPathMatrix"><code>sharedPathMatrix</code></a> and <a href="../public/#PhyloNetworks.simulate"><code>simulate</code></a> return objects of this type.</p>
 <p>The <code>MatrixTopologicalOrder</code> object has fields: <code>V</code>, <code>nodeNumbersTopOrder</code>, <code>internalNodeNumbers</code>, <code>tipNumbers</code>, <code>tipNames</code>, <code>indexation</code>. Type in "?MatrixTopologicalOrder.field" to get documentation on a specific field.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/traits.jl#L11-L22' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/traits.jl#L11-L22' class='documenter-source'>source</a><br></p>
 <p><a id='Functions-and-methods-1'></a></p>
 <h2 id="functions-and-methods">Functions and methods</h2>
 <p><a id='PhyloNetworks.assignhybridnames!' href='#PhyloNetworks.assignhybridnames!'>#</a>
@@ -579,13 +579,13 @@
 <p><code>assignhybridnames!(net)</code></p>
 <p>Assign names to hybrid nodes in the network <code>net</code>. Hybrid nodes with an empty <code>name</code> field ("") are modified with a name that does not conflict with other hybrid names in the network. The preferred name is "#H3" if the node number is 3 or -3, but an index other than 3 would be used if "#H3" were the name of another hybrid node already.</p>
 <p>If two hybrid nodes have non-empty and equal names, the name of one of them is changed and re-assigned as described above (with a warning).</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/auxiliary.jl#L1160-L1170' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/auxiliary.jl#L1160-L1170' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.deleteNode!' href='#PhyloNetworks.deleteNode!'>#</a>
 <strong><code>PhyloNetworks.deleteNode!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>deleteNode!(net::HybridNetwork, n::Node)</code></p>
 <p>deletes a Node from a network, i.e. removes it from net.node, and from net.hybrid or net.leaf as appropriate. Updates attributes numNodes, numTaxa, numHybrids (it does not update net.names though).</p>
 <p>Warning: if the root is deleted, the new root is arbitrarily set to the first node in the list. This is intentional to save time because this function is used frequently in snaq!, which handles semi-directed (unrooted) networks.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/auxiliary.jl#L394-L406' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/auxiliary.jl#L394-L406' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.sampleBootstrapTrees' href='#PhyloNetworks.sampleBootstrapTrees'>#</a>
 <strong><code>PhyloNetworks.sampleBootstrapTrees</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>sampleBootstrapTrees(vector of tree lists; seed=0::Integer, generesampling=false, row=0)
@@ -599,7 +599,7 @@ sampleBootstrapTrees!(tree list, vector of tree lists; seed=0::Integer, generesa
 <li><code>row=i</code>: samples the ith bootstrap tree for each gene. <code>row</code> is turned back to 0 if gene resampling is true.</li>
 </ul>
 <p>output: one vector of trees. the modifying function (!) modifies the input tree list and returns it.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/bootstrap.jl#L29-L47' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/bootstrap.jl#L29-L47' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.sampleCFfromCI' href='#PhyloNetworks.sampleCFfromCI'>#</a>
 <strong><code>PhyloNetworks.sampleCFfromCI</code></strong> &mdash; <em>Function</em>.</p>
 <pre><code>sampleCFfromCI(data frame, seed=0)
@@ -612,7 +612,7 @@ sampleCFfromCI!(data frame, seed=0)
 <li>The modifying function overwrites the input data frame with the sampled CFs and returns it. If <code>seed=0</code>, the random generator is seeded from the clock. Otherwise the random generator is seeded using <code>seed</code>.</li>
 </ul>
 <p>Warning: the modifying version does <em>not</em> check the df: assumes correct columns.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/bootstrap.jl#L86-L104' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/bootstrap.jl#L86-L104' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.setNonIdBL!' href='#PhyloNetworks.setNonIdBL!'>#</a>
 <strong><code>PhyloNetworks.setNonIdBL!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>setNonIdBL!(net)</code></p>
@@ -623,13 +623,13 @@ sampleCFfromCI!(data frame, seed=0)
 <li>a bad diamond I: the edges across from the hybrid node have non identifiable lengths but are kept, because the two γ*(1-exp(-t)) values are identifiable.</li>
 </ul>
 <p>will break if <code>inCycle</code> attributes are not initialized (at -1) or giving a correct node number.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/descriptive.jl#L68-L80' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/descriptive.jl#L68-L80' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.sharedPathMatrix' href='#PhyloNetworks.sharedPathMatrix'>#</a>
 <strong><code>PhyloNetworks.sharedPathMatrix</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>sharedPathMatrix(net::HybridNetwork; checkPreorder=true::Bool)</code></p>
 <p>This function computes the shared path matrix between all the nodes of a network. It assumes that the network is in the pre-order. If checkPreorder is true (default), then it runs function <code>preoder</code> on the network beforehand.</p>
 <p>Returns an object of type <a href="./#PhyloNetworks.MatrixTopologicalOrder"><code>MatrixTopologicalOrder</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/traits.jl#L215-L224' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/traits.jl#L215-L224' class='documenter-source'>source</a><br></p>
 <p><a id='Base.getindex-Tuple{PhyloNetworks.MatrixTopologicalOrder,Symbol}' href='#Base.getindex-Tuple{PhyloNetworks.MatrixTopologicalOrder,Symbol}'>#</a>
 <strong><code>Base.getindex</code></strong> &mdash; <em>Method</em>.</p>
 <pre><code>getindex(collection, key...)
@@ -653,7 +653,7 @@ sampleCFfromCI!(data frame, seed=0)
 </ul>
 </li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/traits.jl#L159-L173' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/traits.jl#L159-L173' class='documenter-source'>source</a><br></p>
 <p><a id='Main-functions-in-SNaQ-1'></a></p>
 <h2 id="main-functions-in-snaq">Main functions in SNaQ</h2>
 <p><a id='PhyloNetworks.optTopRuns!' href='#PhyloNetworks.optTopRuns!'>#</a>
@@ -679,7 +679,7 @@ snaqDebug
 <pre><code>optTop! : optimizes at h=0, then h=1 etc.
 </code></pre>
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/optimization.jl#L1542-L1570' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/optimization.jl#L1542-L1570' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.optTopRun1!' href='#PhyloNetworks.optTopRun1!'>#</a>
 <strong><code>PhyloNetworks.optTopRun1!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>optTopRun1</code> roadmap</p>
@@ -690,7 +690,7 @@ snaqDebug
 <p>If the starting topology is a network, then with probability <code>1-probST</code> it will modify one randomly chosen hybrid edge: with prob 0.5, the function will move origin, with prob 0.5 will do move target</p>
 <p>If there are multiple alleles (<code>d.repSpecies</code> not empty), then the function has to check that the starting topology does not violate the multiple alleles condition.</p>
 <p>After modifying the starting topology with NNI and/or move origin/target, the function calls <code>optTopLevel</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/optimization.jl#L1776-L1787' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/optimization.jl#L1776-L1787' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.optTopLevel!' href='#PhyloNetworks.optTopLevel!'>#</a>
 <strong><code>PhyloNetworks.optTopLevel!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>optTopLevel</code> road map</p>
@@ -727,7 +727,7 @@ snaqDebug
 </ul>
 <p>end while</p>
 <p>After choosing the best network <code>newT</code>, we do one last more thorough optimization of branch lengths with <code>optBL</code>, we change non identifiable branch lengths to -1 and return <code>newT</code></p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/optimization.jl#L1135-L1190' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/optimization.jl#L1135-L1190' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.proposedTop!' href='#PhyloNetworks.proposedTop!'>#</a>
 <strong><code>PhyloNetworks.proposedTop!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>proposedTop!(move,newT,random,count,N,movescount,movesfail,multall)</code> road map</p>
@@ -769,7 +769,7 @@ snaqDebug
 </ul>
 <p>choose an edge for nni that does not have a neighbor hybrid. It will try to find such an edge N times, and if it fails, it will return false (unsuccessful move). N=10 by default. If N=1, it rarely finds such an edge if the network is small or complex. The function cannot choose an external edge. it will update locally the attributes.</p>
 <p><strong> Important: </strong> All the moves undo what they did if the move was not successful, so at the end you either have a <code>newT</code> with a new move and with all good attributes, or the same <code>newT</code> that started. This is important to avoid having to do deepcopy of the network before doing the move. Also, after each move, when we update the attributes, we do not update the attributes of the whole network, we only update the attributes of the edges that were affected by the move. This saves time, but makes the code quite clunky. Only the case of multiple alleles the moves does not undo what it did, because it finds out that it failed after the function is over, so just need to treat this case special.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/optimization.jl#L1014-L1056' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/optimization.jl#L1014-L1056' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.optBL!' href='#PhyloNetworks.optBL!'>#</a>
 <strong><code>PhyloNetworks.optBL!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>optBL</code> road map</p>
@@ -815,7 +815,7 @@ snaqDebug
 </li>
 </ul>
 <p>Finally, we call <code>NLopt.optimize</code>, and we update the <code>net.loglik</code> and <code>net.ht</code> at the end. After <code>optBL</code>, we want to call <code>afterOptBLAll</code> (or <code>afterOptBLAllMultipleAlleles</code>) to check if there are <code>h==0,1</code>; <code>t==0</code>; <code>hz==0,1</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/optimization.jl#L304-L341' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/optimization.jl#L304-L341' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.afterOptBL!' href='#PhyloNetworks.afterOptBL!'>#</a>
 <strong><code>PhyloNetworks.afterOptBL!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>afterOptBL</code> road map</p>
@@ -842,7 +842,7 @@ snaqDebug
 </li>
 </ul>
 <p><strong> Important: </strong> <code>afterOptBL</code> is doing only one change, but we need to repeat multiple times to be sure that we fix all the gamma zero problems, which is why we call <code>afterOptBLRepeat</code></p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/optimization.jl#L558-L582' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/optimization.jl#L558-L582' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.gammaZero!' href='#PhyloNetworks.gammaZero!'>#</a>
 <strong><code>PhyloNetworks.gammaZero!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>gammaZero</code> road map</p>
@@ -855,7 +855,7 @@ snaqDebug
 <li>If still problem or worse pseudolik, we call <code>moveHybrid</code></li>
 </ol>
 <p><strong> Important: </strong> Any function (<code>afterOptBL</code>) calling <code>gammaZero</code> is assuming that it only made a change, so if the returned value is true, then a change was made, and the other function needs to run <code>optBL</code> and check that all parameters are 'valid'. If the returned value is false, then no change was possible and we need to remove a hybridization if the problem is h==0,1; hz==0,1. If the problem is t==0, we ignore this problem.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/optimization.jl#L503-L514' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/optimization.jl#L503-L514' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.moveHybrid!' href='#PhyloNetworks.moveHybrid!'>#</a>
 <strong><code>PhyloNetworks.moveHybrid!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>moveHybrid</code> road map</p>
@@ -865,12 +865,12 @@ snaqDebug
 <li><code>closeN=true</code> will try move origin/target on all neighbors (first choose minor/major edge at random, then make list of all neighbor edges and tries to put the hybrid node in all the neighbors until successful move); if false, will delete and add hybrid until successful move up to N times (this is never tested)</li>
 </ul>
 <p>Returns true if change was successful (not testing <code>optBL</code> again), and false if we could not move anything</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/optimization.jl#L457-L467' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/optimization.jl#L457-L467' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.afterOptBLRepeat!' href='#PhyloNetworks.afterOptBLRepeat!'>#</a>
 <strong><code>PhyloNetworks.afterOptBLRepeat!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>afterOptBLRepeat</code> road map</p>
 <p><code>afterOptBL</code> is doing only one change, but we need to repeat multiple times to be sure that we fix all the gamma zero problems, which is why we call <code>afterOptBLRepeat</code>. This function will repeat <code>afterOptBL</code> every time a successful change happened; this is done only if <code>closeN=false</code>, because we would delete/add hybridizations and need to stop after tried N times. If <code>closeN=true</code> (default), then <code>afterOptBLRepeat</code> only does one <code>afterOptBL</code>, because in this case, only the neighbor edges need to be tested, and this would have been done already in <code>gammaZero</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/optimization.jl#L673-L679' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/optimization.jl#L673-L679' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.afterOptBLAll!' href='#PhyloNetworks.afterOptBLAll!'>#</a>
 <strong><code>PhyloNetworks.afterOptBLAll!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>afterOptBLAll</code> road map</p>
@@ -904,7 +904,7 @@ snaqDebug
 </li>
 </ul>
 <p>If first while ends by <code>tries&gt;N</code>, then it checks one last time the flags, if bad h/hz will move down one level, and exit</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/2d94833f930f189c833d7cfb046db76fa4b3122e/src/optimization.jl#L744-L763' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/tree/d375dd25e30bd33dceccb3d4b04c3ceb24457db4/src/optimization.jl#L744-L763' class='documenter-source'>source</a><br></p>
                 
                   
                 
