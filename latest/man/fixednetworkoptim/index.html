@@ -5,6 +5,7 @@
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
       
         <meta name="description" content="PhyloNetworks is a Julia package for the manipulation, visualization and inference of phylogenetic networks.">
       
@@ -15,20 +16,20 @@
       
         <link rel="shortcut icon" href="../../assets/images/favicon.png">
       
-      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.1">
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.5">
     
     
       
-        <title>Fixed Network - PhyloNetworks.jl</title>
+        <title>Candidate Networks - PhyloNetworks.jl</title>
       
     
     
       <script src="../../assets/javascripts/modernizr-1df76c4e58.js"></script>
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application-f98ca285f9.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application-769c285a91.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-8817cfa535.palette.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-02c2a4388f.palette.css">
       
     
     
@@ -87,7 +88,7 @@
                 </span>
               
             
-            Fixed Network
+            Candidate Networks
           
         </span>
       </div>
@@ -95,11 +96,11 @@
         
           <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
           
-<div class="md-search" data-md-component="search">
+<div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="search"></label>
   <div class="md-search__inner">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
       <label class="md-icon md-search__icon" for="search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
     </form>
@@ -117,9 +118,9 @@
 </div>
         
       </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <div class="md-header-nav__source">
-          
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
             
 
 
@@ -139,9 +140,9 @@
     </div>
   </a>
 
-          
+          </div>
         </div>
-      </div>
+      
     </div>
   </nav>
 </header>
@@ -275,6 +276,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../dist_reroot/" title="Network comparison and manipulation" class="md-nav__link">
+      Network comparison and manipulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -286,11 +299,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Fixed Network
+        Candidate Networks
       </label>
     
-    <a href="./" title="Fixed Network" class="md-nav__link md-nav__link--active">
-      Fixed Network
+    <a href="./" title="Candidate Networks" class="md-nav__link md-nav__link--active">
+      Candidate Networks
     </a>
     
       
@@ -304,8 +317,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#optimizing-branch-lengths-and-inheritance-probabilities-for-a-given-network" title="Optimizing branch lengths and inheritance probabilities for a given network" class="md-nav__link">
-    Optimizing branch lengths and inheritance probabilities for a given network
+  <a href="#optimizing-parameters-for-a-given-network" title="Optimizing parameters for a given network" class="md-nav__link">
+    Optimizing parameters for a given network
   </a>
   
 </li>
@@ -448,8 +461,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#optimizing-branch-lengths-and-inheritance-probabilities-for-a-given-network" title="Optimizing branch lengths and inheritance probabilities for a given network" class="md-nav__link">
-    Optimizing branch lengths and inheritance probabilities for a given network
+  <a href="#optimizing-parameters-for-a-given-network" title="Optimizing parameters for a given network" class="md-nav__link">
+    Optimizing parameters for a given network
   </a>
   
 </li>
@@ -478,29 +491,46 @@
                   <a href="https://github.com/crsl4/PhyloNetworks.jl/edit/master/docs/man/fixednetworkoptim.md" title="Edit this page" class="md-icon md-content__icon">edit</a>
                 
                 
-                <p><a id='Fixed-Network-1'></a></p>
-<h1 id="fixed-network">Fixed Network</h1>
-<p><a id='Optimizing-branch-lengths-and-inheritance-probabilities-for-a-given-network-1'></a></p>
-<h2 id="optimizing-branch-lengths-and-inheritance-probabilities-for-a-given-network">Optimizing branch lengths and inheritance probabilities for a given network</h2>
+                <p><a id='Candidate-Networks-1'></a></p>
+<h1 id="candidate-networks">Candidate Networks</h1>
+<p><a id='Optimizing-parameters-for-a-given-network-1'></a></p>
+<h2 id="optimizing-parameters-for-a-given-network">Optimizing parameters for a given network</h2>
 <p>For a given network topology, we can optimize the branch lengths and inheritance probabilities (γ) with the pseudolikelihood. This is useful if we have a few candidate networks to compare. Each network can be optimized individually, and the network with the best pseudolikelihood can be chosen.</p>
-<p>The score being optimized is the pseudo-deviance, i.e. the negative log pseudo-likelihood up to an additive constant, such that a perfect fit corresponds to a deviance of 0.0 (the lower the better).</p>
-<pre><code class="julia">net1topo = readTopology(&quot;(2,(4,(3,(5,(6,#H1)))),(1)#H1);&quot;);
-net1par = topologyMaxQPseudolik!(net1topo,d)
-net1par.loglik # pseudo deviance, actually
-</code></pre>
+<p>The score being optimized is the pseudo-deviance, i.e. the negative log pseudo-likelihood up to an additive constant (the lower the better).</p>
+<p>Following our example in <a href="../snaq_plot/#Getting-a-Network-1">Getting a Network</a>, we can optimize parameters on the true network (the one originally used to simulate the data):</p>
+<div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">truenet</span> <span class="o">=</span> <span class="n">readTopology</span><span class="p">(</span><span class="s">&quot;((((D:0.4,C:0.4):4.8,((A:0.8,B:0.8):2.2)#H1:2.2::0.7):4.0,(#H1:0::0.3,E:3.0):6.2):2.0,O:11.2);&quot;</span><span class="p">);</span>
 
-<p>For a more thorough optimization, we may increase the requirements before the search stops:</p>
-<pre><code class="julia">net1par = topologyMaxQPseudolik!(net1topo,d, xtolRel=1e-10, xtolAbs=1e-10)
-net1par.loglik
-</code></pre>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">net1alt</span> <span class="o">=</span> <span class="n">topologyMaxQPseudolik!</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="n">raxmlCF</span><span class="p">);</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">writeTopology</span><span class="p">(</span><span class="n">net1alt</span><span class="p">,</span> <span class="n">round</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
+<span class="s">&quot;(D,C,(((A,B):0.987)#H1:8.376::0.721,((#H1:0.0::0.279,E):1.287,O):1.181):7.615);&quot;</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">net1alt</span><span class="o">.</span><span class="n">loglik</span> <span class="c"># pseudo deviance, actually</span>
+<span class="mf">29.94130186108919</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">net1alt</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="" src="../../assets/figures/fixednetworkoptim_truenet_opt_1.png" /></p>
+<p>We get a score of 29.941, which is comparable to the score of the SNaQ network (net1: 28.315), especially compared to the score of the best tree (net0: 53.532). This begs the question: is the true network within the "range" of uncertainty? We can run a <a href="../bootstrap/#Bootstrap-1">Bootstrap</a> analysis to measure uncertainty in our network inference.</p>
+<p>For a more thorough optimization, we may increase the requirements before the search stops (but the optimization will take longer). It makes no difference on this small data set.</p>
+<div class="codehilite"><pre><span></span><span class="n">net1par</span> <span class="o">=</span> <span class="n">topologyMaxQPseudolik!</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="n">raxmlCF</span><span class="p">,</span> <span class="n">ftolRel</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span> <span class="n">xtolAbs</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+<span class="n">net1par</span><span class="o">.</span><span class="n">loglik</span>
+</pre></div>
+
 
 <p><a id='Network-Score-with-no-optimization-1'></a></p>
 <h2 id="network-score-with-no-optimization">Network Score with no optimization</h2>
 <p>For a network with given branch lengths and γ heritabilies, we can compute the pseudolikelihood with:</p>
-<pre><code class="julia">net1withBL = readTopology(&quot;(2,(4,(3,(5,(6,#H6:1.0::0.3):5.006):0.518):0.491):1.533,(1)#H6:1.0::0.7);&quot;);
-topologyQPseudolik!(net1withBL,d)
-net1withBL.loglik
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">topologyQPseudolik!</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span><span class="n">raxmlCF</span><span class="p">);</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">truenet</span><span class="o">.</span><span class="n">loglik</span>
+<span class="mf">153.5310295393005</span>
+</pre></div>
+
 
 <p>This function is not maximizing the pseudolikelihood, it is simply computing the pseudolikelihood (or deviance) for the given branch lengths and probabilities of inheritance. At the moment, both of these functions require that the given network is of level 1 (cycles don't overlap).</p>
                 
@@ -521,7 +551,7 @@ net1withBL.loglik
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../snaq_plot/" title="Network estimation and display" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../dist_reroot/" title="Network comparison and manipulation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -530,7 +560,7 @@ net1withBL.loglik
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Network estimation and display
+                Network comparison and manipulation
               </span>
             </div>
           </a>
@@ -572,7 +602,7 @@ net1withBL.loglik
       
     </div>
     
-      <script src="../../assets/javascripts/application-e3caa82af6.js"></script>
+      <script src="../../assets/javascripts/application-07b0fbb49b.js"></script>
       
       
       <script>app.initialize({url:{base:"../.."}})</script>

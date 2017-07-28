@@ -5,6 +5,7 @@
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
       
         <meta name="description" content="PhyloNetworks is a Julia package for the manipulation, visualization and inference of phylogenetic networks.">
       
@@ -15,7 +16,7 @@
       
         <link rel="shortcut icon" href="./assets/images/favicon.png">
       
-      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.1">
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.5">
     
     
       
@@ -26,9 +27,9 @@
       <script src="./assets/javascripts/modernizr-1df76c4e58.js"></script>
     
     
-      <link rel="stylesheet" href="./assets/stylesheets/application-f98ca285f9.css">
+      <link rel="stylesheet" href="./assets/stylesheets/application-769c285a91.css">
       
-        <link rel="stylesheet" href="./assets/stylesheets/application-8817cfa535.palette.css">
+        <link rel="stylesheet" href="./assets/stylesheets/application-02c2a4388f.palette.css">
       
     
     
@@ -91,11 +92,11 @@
         
           <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
           
-<div class="md-search" data-md-component="search">
+<div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="search"></label>
   <div class="md-search__inner">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
       <label class="md-icon md-search__icon" for="search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
     </form>
@@ -113,9 +114,9 @@
 </div>
         
       </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <div class="md-header-nav__source">
-          
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
             
 
 
@@ -135,9 +136,9 @@
     </div>
   </a>
 
-          
+          </div>
         </div>
-      </div>
+      
     </div>
   </nav>
 </header>
@@ -348,8 +349,20 @@
 
 
   <li class="md-nav__item">
-    <a href="man/fixednetworkoptim/" title="Fixed Network" class="md-nav__link">
-      Fixed Network
+    <a href="man/dist_reroot/" title="Network comparison and manipulation" class="md-nav__link">
+      Network comparison and manipulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="man/fixednetworkoptim/" title="Candidate Networks" class="md-nav__link">
+      Candidate Networks
     </a>
   </li>
 
@@ -542,13 +555,13 @@
                 
                 <p><a id='PhyloNetworks.jl-1'></a></p>
 <h1 id="phylonetworksjl">PhyloNetworks.jl</h1>
-<p>PhyloNetworks is a Julia package for the manipulation, visualization and inference of phylogenetic networks.  SNaQ implements the statistical inference method in <a href="http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1005896">Sol&iacute;s-Lemus and An&eacute; 2016</a>. The procedure involves a numerical optimization of branch lengths and inheritance probabilities and a heuristic search in the space of phylogenetic networks.</p>
+<p>PhyloNetworks is a <a href="http://julialang.org">Julia</a> package for the manipulation, visualization, inference of phylogenetic networks, and their use for trait evolution.</p>
 <p><a id='How-to-get-help-1'></a></p>
 <h2 id="how-to-get-help">How to get help</h2>
 <ul>
 <li>the package <a href="https://github.com/crsl4/PhyloNetworks.jl/wiki">wiki</a> has a step-by-step tutorial, done for the Evolution 2016 conference, with background on networks and explanations.</li>
 <li>the <a href="https://groups.google.com/forum/#!forum/phylonetworks-users">google group</a> has answers to common questions.</li>
-<li>the Manual below has a quick tutorial on SNaQ and PhyloNetworks.</li>
+<li>the Manual below has a quick tutorial (navigation on the left).</li>
 <li>the <a href=".#main-index-1">Index</a> further below has the full list of documented functions.</li>
 </ul>
 <p><a id='Manual-Outline-1'></a></p>
@@ -564,6 +577,7 @@
 <li><a href="man/inputdata/#Input-for-SNaQ-1">Input for SNaQ</a><ul>
 <li><a href="man/inputdata/#Tutorial-data:-gene-trees-1">Tutorial data: gene trees</a></li>
 <li><a href="man/inputdata/#Tutorial-data:-quartet-CFs-1">Tutorial data: quartet CFs</a></li>
+<li><a href="man/inputdata/#Tutorial-data:-starting-tree-1">Tutorial data: starting tree</a></li>
 </ul>
 </li>
 <li><a href="man/ticr_howtogetQuartetCFs/#TICR-pipeline-1">TICR pipeline</a><ul>
@@ -573,29 +587,38 @@
 </li>
 <li><a href="man/snaq_plot/#Getting-a-Network-1">Getting a Network</a><ul>
 <li><a href="man/snaq_plot/#Network-Estimation-1">Network Estimation</a></li>
+<li><a href="man/snaq_plot/#parallel-computation-1">parallel computation</a></li>
+<li><a href="man/snaq_plot/#choosing-the-number-of-hybridizations-1">choosing the number of hybridizations</a></li>
 <li><a href="man/snaq_plot/#Network-Visualization-1">Network Visualization</a></li>
 <li><a href="man/snaq_plot/#Re-rooting-networks-1">Re-rooting networks</a></li>
 <li><a href="man/snaq_plot/#Candidate-Network-Evaluation-1">Candidate Network Evaluation</a></li>
+<li><a href="man/snaq_plot/#SNaQ-error-reporting-1">SNaQ error reporting</a></li>
 </ul>
 </li>
-<li><a href="man/fixednetworkoptim/#Fixed-Network-1">Fixed Network</a><ul>
-<li><a href="man/fixednetworkoptim/#Optimizing-branch-lengths-and-inheritance-probabilities-for-a-given-network-1">Optimizing branch lengths and inheritance probabilities for a given network</a></li>
+<li><a href="man/dist_reroot/#Comparing-and-manipulating-networks-1">Comparing and manipulating networks</a><ul>
+<li><a href="man/dist_reroot/#Comparing-networks-/-trees-1">Comparing networks / trees</a></li>
+<li><a href="man/dist_reroot/#Re-rooting-trees-and-networks-1">Re-rooting trees and networks</a></li>
+<li><a href="man/dist_reroot/#Extracting-the-major-tree-1">Extracting the major tree</a></li>
+<li><a href="man/dist_reroot/#Displayed-trees-and-subnetworks-1">Displayed trees and subnetworks</a></li>
+</ul>
+</li>
+<li><a href="man/fixednetworkoptim/#Candidate-Networks-1">Candidate Networks</a><ul>
+<li><a href="man/fixednetworkoptim/#Optimizing-parameters-for-a-given-network-1">Optimizing parameters for a given network</a></li>
 <li><a href="man/fixednetworkoptim/#Network-Score-with-no-optimization-1">Network Score with no optimization</a></li>
 </ul>
 </li>
 <li><a href="man/expectedCFs/#Extract-Expected-CFs-1">Extract Expected CFs</a></li>
 <li><a href="man/bootstrap/#Bootstrap-1">Bootstrap</a><ul>
 <li><a href="man/bootstrap/#Running-a-bootstrap-analysis-1">Running a bootstrap analysis</a></li>
-<li><a href="man/bootstrap/#Summarizing-bootstrap-on-the-main-tree-1">Summarizing bootstrap on the main tree</a></li>
-<li><a href="man/bootstrap/#Summarizing-bootstrap-on-reticulations-1">Summarizing bootstrap on reticulations</a></li>
+<li><a href="man/bootstrap/#support-for-tree-edges-1">support for tree edges</a></li>
+<li><a href="man/bootstrap/#support-for-hybrid-edges-and-hybrid-nodes-1">support for hybrid edges and hybrid nodes</a></li>
 </ul>
 </li>
 <li><a href="man/multiplealleles/#Multiple-alleles-per-species-1">Multiple alleles per species</a></li>
 <li><a href="man/trait_tree/#Continuous-Trait-Evolution-1">Continuous Trait Evolution</a><ul>
-<li><a href="man/trait_tree/#Simulation-1">Simulation</a></li>
-<li><a href="man/trait_tree/#Phylogenetic-Regression-1">Phylogenetic Regression</a></li>
+<li><a href="man/trait_tree/#Trait-simulation-1">Trait simulation</a></li>
+<li><a href="man/trait_tree/#Phylogenetic-regression-1">Phylogenetic regression</a></li>
 <li><a href="man/trait_tree/#Ancestral-State-Reconstruction-1">Ancestral State Reconstruction</a></li>
-<li><a href="man/trait_tree/#Data-Imputation-1">Data Imputation</a></li>
 <li><a href="man/trait_tree/#Phylogenetic-ANOVA-1">Phylogenetic ANOVA</a></li>
 <li><a href="man/trait_tree/#Pagel's-Lambda-1">Pagel's Lambda</a></li>
 </ul>
@@ -652,6 +675,7 @@
 <li><a href="lib/public/#PhyloNetworks.mapAllelesCFtable"><code>PhyloNetworks.mapAllelesCFtable</code></a></li>
 <li><a href="lib/public/#PhyloNetworks.minorTreeAt"><code>PhyloNetworks.minorTreeAt</code></a></li>
 <li><a href="lib/public/#PhyloNetworks.mu_estim"><code>PhyloNetworks.mu_estim</code></a></li>
+<li><a href="lib/public/#PhyloNetworks.parsimonyDiscrete"><code>PhyloNetworks.parsimonyDiscrete</code></a></li>
 <li><a href="lib/public/#PhyloNetworks.phyloNetworklm"><code>PhyloNetworks.phyloNetworklm</code></a></li>
 <li><a href="lib/public/#PhyloNetworks.predint"><code>PhyloNetworks.predint</code></a></li>
 <li><a href="lib/public/#PhyloNetworks.predintPlot"><code>PhyloNetworks.predintPlot</code></a></li>
@@ -770,7 +794,7 @@
       
     </div>
     
-      <script src="./assets/javascripts/application-e3caa82af6.js"></script>
+      <script src="./assets/javascripts/application-07b0fbb49b.js"></script>
       
       
       <script>app.initialize({url:{base:"."}})</script>

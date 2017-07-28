@@ -5,6 +5,7 @@
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
       
         <meta name="description" content="PhyloNetworks is a Julia package for the manipulation, visualization and inference of phylogenetic networks.">
       
@@ -15,7 +16,7 @@
       
         <link rel="shortcut icon" href="../../assets/images/favicon.png">
       
-      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.1">
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.5">
     
     
       
@@ -26,9 +27,9 @@
       <script src="../../assets/javascripts/modernizr-1df76c4e58.js"></script>
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application-f98ca285f9.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application-769c285a91.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-8817cfa535.palette.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-02c2a4388f.palette.css">
       
     
     
@@ -95,11 +96,11 @@
         
           <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
           
-<div class="md-search" data-md-component="search">
+<div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="search"></label>
   <div class="md-search__inner">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
       <label class="md-icon md-search__icon" for="search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
     </form>
@@ -117,9 +118,9 @@
 </div>
         
       </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <div class="md-header-nav__source">
-          
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
             
 
 
@@ -139,9 +140,9 @@
     </div>
   </a>
 
-          
+          </div>
         </div>
-      </div>
+      
     </div>
   </nav>
 </header>
@@ -277,8 +278,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../fixednetworkoptim/" title="Fixed Network" class="md-nav__link">
-      Fixed Network
+    <a href="../dist_reroot/" title="Network comparison and manipulation" class="md-nav__link">
+      Network comparison and manipulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fixednetworkoptim/" title="Candidate Networks" class="md-nav__link">
+      Candidate Networks
     </a>
   </li>
 
@@ -426,33 +439,94 @@
                 <p><a id='Extract-Expected-CFs-1'></a></p>
 <h1 id="extract-expected-cfs">Extract Expected CFs</h1>
 <p>A good way to visualize the "goodness-of-fit" of a given estimated network to the data is to plot the observed CF versus the expected CF. If the network is a good fit, then the dots in the plot will be close to the diagonal (x=y line). The following function will create a dataframe with the observed and expected CFs, which are all saved in the DataCF object after running snaq:</p>
-<pre><code class="julia">df_wide = fittedQuartetCF(d) # same as fittedQuartetCF(d, :wide)
-df_long = fittedQuartetCF(d, :long)
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">topologyMaxQPseudolik!</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="n">raxmlCF</span><span class="p">);</span>
 
-<p>It is important to have run <code>snaq!</code>, <code>topologyQPseudolik!</code> or <code>topologyMaxQPseudolik!</code> before making this plot, or the result would be meaningless. These functions update the fitted concordance factors (those expected under the network) inside the dataCF object <code>d</code>.</p>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">df_wide</span> <span class="o">=</span> <span class="n">fittedQuartetCF</span><span class="p">(</span><span class="n">raxmlCF</span><span class="p">)</span> <span class="c"># same as fittedQuartetCF(raxmlCF, :wide)</span>
+<span class="mi">15</span><span class="n">×10</span> <span class="n">DataFrames</span><span class="o">.</span><span class="n">DataFrame</span>
+<span class="n">│</span> <span class="n">Row</span> <span class="n">│</span> <span class="n">tx1</span> <span class="n">│</span> <span class="n">tx2</span> <span class="n">│</span> <span class="n">tx3</span> <span class="n">│</span> <span class="n">tx4</span> <span class="n">│</span> <span class="n">obsCF12</span>  <span class="n">│</span> <span class="n">obsCF13</span>   <span class="n">│</span> <span class="n">obsCF14</span>   <span class="n">│</span> <span class="n">expCF12</span>     <span class="n">│</span>
+<span class="n">├─────┼─────┼─────┼─────┼─────┼──────────┼───────────┼───────────┼─────────────┤</span>
+<span class="n">│</span> <span class="mi">1</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="mf">1.0</span>      <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">0.999949</span>    <span class="n">│</span>
+<span class="n">│</span> <span class="mi">2</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="mf">0.833333</span> <span class="n">│</span> <span class="mf">0.0333333</span> <span class="n">│</span> <span class="mf">0.133333</span>  <span class="n">│</span> <span class="mf">0.835101</span>    <span class="n">│</span>
+<span class="n">│</span> <span class="mi">3</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="mf">0.866667</span> <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">0.133333</span>  <span class="n">│</span> <span class="mf">0.860271</span>    <span class="n">│</span>
+<span class="n">│</span> <span class="mi">4</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="mf">0.833333</span> <span class="n">│</span> <span class="mf">0.0333333</span> <span class="n">│</span> <span class="mf">0.133333</span>  <span class="n">│</span> <span class="mf">0.835101</span>    <span class="n">│</span>
+<span class="n">│</span> <span class="mi">5</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="mf">0.866667</span> <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">0.133333</span>  <span class="n">│</span> <span class="mf">0.860271</span>    <span class="n">│</span>
+<span class="n">│</span> <span class="mi">6</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="mf">0.833333</span> <span class="n">│</span> <span class="mf">0.0666667</span> <span class="n">│</span> <span class="mf">0.1</span>       <span class="n">│</span> <span class="mf">0.844588</span>    <span class="n">│</span>
+<span class="n">│</span> <span class="mi">7</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="mf">0.0</span>      <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">1.0</span>       <span class="n">│</span> <span class="mf">0.000123577</span> <span class="n">│</span>
+<span class="n">│</span> <span class="mi">8</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="mf">0.0</span>      <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">1.0</span>       <span class="n">│</span> <span class="mf">0.000133914</span> <span class="n">│</span>
+<span class="n">│</span> <span class="mi">9</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="mf">0.533333</span> <span class="n">│</span> <span class="mf">0.333333</span>  <span class="n">│</span> <span class="mf">0.133333</span>  <span class="n">│</span> <span class="mf">0.598761</span>    <span class="n">│</span>
+<span class="n">│</span> <span class="mi">10</span>  <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="mf">0.533333</span> <span class="n">│</span> <span class="mf">0.333333</span>  <span class="n">│</span> <span class="mf">0.133333</span>  <span class="n">│</span> <span class="mf">0.598761</span>    <span class="n">│</span>
+<span class="n">│</span> <span class="mi">11</span>  <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="mf">0.0</span>      <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">1.0</span>       <span class="n">│</span> <span class="mf">0.000123577</span> <span class="n">│</span>
+<span class="n">│</span> <span class="mi">12</span>  <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="mf">0.0</span>      <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">1.0</span>       <span class="n">│</span> <span class="mf">0.000133914</span> <span class="n">│</span>
+<span class="n">│</span> <span class="mi">13</span>  <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="mf">0.666667</span> <span class="n">│</span> <span class="mf">0.266667</span>  <span class="n">│</span> <span class="mf">0.0666667</span> <span class="n">│</span> <span class="mf">0.598761</span>    <span class="n">│</span>
+<span class="n">│</span> <span class="mi">14</span>  <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="mf">0.666667</span> <span class="n">│</span> <span class="mf">0.266667</span>  <span class="n">│</span> <span class="mf">0.0666667</span> <span class="n">│</span> <span class="mf">0.598761</span>    <span class="n">│</span>
+<span class="n">│</span> <span class="mi">15</span>  <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="mf">1.0</span>      <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">0.999898</span>    <span class="n">│</span>
+
+<span class="n">│</span> <span class="n">Row</span> <span class="n">│</span> <span class="n">expCF13</span>     <span class="n">│</span> <span class="n">expCF14</span>    <span class="n">│</span>
+<span class="n">├─────┼─────────────┼────────────┤</span>
+<span class="n">│</span> <span class="mi">1</span>   <span class="n">│</span> <span class="mf">2.52737e-5</span>  <span class="n">│</span> <span class="mf">2.52737e-5</span> <span class="n">│</span>
+<span class="n">│</span> <span class="mi">2</span>   <span class="n">│</span> <span class="mf">0.0824494</span>   <span class="n">│</span> <span class="mf">0.0824494</span>  <span class="n">│</span>
+<span class="n">│</span> <span class="mi">3</span>   <span class="n">│</span> <span class="mf">0.0698646</span>   <span class="n">│</span> <span class="mf">0.0698646</span>  <span class="n">│</span>
+<span class="n">│</span> <span class="mi">4</span>   <span class="n">│</span> <span class="mf">0.0824494</span>   <span class="n">│</span> <span class="mf">0.0824494</span>  <span class="n">│</span>
+<span class="n">│</span> <span class="mi">5</span>   <span class="n">│</span> <span class="mf">0.0698646</span>   <span class="n">│</span> <span class="mf">0.0698646</span>  <span class="n">│</span>
+<span class="n">│</span> <span class="mi">6</span>   <span class="n">│</span> <span class="mf">0.0777058</span>   <span class="n">│</span> <span class="mf">0.0777058</span>  <span class="n">│</span>
+<span class="n">│</span> <span class="mi">7</span>   <span class="n">│</span> <span class="mf">0.000123577</span> <span class="n">│</span> <span class="mf">0.999753</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">8</span>   <span class="n">│</span> <span class="mf">0.000133914</span> <span class="n">│</span> <span class="mf">0.999732</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">9</span>   <span class="n">│</span> <span class="mf">0.302023</span>    <span class="n">│</span> <span class="mf">0.099216</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">10</span>  <span class="n">│</span> <span class="mf">0.302023</span>    <span class="n">│</span> <span class="mf">0.099216</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">11</span>  <span class="n">│</span> <span class="mf">0.000123577</span> <span class="n">│</span> <span class="mf">0.999753</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">12</span>  <span class="n">│</span> <span class="mf">0.000133914</span> <span class="n">│</span> <span class="mf">0.999732</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">13</span>  <span class="n">│</span> <span class="mf">0.302023</span>    <span class="n">│</span> <span class="mf">0.099216</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">14</span>  <span class="n">│</span> <span class="mf">0.302023</span>    <span class="n">│</span> <span class="mf">0.099216</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">15</span>  <span class="n">│</span> <span class="mf">5.09658e-5</span>  <span class="n">│</span> <span class="mf">5.09658e-5</span> <span class="n">│</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">df_long</span> <span class="o">=</span> <span class="n">fittedQuartetCF</span><span class="p">(</span><span class="n">raxmlCF</span><span class="p">,</span> <span class="o">:</span><span class="n">long</span><span class="p">)</span>
+<span class="mi">45</span><span class="n">×7</span> <span class="n">DataFrames</span><span class="o">.</span><span class="n">DataFrame</span>
+<span class="n">│</span> <span class="n">Row</span> <span class="n">│</span> <span class="n">tx1</span> <span class="n">│</span> <span class="n">tx2</span> <span class="n">│</span> <span class="n">tx3</span> <span class="n">│</span> <span class="n">tx4</span> <span class="n">│</span> <span class="n">quartet</span> <span class="n">│</span> <span class="n">obsCF</span>     <span class="n">│</span> <span class="n">expCF</span>      <span class="n">│</span>
+<span class="n">├─────┼─────┼─────┼─────┼─────┼─────────┼───────────┼────────────┤</span>
+<span class="n">│</span> <span class="mi">1</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;12_34&quot;</span> <span class="n">│</span> <span class="mf">1.0</span>       <span class="n">│</span> <span class="mf">0.999949</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">2</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;13_24&quot;</span> <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">2.52737e-5</span> <span class="n">│</span>
+<span class="n">│</span> <span class="mi">3</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;14_23&quot;</span> <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">2.52737e-5</span> <span class="n">│</span>
+<span class="n">│</span> <span class="mi">4</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;12_34&quot;</span> <span class="n">│</span> <span class="mf">0.833333</span>  <span class="n">│</span> <span class="mf">0.835101</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">5</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;13_24&quot;</span> <span class="n">│</span> <span class="mf">0.0333333</span> <span class="n">│</span> <span class="mf">0.0824494</span>  <span class="n">│</span>
+<span class="n">│</span> <span class="mi">6</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;14_23&quot;</span> <span class="n">│</span> <span class="mf">0.133333</span>  <span class="n">│</span> <span class="mf">0.0824494</span>  <span class="n">│</span>
+<span class="n">│</span> <span class="mi">7</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="s">&quot;12_34&quot;</span> <span class="n">│</span> <span class="mf">0.866667</span>  <span class="n">│</span> <span class="mf">0.860271</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">8</span>   <span class="n">│</span> <span class="s">&quot;A&quot;</span> <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="s">&quot;13_24&quot;</span> <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">0.0698646</span>  <span class="n">│</span>
+<span class="n">⋮</span>
+<span class="n">│</span> <span class="mi">37</span>  <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="s">&quot;12_34&quot;</span> <span class="n">│</span> <span class="mf">0.666667</span>  <span class="n">│</span> <span class="mf">0.598761</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">38</span>  <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="s">&quot;13_24&quot;</span> <span class="n">│</span> <span class="mf">0.266667</span>  <span class="n">│</span> <span class="mf">0.302023</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">39</span>  <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="s">&quot;14_23&quot;</span> <span class="n">│</span> <span class="mf">0.0666667</span> <span class="n">│</span> <span class="mf">0.099216</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">40</span>  <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="s">&quot;12_34&quot;</span> <span class="n">│</span> <span class="mf">0.666667</span>  <span class="n">│</span> <span class="mf">0.598761</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">41</span>  <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="s">&quot;13_24&quot;</span> <span class="n">│</span> <span class="mf">0.266667</span>  <span class="n">│</span> <span class="mf">0.302023</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">42</span>  <span class="n">│</span> <span class="s">&quot;B&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="s">&quot;14_23&quot;</span> <span class="n">│</span> <span class="mf">0.0666667</span> <span class="n">│</span> <span class="mf">0.099216</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">43</span>  <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="s">&quot;12_34&quot;</span> <span class="n">│</span> <span class="mf">1.0</span>       <span class="n">│</span> <span class="mf">0.999898</span>   <span class="n">│</span>
+<span class="n">│</span> <span class="mi">44</span>  <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="s">&quot;13_24&quot;</span> <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">5.09658e-5</span> <span class="n">│</span>
+<span class="n">│</span> <span class="mi">45</span>  <span class="n">│</span> <span class="s">&quot;C&quot;</span> <span class="n">│</span> <span class="s">&quot;D&quot;</span> <span class="n">│</span> <span class="s">&quot;E&quot;</span> <span class="n">│</span> <span class="s">&quot;O&quot;</span> <span class="n">│</span> <span class="s">&quot;14_23&quot;</span> <span class="n">│</span> <span class="mf">0.0</span>       <span class="n">│</span> <span class="mf">5.09658e-5</span> <span class="n">│</span>
+</pre></div>
+
+
+<p>It is important to have run <code>snaq!</code>, <code>topologyQPseudolik!</code> or <code>topologyMaxQPseudolik!</code> before making these tables, or the result would be meaningless. These functions update the fitted concordance factors (those expected under the network) inside the DataCF object <code>raxmlCF</code>.</p>
 <p>Now, we can plot them with any of the Julia packages for plotting. For example:</p>
-<pre><code class="julia">using Gadfly
-p = plot(layer(df_long, x=&quot;obsCF&quot;, y=&quot;expCF&quot;, Geom.point, Stat.x_jitter(range=0.4)),
-         layer(x=0:1,y=0:1, Geom.line))
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">Gadfly</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">layer</span><span class="p">(</span><span class="n">df_long</span><span class="p">,</span> <span class="n">Geom</span><span class="o">.</span><span class="n">point</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">&quot;obsCF&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;expCF&quot;</span><span class="p">),</span>
+     <span class="n">layer</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">Geom</span><span class="o">.</span><span class="n">line</span><span class="p">),</span> <span class="c"># diagonal line</span>
+     <span class="n">Guide</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&quot;CF observed in gene trees&quot;</span><span class="p">),</span> <span class="n">Guide</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&quot;CF expected from network&quot;</span><span class="p">))</span>
+</pre></div>
 
-<p>This will pop up a browser window with the plot. The plot can be saved as PDF (or many other formats, see <a href="http://dcjones.github.io/Gadfly.jl/">Gadfly tutorial</a>) with</p>
-<pre><code class="julia">draw(PDF(&quot;plot.pdf&quot;, 4inch, 3inch), p)
-</code></pre>
 
-<p>To highlight quartets that include taxon "6", say, if we suspect that it is an unrecognized hybrid, one may do this.</p>
-<pre><code>using DataFramesMeta # install this package with Pkg.add(&quot;DataFramesMeta&quot;) if not done before
-mycolor = @with(df_long, (:tx1 .== &quot;6&quot;) | (:tx2 .== &quot;6&quot;) | (:tx3 .== &quot;6&quot;) | (:tx4 .== &quot;6&quot;));
-# 'mycolor' is true for quartets having taxon &quot;6&quot;, false for others
-p = plot(layer(df_long, x=&quot;obsCF&quot;, y=&quot;expCF&quot;, color=mycolor, Geom.point),
-         layer(x=0:1,y=0:1, Geom.line),
-         Guide.colorkey(&quot;has taxon 6?&quot;))
-</code></pre>
-
+<p><img alt="" src="../../assets/figures/expectedCFs_obsvsfitted_1.png" /></p>
 <p>To export this table and explore the fit of the network with other tools:</p>
-<pre><code class="julia">writetable(&quot;fittedCF_net1_long.csv&quot;, df_long)
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">writetable</span><span class="p">(</span><span class="s">&quot;fittedCF.csv&quot;</span><span class="p">,</span> <span class="n">df_long</span><span class="p">)</span>
+</pre></div>
+
+
+<p>To highlight quartets that include taxon A, say, if we suspect that it is an unrecognized hybrid, one may do this. But very many points are overlapping, and this particular plot is not very satisfying as it is.</p>
+<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">DataFramesMeta</span> <span class="c"># install this package with Pkg.add(&quot;DataFramesMeta&quot;) if not done before</span>
+<span class="n">mycolor</span> <span class="o">=</span> <span class="nd">@with</span><span class="p">(</span><span class="n">df_long</span><span class="p">,</span> <span class="p">(</span><span class="o">:</span><span class="n">tx1</span> <span class="o">.==</span> <span class="s">&quot;A&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="o">:</span><span class="n">tx2</span> <span class="o">.==</span> <span class="s">&quot;A&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="o">:</span><span class="n">tx3</span> <span class="o">.==</span> <span class="s">&quot;A&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="o">:</span><span class="n">tx4</span> <span class="o">.==</span> <span class="s">&quot;A&quot;</span><span class="p">));</span>
+<span class="c"># &#39;mycolor&#39; is true for quartets having taxon A, false for others</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">layer</span><span class="p">(</span><span class="n">df_long</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">&quot;obsCF&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;expCF&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">mycolor</span><span class="p">,</span> <span class="n">Geom</span><span class="o">.</span><span class="n">point</span><span class="p">),</span>
+     <span class="n">layer</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">Geom</span><span class="o">.</span><span class="n">line</span><span class="p">),</span>
+     <span class="n">Guide</span><span class="o">.</span><span class="n">colorkey</span><span class="p">(</span><span class="s">&quot;has taxon A?&quot;</span><span class="p">))</span>
+</pre></div>
                 
                   
                 
@@ -471,7 +545,7 @@ p = plot(layer(df_long, x=&quot;obsCF&quot;, y=&quot;expCF&quot;, color=mycolor,
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../fixednetworkoptim/" title="Fixed Network" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../fixednetworkoptim/" title="Candidate Networks" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -480,7 +554,7 @@ p = plot(layer(df_long, x=&quot;obsCF&quot;, y=&quot;expCF&quot;, color=mycolor,
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Fixed Network
+                Candidate Networks
               </span>
             </div>
           </a>
@@ -522,7 +596,7 @@ p = plot(layer(df_long, x=&quot;obsCF&quot;, y=&quot;expCF&quot;, color=mycolor,
       
     </div>
     
-      <script src="../../assets/javascripts/application-e3caa82af6.js"></script>
+      <script src="../../assets/javascripts/application-07b0fbb49b.js"></script>
       
       
       <script>app.initialize({url:{base:"../.."}})</script>
