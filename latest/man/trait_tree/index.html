@@ -16,7 +16,7 @@
       
         <link rel="shortcut icon" href="../../assets/images/favicon.png">
       
-      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.5">
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.8.1">
     
     
       
@@ -27,7 +27,7 @@
       <script src="../../assets/javascripts/modernizr-1df76c4e58.js"></script>
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application-769c285a91.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application-bfecc7305d.css">
       
         <link rel="stylesheet" href="../../assets/stylesheets/application-02c2a4388f.palette.css">
       
@@ -106,7 +106,7 @@
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="" data-md-lang-tokenizer="[\s\-]+">
           <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
             Type to start searching
           </div>
@@ -433,6 +433,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#shifts-and-heterosis" title="Shifts and Heterosis" class="md-nav__link">
+    Shifts and Heterosis
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simulation-of-a-shifted-bm" title="Simulation of a Shifted BM" class="md-nav__link">
+    Simulation of a Shifted BM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fit-of-a-shifted-bm" title="Fit of a Shifted BM" class="md-nav__link">
+    Fit of a Shifted BM
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
     </ul>
@@ -581,6 +608,33 @@
   <a href="#pagels-lambda" title="Pagel's Lambda" class="md-nav__link">
     Pagel's Lambda
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shifts-and-heterosis" title="Shifts and Heterosis" class="md-nav__link">
+    Shifts and Heterosis
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simulation-of-a-shifted-bm" title="Simulation of a Shifted BM" class="md-nav__link">
+    Simulation of a Shifted BM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fit-of-a-shifted-bm" title="Fit of a Shifted BM" class="md-nav__link">
+    Fit of a Shifted BM
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -908,10 +962,93 @@
 
 <p>As it is indeed generated according to a plain BM on the phylogeny, the estimated λ should be close to 1. It can be extracted with function <code>lambda_estim</code>:</p>
 <div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">lambda_estim</span><span class="p">(</span><span class="n">fitPagel</span><span class="p">)</span>
-<span class="mf">0.9073561228997261</span>
+<span class="mf">0.9073561228985138</span>
 </pre></div>
 
 
+<p><a id='Shifts-and-Heterosis-1'></a></p>
+<h2 id="shifts-and-heterosis">Shifts and Heterosis</h2>
+<p>In the ANOVA section above, we showed how to include heterosis in a simple case. In general, heterosis can be seen as a particuliar exemple of a <em>shifted BM</em> on  the phylogenetic network.</p>
+<p><a id='Simulation-of-a-Shifted-BM-1'></a></p>
+<h3 id="simulation-of-a-shifted-bm">Simulation of a Shifted BM</h3>
+<p>In a shifted BM, the trait evolves as a BM on the network most of the time, but <em>shifts</em> on some of the branches. The positions and values of the shifts can be stored in a <a href="../../lib/public/#PhyloNetworks.ShiftNet"><code>ShiftNet</code></a> object. For identifiability reasons, shifts are only allowed on tree-like branches. The position of the shifts can be given using vector of edges. To see this, let's first plot the network with its associated edges and node numbers.</p>
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="n">useEdgeLength</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">showEdgeNumber</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="" src="../../assets/figures/trait_tree_truenet_with_numbers_1.png" /></p>
+<p>Let's say that we want to add a shift with value 5.0 on the branch directly following the hybridization event, in order to model heterosis. We can see on the plot above that this branch is number 6, so we define the following object:</p>
+<div class="codehilite"><pre><span></span><span class="n">shift</span> <span class="o">=</span> <span class="n">ShiftNet</span><span class="p">(</span><span class="n">truenet</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="mf">5.0</span><span class="p">,</span>  <span class="n">truenet</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Note that the edge numbers and values of a <code>ShiftNet</code> object can be retrieved thanks to functions <a href="../../lib/public/#PhyloNetworks.getShiftEdgeNumber"><code>getShiftEdgeNumber</code></a> and <a href="../../lib/public/#PhyloNetworks.getShiftValue"><code>getShiftValue</code></a>. The constructor can take a single edge and associated value, like here, or two vectors of edges and matching values.</p>
+<p>Because we often need to put shifts only on edges right after hybrids, there is a special function <a href="../../lib/public/#PhyloNetworks.shiftHybrid"><code>shiftHybrid</code></a> to do that, so that  we do not have to find out their edges number. Here, the <code>shift</code> object could hence have been defined as:</p>
+<div class="codehilite"><pre><span></span><span class="n">shift</span> <span class="o">=</span> <span class="n">shiftHybrid</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span>  <span class="n">truenet</span><span class="p">)</span>
+<span class="n">shift</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>PhyloNetworks.ShiftNet:
+     Edge Number Shift Value
+               6         5.0
+</pre></div>
+
+
+<p>The parameters for the simulation are then defined as above, just adding the <code>ShiftNet</code> object as a parameter.</p>
+<div class="codehilite"><pre><span></span><span class="n">params_sh</span> <span class="o">=</span> <span class="n">ParamsBM</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">shift</span><span class="p">)</span> <span class="c"># BM with mean 2, variance 0.5, and shifts.</span>
+</pre></div>
+
+
+<p>The traits are simulated using the same function <a href="../../lib/public/#PhyloNetworks.simulate"><code>simulate</code></a>, and extracted at the tips as before.</p>
+<div class="codehilite"><pre><span></span><span class="n">srand</span><span class="p">(</span><span class="mi">18700904</span><span class="p">)</span>
+<span class="n">sim_sh</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="n">params_sh</span><span class="p">)</span> <span class="c"># simulate a shifted BM on truenet</span>
+<span class="n">trait_sh</span> <span class="o">=</span> <span class="n">sim_sh</span><span class="p">[</span><span class="o">:</span><span class="n">Tips</span><span class="p">]</span>              <span class="c"># trait at the tips (data)</span>
+</pre></div>
+
+
+<p><a id='Fit-of-a-Shifted-BM-1'></a></p>
+<h3 id="fit-of-a-shifted-bm">Fit of a Shifted BM</h3>
+<p>Let's assume that we measured <code>trait_sh</code>, and that we want to test whether there were some ancestral hybridizations. To do that, we can use the  custom columns of the <a href="../../lib/public/#PhyloNetworks.incidenceMatrix"><code>incidenceMatrix</code></a>, that can be directly defined thanks to function <a href="../../lib/public/#PhyloNetworks.regressorHybrid"><code>regressorHybrid</code></a>.</p>
+<div class="codehilite"><pre><span></span><span class="n">df_shift</span> <span class="o">=</span> <span class="n">regressorHybrid</span><span class="p">(</span><span class="n">truenet</span><span class="p">)</span> <span class="c"># Regressors matching Hybrid Shifts</span>
+</pre></div>
+
+
+<p>This creates a dataframe, with as many columns as the number of hybrids in the network, each named according to the number of the edge after the hybrid. We can use this dataframe as regressors in the <code>phyloNetworklm</code> function.</p>
+<div class="codehilite"><pre><span></span><span class="n">dat</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">trait</span> <span class="o">=</span> <span class="n">trait_sh</span><span class="p">,</span> <span class="n">tipNames</span> <span class="o">=</span> <span class="n">tipLabels</span><span class="p">(</span><span class="n">sim_sh</span><span class="p">))</span>  <span class="c"># Data</span>
+<span class="n">dat</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="n">df_shift</span><span class="p">,</span> <span class="n">on</span><span class="o">=:</span><span class="n">tipNames</span><span class="p">)</span>                          <span class="c"># join the two</span>
+<span class="n">fit_sh</span> <span class="o">=</span> <span class="n">phyloNetworklm</span><span class="p">(</span><span class="nd">@formula</span><span class="p">(</span><span class="n">trait</span> <span class="o">~</span> <span class="n">shift_6</span><span class="p">),</span> <span class="n">dat</span><span class="p">,</span> <span class="n">truenet</span><span class="p">)</span> <span class="c"># fit</span>
+<span class="n">fit_sh</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>DataFrames.DataFrameRegressionModel{PhyloNetworks.PhyloNetworkLinearModel,A
+rray{Float64,2}}
+
+Formula: trait ~ 1 + shift_6
+
+Model: BM
+
+Parameter(s) Estimates:
+Sigma2: 0.347898
+
+Coefficients:
+             Estimate Std.Error t value Pr(&gt;|t|)
+(Intercept)    1.7885   1.46856 1.21786   0.2902
+shift_6       6.13121   1.73228 3.53939   0.0240
+
+Log Likelihood: -9.8996497316
+AIC: 25.7992994631
+</pre></div>
+
+
+<p>Here, because there is only one hybrid in the network, we can directly see whether the ancestral heterosis is significant or not thanks to the  Student test on the coefficient associated with <code>shift_6</code>. In more complex cases, it is possible to do a Fisher test, thanks to the <code>GLM</code> function <code>ftest</code>.</p>
+<div class="codehilite"><pre><span></span><span class="n">fit_null</span> <span class="o">=</span> <span class="n">phyloNetworklm</span><span class="p">(</span><span class="nd">@formula</span><span class="p">(</span><span class="n">trait</span> <span class="o">~</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dat</span><span class="p">,</span> <span class="n">truenet</span><span class="p">)</span> <span class="c"># fit against the null (no shift)</span>
+<span class="n">ftest</span><span class="p">(</span><span class="n">fit_sh</span><span class="p">,</span> <span class="n">fit_null</span><span class="p">)</span>                                      <span class="c"># nested models, from more complex to most simple</span>
+</pre></div>
+
+
+<p>Here, this test is equivalent to the Fisher test, and gives the same p-value.</p>
 <div class="footnote">
 <hr />
 <ol>
@@ -989,7 +1126,7 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application-07b0fbb49b.js"></script>
+      <script src="../../assets/javascripts/application-6940329b9f.js"></script>
       
       
       <script>app.initialize({url:{base:"../.."}})</script>
