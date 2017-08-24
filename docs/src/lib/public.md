@@ -125,6 +125,7 @@ predintPlot
 incidenceMatrix
 regressorShift
 regressorHybrid
+transform!
 parsimonyDiscrete
 ```
 

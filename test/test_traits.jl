@@ -114,3 +114,23 @@ V2 = gam*V_t_1[:All] + (1-gam)*V_t_2[:All] - gam*(1-gam) * (V_t_1.V[p, p] - V_t_
 
 @test V1[:All] ≈ V2
 
+
+###############################################################################
+## Lambda
+###############################################################################
+net = readTopology("(((Ag:5,(#H1:1::0.056,((Ak:2,(E:1,#H2:1::0.004):1):1,(M:2)#H2:1::0.996):1):1):1,(((((Az:1,Ag2:1):1,As:2):1)#H1:1::0.944,Ap:4):1,Ar:5):1):1,(P:4,20:4):3,165:7);")
+preorder!(net)
+ 
+lam = 0.0
+
+## Transform variance matrix dirrectly
+V1 = sharedPathMatrix(net)
+gammas = PhyloNetworks.getGammas(net)
+times = PhyloNetworks.getHeights(net)
+PhyloNetworks.transform_matrix_lambda!(V1, lam, gammas, times)
+
+## Transform net
+transform!(net, "lambda", lam)
+V2 = sharedPathMatrix(net)
+
+@test V1[:All] ≈ V2[:All]

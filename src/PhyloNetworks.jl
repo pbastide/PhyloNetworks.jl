@@ -101,7 +101,8 @@ expectationsPlot,
 predint,
 predintPlot,
 ftest, # To be removed when available in GLM
-parsimonyDiscrete
+parsimonyDiscrete,
+transform!
 
 # export part
 

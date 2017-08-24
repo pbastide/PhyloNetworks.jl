@@ -800,6 +800,48 @@ function paramstable(obj::ParamsBM)
 end
 
 
+function transform!(net::HybridNetwork, params::ParamsProcess, checkPreorder=true::Bool)
+    if isa(params, ParamsBM)
+        return net
+    elseif isa(params, ParamsLambda)
+        transform!(net, "lambda", params.lambda, checkPreorder)
+    else
+        error("The 'transform' function only works for Pagel's lambda (for now).")
+    end
+end
+
+"""
+`transform!(net::HybridNetwork, model="lambda"::AbstractString, pars=[1.0]::Vector{Real}, checkPreorder=true::Bool)`
+
+Transform the branch lengths of `net` according to the `model`, with parameters `pars`.
+Only 'lambda' model is implemented for now.
+
+"""
+function transform!(net::HybridNetwork, model="lambda"::AbstractString, pars=[1.0]::Vector{Real}, checkPreorder=true::Bool)
+    if model == "lambda"
+        transformLambda!(net, pars[1], checkPreorder)
+    else
+        error("The model you chose is not currently supported. Please check the documentation for a list of models.")
+    end
+end
+
+function transformLambda!(net::HybridNetwork, lambda::Real, checkPreorder=true::Bool)
+    if(checkPreorder)
+        preorder!(net)
+    end
+    times = getHeights(net)
+    order_nodes = [n.number for n in net.nodes_changed]
+    for i in 1:size(net.edge, 1)
+        node = getChild(net.edge[i]) # get child node
+        if node.leaf
+            t = times[indexin([node.number], order_nodes)][1]
+            net.edge[i].length = lambda * net.edge[i].length + (1-lambda) * t
+        else
+            net.edge[i].length = lambda * net.edge[i].length
+        end
+    end
+end
+
 ###############################################################################
 ###############################################################################
 ## Simulation Function
@@ -1106,6 +1148,7 @@ function phyloNetworklm(X::Matrix,
                                             msng=msng, ind=ind,
                                             startingValue=startingValue, fixedValue=fixedValue)
     end
+    error("The model you chose is not currently supported. Please check the documentation for a list of models.")
 end
 
 ###############################################################################
