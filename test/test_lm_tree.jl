@@ -68,7 +68,10 @@ tmp = predict(fitBM);
 @show tmp[1:6], tmp[190:end] # 4.679 except for last 5: 9.31707, 9.33832, 9.33052, 9.34356, 9.31707
 println("are they all 4.6789989001?")
 # next: looks random. sometimes passes, most times fails
-@test_skip predict(fitBM) ≈ [4.6789989001 for i in 1:197] atol=1e-10
+@test predict(fitBM) ≈ [4.6789989001 for i in 1:197] atol=1e-10
+@test predict(fitBM) ≈ [4.6789989001 for i in 1:197] atol=1e-10
+@test predict(fitBM) ≈ [4.6789989001 for i in 1:197] atol=1e-10
+@test predict(fitBM) ≈ [4.6789989001 for i in 1:197] atol=1e-10
 # @test_approx_eq_eps model_response(fitBM)[fitbis.model.ind] model_response(fitbis)
 # @test_approx_eq_eps deviance(fitBM)  deviance(fitbis)
 # @test_approx_eq_eps nulldeviance(fitBM)  nulldeviance(fitbis)
@@ -95,7 +98,7 @@ nodesR = expeR[-expe[1:196, :nodeNumber] + 196]
 nodesJulia = expe[1:196, :condExpectation]
 @show nodesR[1:6],    nodesR[190:end]
 @show nodesJulia[1:6],nodesJulia[190:end]
-@test_skip isapprox(nodesR, nodesJulia)
+@test isapprox(nodesR, nodesJulia)
 
 ## Variances
 vars = diag(anc.variances_nodes)
@@ -116,7 +119,7 @@ nodesRt = expeRt[-expe[1:196, :nodeNumber] + 196 - 197]
 nodesJulia = expe[1:196, :condExpectation]
 @show nodesRt[1:6],   nodesRt[190:end]
 @show nodesJulia[1:6],nodesJulia[190:end]
-@test_skip isapprox(nodesRt, nodesJulia)
+@test isapprox(nodesRt, nodesJulia)
 
 ## Variances
 vars = diag(anc.variances_nodes)
@@ -219,7 +222,7 @@ fitLambda = (@test_warn "Maximum lambda value" phyloNetworklm(@formula(trait ~ 1
 @test nobs(fitLambda) ≈ 197.0 atol=1e-10
 @show sum(residuals(fitLambda)) # locally: -115.91591040367894
 println("is this -113.594?")
-@test_skip isapprox(sum(residuals(fitLambda)), -113.594, atol=1e-2) ## Low Tolerance !!
+@test isapprox(sum(residuals(fitLambda)), -113.594, atol=1e-2) ## Low Tolerance !!
 @test dof_residual(fitLambda) ≈ 196.0 atol=1e-10 ## Correct Definition ?
 @test sigma2_estim(fitLambda) ≈ 0.0014756 atol=1e-7
 @test stderr(fitLambda) ≈ [0.22608] atol=1e-5
@@ -230,7 +233,11 @@ tmp = predict(fitLambda);
 @show tmp[1:6], tmp[190:end] # all 4.66893 except for last 5: 8.42676, 8.44585, etc.
 println("are they all 4.66893?")
 # next: looks random. sometimes passes, most times fails
-@test_skip predict(fitLambda) ≈ [4.66893 for i in 1:197] atol=6e-5
+@test predict(fitLambda) ≈ [4.66893 for i in 1:197] atol=6e-5
+@test predict(fitLambda) ≈ [4.66893 for i in 1:197] atol=6e-5
+@test predict(fitLambda) ≈ [4.66893 for i in 1:197] atol=6e-5
+@test predict(fitLambda) ≈ [4.66893 for i in 1:197] atol=6e-5
+@test predict(fitLambda) ≈ [4.66893 for i in 1:197] atol=6e-5
 
 ### R script to get the above values:
 # library(geiger)
@@ -319,7 +326,7 @@ tmp  = predict(fitBM)
 tmp2 = predictR[fitBM.model.ind]
 @show tmp[1:6],  tmp[190:end]
 @show tmp2[1:6],tmp2[190:end] # the last 5 values are different
-@test_skip isapprox(predict(fitBM), predictR[fitBM.model.ind], atol=1e-8)
+@test isapprox(predict(fitBM), predictR[fitBM.model.ind], atol=1e-8)
 
 # ## R code to get those results
 # library(geiger)
@@ -387,7 +394,7 @@ vcovR =  [0.0200086273  -0.0136717540 0.0084815090  -0.0093192029 -0.0114417825 
 @test nobs(fitBM) ≈ 100.0 atol=1e-10
 @show sum(residuals(fitBM)) # looks random, e.g. 1.6091413520064477, or 0.8338189090359597
 println("is this equal to 0.6352899255?") # sometimes NO, yet the test passes below!!
-@test_skip sum(residuals(fitBM)) ≈ 0.6352899255 atol=1e-10
+@test sum(residuals(fitBM)) ≈ 0.6352899255 atol=1e-10
 @test dof_residual(fitBM) ≈ 91.0 atol=1e-10
 @test sigma2_estim(fitBM) ≈ 0.0003025014 atol=1e-10
 @test stderr(fitBM) ≈ [0.1414518551,0.1361605540,0.1321542330,0.1295968341,0.2214683008,0.1820427154,0.0672106202,0.0965879311,0.0864973651] atol=1e-10
@@ -471,7 +478,7 @@ vcovR =  [0.0200251600  -0.0137474015 0.0085637021  -0.0092973836 -0.0114259722 
 @test nobs(fitLambda) ≈ 100.0 atol=1e-10
 @show sum(residuals(fitLambda)) # looks random, eg 0.033126277561337916 or 0.644941961666333
 println("is this equal to 0.6369008979?")
-@test_skip sum(residuals(fitLambda)) ≈ 0.6369008979 atol=1e-5
+@test sum(residuals(fitLambda)) ≈ 0.6369008979 atol=1e-5
 @test dof_residual(fitLambda) ≈ 91.0 atol=1e-10
 @test sigma2_estim(fitLambda) ≈ 0.0003009914 atol=1e-9
 @test stderr(fitLambda) ≈ [0.1415102824,0.1367059706,0.1327404019,0.1294070617,0.2213803048,0.1817274626,0.0671133793,0.0966096332,0.0863718011] atol=1e-6
