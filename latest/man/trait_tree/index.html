@@ -307,6 +307,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#trait-simulation" title="Trait simulation" class="md-nav__link">
+    Trait simulation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#phylogenetic-regression" title="Phylogenetic regression" class="md-nav__link">
     Phylogenetic regression
   </a>
@@ -335,8 +342,29 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#data-imputation" title="Data imputation" class="md-nav__link">
+    Data imputation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-known-predictors" title="With known predictors" class="md-nav__link">
+    With known predictors
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phylogenetic-anova" title="Phylogenetic ANOVA" class="md-nav__link">
+    Phylogenetic ANOVA
+  </a>
   
 </li>
       
@@ -459,6 +487,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#trait-simulation" title="Trait simulation" class="md-nav__link">
+    Trait simulation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#phylogenetic-regression" title="Phylogenetic regression" class="md-nav__link">
     Phylogenetic regression
   </a>
@@ -487,8 +522,29 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#data-imputation" title="Data imputation" class="md-nav__link">
+    Data imputation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-known-predictors" title="With known predictors" class="md-nav__link">
+    With known predictors
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phylogenetic-anova" title="Phylogenetic ANOVA" class="md-nav__link">
+    Phylogenetic ANOVA
+  </a>
   
 </li>
       
@@ -559,28 +615,21 @@
 
 
 <p>As previously, we can plot the network thanks to the <code>RCall</code> package. The <code>name</code> function is only instrumental here, to ensure that the figure is saved in the correct directory when the documentation is built. We only show the comands to actually save the plot in this first example for the interested reader, but we will hide those in the rest of the chapter, for the sake of clarity.</p>
-<p>```@example tree_trait
-using PhyloPlots, RCall
-R"name &lt;- function(x) file.path(\"..\", \"assets\", \"figures\", x)"
-R"svg(name(\"truenet.svg\"), width=8, height=4)"
-R"par(mar = c(0, 0, 0, 0))"
-plot(truenet, :R, useEdgeLength=true, showGamma=true)
-R"dev.off()"
-nothing # hide</p>
-<div class="codehilite"><pre><span></span>![truenet](../assets/figures/truenet.svg)
+<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">PhyloPlots</span><span class="p">,</span> <span class="n">RCall</span>
+<span class="n">R</span><span class="s">&quot;name &lt;- function(x) file.path(</span><span class="se">\&quot;</span><span class="s">..</span><span class="se">\&quot;</span><span class="s">, </span><span class="se">\&quot;</span><span class="s">assets</span><span class="se">\&quot;</span><span class="s">, </span><span class="se">\&quot;</span><span class="s">figures</span><span class="se">\&quot;</span><span class="s">, x)&quot;</span>
+<span class="n">R</span><span class="s">&quot;svg(name(</span><span class="se">\&quot;</span><span class="s">truenet.svg</span><span class="se">\&quot;</span><span class="s">), width=8, height=4)&quot;</span>
+<span class="n">R</span><span class="s">&quot;par(mar = c(0, 0, 0, 0))&quot;</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">useEdgeLength</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
+<span class="n">R</span><span class="s">&quot;dev.off()&quot;</span>
+</pre></div>
 
 
-<span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&#39;Trait-simulation-1&#39;</span><span class="nt">&gt;&lt;/a&gt;</span>
-
-## Trait simulation
-
-
-We start by generating continuous traits to study. We simulate three traits on the network (two independent, one dependent), using a Brownian Motion (BM) model of trait evolution on the network. We start by choosing the parameters of the BM (ancestral mean and variance), by creating objects of class [`ParamsBM`](../lib/public.md#PhyloNetworks.ParamsBM)`<span class="nt">&lt;:ParamsProcess</span><span class="err">`.</span>
-
-
-<span class="err">```julia</span>
-<span class="na">params_trait1 =</span> <span class="s">ParamsBM(</span> <span class="err">2,</span> <span class="err">0.5)</span> <span class="err">#</span> <span class="err">BM</span> <span class="err">with</span> <span class="err">mean</span>  <span class="err">2</span> <span class="err">and</span> <span class="err">variance</span> <span class="err">0.5</span>
-<span class="na">params_trait2 =</span> <span class="s">ParamsBM(-2,</span> <span class="err">1)</span>   <span class="err">#</span> <span class="err">BM</span> <span class="err">with</span> <span class="err">mean</span> <span class="err">-2</span> <span class="err">and</span> <span class="err">variance</span> <span class="err">1.0</span>
+<p><img alt="truenet" src="../../assets/figures/truenet.svg" /></p>
+<p><a id='Trait-simulation-1'></a></p>
+<h2 id="trait-simulation">Trait simulation</h2>
+<p>We start by generating continuous traits to study. We simulate three traits on the network (two independent, one dependent), using a Brownian Motion (BM) model of trait evolution on the network. We start by choosing the parameters of the BM (ancestral mean and variance), by creating objects of class <a href="../../lib/public/#PhyloNetworks.ParamsBM"><code>ParamsBM</code></a><code>&lt;:ParamsProcess</code>.</p>
+<div class="codehilite"><pre><span></span><span class="n">params_trait1</span> <span class="o">=</span> <span class="n">ParamsBM</span><span class="p">(</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="c"># BM with mean  2 and variance 0.5</span>
+<span class="n">params_trait2</span> <span class="o">=</span> <span class="n">ParamsBM</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>   <span class="c"># BM with mean -2 and variance 1.0</span>
 </pre></div>
 
 
@@ -726,42 +775,29 @@ julia&gt; predint(ancTrait1, level=0.9) # prediction interval (with level 90%)
 
 
 <p>We can plot the ancestral states or prediction intervals on the tree, using the <code>nodeLabel</code> argument of the <code>plot</code> function.</p>
-<p>```@example tree_trait
-ancExpe = expectationsPlot(ancTrait1); # format expected ancestral states for the plot
-R"svg(name(\"ancestral_expe.svg\"), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
-plot(truenet, :R, nodeLabel = ancExpe)
-R"dev.off()" # hide
-nothing # hide</p>
-<div class="codehilite"><pre><span></span>![ancestral_expe](../assets/figures/ancestral_expe.svg)
+<div class="codehilite"><pre><span></span><span class="n">ancExpe</span> <span class="o">=</span> <span class="n">expectationsPlot</span><span class="p">(</span><span class="n">ancTrait1</span><span class="p">);</span> <span class="c"># format expected ancestral states for the plot</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">ancExpe</span><span class="p">)</span>
+</pre></div>
 
 
-```@example tree_trait
-ancInt = predintPlot(ancTrait1) # format the prediction intervals for the plot
-R&quot;svg(name(\&quot;ancestral_predint.svg\&quot;), width=8, height=4)&quot; # hide
-R&quot;par(mar = c(0, 0, 0, 0))&quot; # hide
-plot(truenet,:R, nodeLabel = ancInt)
-R&quot;dev.off()&quot; # hide
-nothing # hide
+<p><img alt="ancestral_expe" src="../../assets/figures/ancestral_expe.svg" /></p>
+<div class="codehilite"><pre><span></span><span class="n">ancInt</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait1</span><span class="p">)</span> <span class="c"># format the prediction intervals for the plot</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span><span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">ancInt</span><span class="p">)</span>
 </pre></div>
 
 
 <p><img alt="ancestral_predint" src="../../assets/figures/ancestral_predint.svg" /></p>
 <p>The <code>predint</code> and <code>predintPlot</code> functions have an optional argument to state the <code>level</code> of the prediction interval. If not given, the default value is 0.95.</p>
 <p>It is also possible to plot both the reconstructed state and the predicted value on the same plot, using the optional keywork argument <code>withExp</code>. As shown below, we could also use the <code>:RCall</code> method from the <a href="https://cecileane.github.io/PhyloPlots.jl/latest/lib/public/"><code>plot</code></a> function.</p>
-<p>```@example tree_trait
-plot(truenet, :R, nodeLabel = predintPlot(ancTrait1, withExp=true))
-nothing # hide</p>
-<div class="codehilite"><pre><span></span>These plots tend to be quite busy, even for small networks.
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait1</span><span class="p">,</span> <span class="n">withExp</span><span class="o">=</span><span class="kc">true</span><span class="p">))</span>
+</pre></div>
 
 
-As we know the true ancestral states here, we can compare them to our estimation.
-
-
-```julia
-predictions = DataFrame(infPred=predint(ancTrait1)[1:7, 1],
-                        trueValue=sim1[:InternalNodes],
-                        supPred=predint(ancTrait1)[1:7, 2])
+<p>These plots tend to be quite busy, even for small networks.</p>
+<p>As we know the true ancestral states here, we can compare them to our estimation.</p>
+<div class="codehilite"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">infPred</span><span class="o">=</span><span class="n">predint</span><span class="p">(</span><span class="n">ancTrait1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                        <span class="n">trueValue</span><span class="o">=</span><span class="n">sim1</span><span class="p">[</span><span class="o">:</span><span class="n">InternalNodes</span><span class="p">],</span>
+                        <span class="n">supPred</span><span class="o">=</span><span class="n">predint</span><span class="p">(</span><span class="n">ancTrait1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 </pre></div>
 
 
@@ -798,21 +834,14 @@ predictions = DataFrame(infPred=predint(ancTrait1)[1:7, 1],
 
 
 <p>The prediction intervals ignore the fact that we estimated the process parameters, so they are less accurate and the function throws a warning. The output is an object of the same <a href="../../lib/public/#PhyloNetworks.ReconstructedStates"><code>ReconstructedStates</code></a> type as earlier, and the same extractors can be applied to it:</p>
-<p>```@example tree_trait
-R"svg(name(\"ancestral1.svg\"), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
-plot(truenet, :R, nodeLabel = expectationsPlot(ancTrait1Approx))
-R"dev.off()" # hide
-nothing # hide</p>
-<div class="codehilite"><pre><span></span>![ancestral1](../assets/figures/ancestral1.svg)
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">expectationsPlot</span><span class="p">(</span><span class="n">ancTrait1Approx</span><span class="p">))</span>
+</pre></div>
 
 
-For convenience, the two steps described above (fitting against the intercept, and then do ancestral state reconstruction) can be done all at once with a single call of the function [`ancestralStateReconstruction`](../lib/public.md#PhyloNetworks.ancestralStateReconstruction) on a DataFrame with the trait to reconstruct, and the tip labels:
-
-
-```julia
-datTrait1 = DataFrame(trait1 = trait1, tipNames = tipLabels(sim1))
-ancTrait1Approx = ancestralStateReconstruction(datTrait1, truenet)
+<p><img alt="ancestral1" src="../../assets/figures/ancestral1.svg" /></p>
+<p>For convenience, the two steps described above (fitting against the intercept, and then do ancestral state reconstruction) can be done all at once with a single call of the function <a href="../../lib/public/#PhyloNetworks.ancestralStateReconstruction"><code>ancestralStateReconstruction</code></a> on a DataFrame with the trait to reconstruct, and the tip labels:</p>
+<div class="codehilite"><pre><span></span><span class="n">datTrait1</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">trait1</span> <span class="o">=</span> <span class="n">trait1</span><span class="p">,</span> <span class="n">tipNames</span> <span class="o">=</span> <span class="n">tipLabels</span><span class="p">(</span><span class="n">sim1</span><span class="p">))</span>
+<span class="n">ancTrait1Approx</span> <span class="o">=</span> <span class="n">ancestralStateReconstruction</span><span class="p">(</span><span class="n">datTrait1</span><span class="p">,</span> <span class="n">truenet</span><span class="p">)</span>
 </pre></div>
 
 
@@ -846,30 +875,18 @@ ancTrait1Approx = ancestralStateReconstruction(datTrait1, truenet)
 </pre></div>
 
 
-<p>```@example tree_trait
-R"svg(name(\"ancestral2.svg\"), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
-plot(truenet, :R, nodeLabel = predintPlot(ancTrait1Approx, level=0.9))
-R"dev.off()" # hide
-nothing # hide</p>
-<div class="codehilite"><pre><span></span>![ancestral2](../assets/figures/ancestral2.svg)
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait1Approx</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.9</span><span class="p">))</span>
+</pre></div>
 
 
-This produces the exact same results. Here, we chose a `level` of 90% for the plotted prediction intervals.
-
-
-<span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&#39;Data-imputation-1&#39;</span><span class="nt">&gt;&lt;/a&gt;</span>
-
-### Data imputation
-
-
-Note that there is no theoretical difference between an internal node, for which we could not measure the value of the trait, and a missing value at a tip of the network. Consequently, the previous [`ancestralStateReconstruction`](../lib/public.md#PhyloNetworks.ancestralStateReconstruction) function can be used to do data imputation. To see this, let&#39;s add some missing values in trait 1.
-
-
-```julia
-datTrait1[:trait1] = allowmissing(datTrait1[:trait1]);
-datTrait1[[2], :trait1] = missing; # second row: for taxon C
-ancTrait1Approx = ancestralStateReconstruction(datTrait1, truenet)
+<p><img alt="ancestral2" src="../../assets/figures/ancestral2.svg" /></p>
+<p>This produces the exact same results. Here, we chose a <code>level</code> of 90% for the plotted prediction intervals.</p>
+<p><a id='Data-imputation-1'></a></p>
+<h3 id="data-imputation">Data imputation</h3>
+<p>Note that there is no theoretical difference between an internal node, for which we could not measure the value of the trait, and a missing value at a tip of the network. Consequently, the previous <a href="../../lib/public/#PhyloNetworks.ancestralStateReconstruction"><code>ancestralStateReconstruction</code></a> function can be used to do data imputation. To see this, let's add some missing values in trait 1.</p>
+<div class="codehilite"><pre><span></span><span class="n">datTrait1</span><span class="p">[</span><span class="o">:</span><span class="n">trait1</span><span class="p">]</span> <span class="o">=</span> <span class="n">allowmissing</span><span class="p">(</span><span class="n">datTrait1</span><span class="p">[</span><span class="o">:</span><span class="n">trait1</span><span class="p">]);</span>
+<span class="n">datTrait1</span><span class="p">[[</span><span class="mi">2</span><span class="p">],</span> <span class="o">:</span><span class="n">trait1</span><span class="p">]</span> <span class="o">=</span> <span class="n">missing</span><span class="p">;</span> <span class="c"># second row: for taxon C</span>
+<span class="n">ancTrait1Approx</span> <span class="o">=</span> <span class="n">ancestralStateReconstruction</span><span class="p">(</span><span class="n">datTrait1</span><span class="p">,</span> <span class="n">truenet</span><span class="p">)</span>
 </pre></div>
 
 
@@ -903,28 +920,16 @@ ancTrait1Approx = ancestralStateReconstruction(datTrait1, truenet)
 </pre></div>
 
 
-<p>```@example tree_trait
-R"svg(name(\"ancestral3.svg\"), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
-plot(truenet, :R, nodeLabel = predintPlot(ancTrait1Approx))
-R"dev.off()" # hide
-nothing # hide</p>
-<div class="codehilite"><pre><span></span>![ancestral3](../assets/figures/ancestral3.svg)
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait1Approx</span><span class="p">))</span>
+</pre></div>
 
 
-A prediction interval is shown for the missing values.
-
-
-<span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&#39;With-known-predictors-1&#39;</span><span class="nt">&gt;&lt;/a&gt;</span>
-
-### With known predictors
-
-
-At this point, it might be tempting to apply this function to trait 3 we simulated earlier as a linear combination of trait 1 and a phylogenetic noise. However, this cannot be done directly:
-
-
-```julia
-ancTrait3 = ancestralStateReconstruction(fitTrait3) # Throws an error !
+<p><img alt="ancestral3" src="../../assets/figures/ancestral3.svg" /></p>
+<p>A prediction interval is shown for the missing values.</p>
+<p><a id='With-known-predictors-1'></a></p>
+<h3 id="with-known-predictors">With known predictors</h3>
+<p>At this point, it might be tempting to apply this function to trait 3 we simulated earlier as a linear combination of trait 1 and a phylogenetic noise. However, this cannot be done directly:</p>
+<div class="codehilite"><pre><span></span><span class="n">ancTrait3</span> <span class="o">=</span> <span class="n">ancestralStateReconstruction</span><span class="p">(</span><span class="n">fitTrait3</span><span class="p">)</span> <span class="c"># Throws an error !</span>
 </pre></div>
 
 
@@ -942,37 +947,23 @@ ancTrait3 = ancestralStateReconstruction(fitTrait3) # Throws an error !
 </pre></div>
 
 
-<p>```@example tree_trait
-R"svg(name(\"ancestral4.svg\"), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
-plot(truenet, :R, nodeLabel = predintPlot(ancTrait3))
-R"dev.off()" # hide
-nothing # hide</p>
-<div class="codehilite"><pre><span></span>![ancestral4](../assets/figures/ancestral4.svg)
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait3</span><span class="p">))</span>
+</pre></div>
 
 
-where we provided the ancestral predictors as a matrix, containing the intercept, and the known predictor at the nodes. The user must be very careful with this function, as no check is done for the order of the predictors, that must be in the same order as the internal nodes of the phylogeny. As ancestral predictors are often unknown, the use of this functionality is discouraged.
-
-
-<span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">&#39;Phylogenetic-ANOVA-1&#39;</span><span class="nt">&gt;&lt;/a&gt;</span>
-
-## Phylogenetic ANOVA
-
-
-The [`phyloNetworklm`](../lib/public.md#PhyloNetworks.phyloNetworklm) function is based on the `lm` function from [GLM](https://github.com/JuliaStats/GLM.jl). This means that it inherits from most of its features, and in particular, it can handle formulas with factors or interactions. For example, in lizards, we might want to do a regression of toe length against body length and the region where each species is found, where this region is coded into 4 categories (say). We might also want to include an interaction effect between body length and region. (This model has no biological basis. It is just meant to show the possibilities of the function).
-
-
-To illustrate the use of categorical predictors of particular interest in a network with reticulations, let&#39;s assume that some transgressive evolution took place after the hybridization event, so that tips &quot;A&quot; and &quot;B&quot; have larger mean compared to the others.
-
-
-```julia
-delta = 5.0; # value of heterosis
-underHyb = [(n == &quot;A&quot; || n == &quot;B&quot;) for n in tipLabels(sim1)] # tips under hybrid
-underHyb
-for i in 1:length(trait3)
-    underHyb[i] <span class="err">&amp;&amp;</span> (trait3[i]+=delta) # add delta to tips A and B
-end
-trait3 # changed: +5 was added by the previous loop to A and B
+<p><img alt="ancestral4" src="../../assets/figures/ancestral4.svg" /></p>
+<p>where we provided the ancestral predictors as a matrix, containing the intercept, and the known predictor at the nodes. The user must be very careful with this function, as no check is done for the order of the predictors, that must be in the same order as the internal nodes of the phylogeny. As ancestral predictors are often unknown, the use of this functionality is discouraged.</p>
+<p><a id='Phylogenetic-ANOVA-1'></a></p>
+<h2 id="phylogenetic-anova">Phylogenetic ANOVA</h2>
+<p>The <a href="../../lib/public/#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a> function is based on the <code>lm</code> function from <a href="https://github.com/JuliaStats/GLM.jl">GLM</a>. This means that it inherits from most of its features, and in particular, it can handle formulas with factors or interactions. For example, in lizards, we might want to do a regression of toe length against body length and the region where each species is found, where this region is coded into 4 categories (say). We might also want to include an interaction effect between body length and region. (This model has no biological basis. It is just meant to show the possibilities of the function).</p>
+<p>To illustrate the use of categorical predictors of particular interest in a network with reticulations, let's assume that some transgressive evolution took place after the hybridization event, so that tips "A" and "B" have larger mean compared to the others.</p>
+<div class="codehilite"><pre><span></span><span class="n">delta</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span> <span class="c"># value of heterosis</span>
+<span class="n">underHyb</span> <span class="o">=</span> <span class="p">[(</span><span class="n">n</span> <span class="o">==</span> <span class="s">&quot;A&quot;</span> <span class="o">||</span> <span class="n">n</span> <span class="o">==</span> <span class="s">&quot;B&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="kp">in</span> <span class="n">tipLabels</span><span class="p">(</span><span class="n">sim1</span><span class="p">)]</span> <span class="c"># tips under hybrid</span>
+<span class="n">underHyb</span>
+<span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">trait3</span><span class="p">)</span>
+    <span class="n">underHyb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">trait3</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">delta</span><span class="p">)</span> <span class="c"># add delta to tips A and B</span>
+<span class="k">end</span>
+<span class="n">trait3</span> <span class="c"># changed: +5 was added by the previous loop to A and B</span>
 </pre></div>
 
 
@@ -1054,20 +1045,13 @@ AIC: 15.9770745374
 <p><a id='Simulation-of-a-Shifted-BM-1'></a></p>
 <h3 id="simulation-of-a-shifted-bm">Simulation of a Shifted BM</h3>
 <p>In a shifted BM, the trait evolves as a BM on the network most of the time, but <em>shifts</em> on some of the branches. The positions and values of the shifts can be stored in a <a href="../../lib/public/#PhyloNetworks.ShiftNet"><code>ShiftNet</code></a> object. For identifiability reasons, shifts are only allowed on tree-like branches. The position of the shifts can be given using vector of edges. To see this, let's first plot the network with its associated edges and node numbers.</p>
-<p>```@example tree_trait
-R"svg(name(\"truenet_with_numbers.svg\"), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
-plot(truenet, :R, useEdgeLength=true, showEdgeNumber=true)
-R"dev.off()" # hide
-nothing # hide</p>
-<div class="codehilite"><pre><span></span>![truenet_with_numbers](../assets/figures/truenet_with_numbers.svg)
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">useEdgeLength</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">showEdgeNumber</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
+</pre></div>
 
 
-Let&#39;s say that we want to add a shift with value 5.0 on the branch directly following the hybridization event, in order to model transgressive evolution. We can see on the plot above that this branch is number 6, so we define the following object:
-
-
-```julia
-shift = ShiftNet(truenet.edge[6], 5.0,  truenet)
+<p><img alt="truenet_with_numbers" src="../../assets/figures/truenet_with_numbers.svg" /></p>
+<p>Let's say that we want to add a shift with value 5.0 on the branch directly following the hybridization event, in order to model transgressive evolution. We can see on the plot above that this branch is number 6, so we define the following object:</p>
+<div class="codehilite"><pre><span></span><span class="n">shift</span> <span class="o">=</span> <span class="n">ShiftNet</span><span class="p">(</span><span class="n">truenet</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="mf">5.0</span><span class="p">,</span>  <span class="n">truenet</span><span class="p">)</span>
 </pre></div>
 
 
