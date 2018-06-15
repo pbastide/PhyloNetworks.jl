@@ -601,25 +601,20 @@
                   <a href="https://github.com/crsl4/PhyloNetworks.jl/edit/master/docs/man/trait_tree.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">PhyloNetworks</span>
-<span class="n">mkpath</span><span class="p">(</span><span class="s">&quot;../assets/figures&quot;</span><span class="p">)</span>
-</pre></div>
-
-
-<p><a id='Continuous-Trait-Evolution-1'></a></p>
+                <p><a id='Continuous-Trait-Evolution-1'></a></p>
 <h1 id="continuous-trait-evolution">Continuous Trait Evolution</h1>
-<p>Once the network is inferred, we can take these species relationships into account when studying the distribution of quantitative traits measured for extant species. This is the goal of phylogenetic comparative methods (PCM).</p>
+<p>Once the network is inferred, we can take these species relationships into account when studying the distribution of quantitative traits measured for extant species. This is the goal of phylogenetic comparative methods (PCM). More details can be found on the developments below in Bastide et al. 2018<sup id="fnref:fnBastide2018"><a class="footnote-ref" href="#fn:fnBastide2018" rel="footnote">1</a></sup></p>
 <p>We assume a fixed network, correctly rooted, with branch lengths proportional to calendar time. Here, we consider the true network that was used in the previous sections, and which is ultrametric (all the tips are contemporary).</p>
 <div class="codehilite"><pre><span></span><span class="n">truenet</span> <span class="o">=</span> <span class="n">readTopology</span><span class="p">(</span><span class="s">&quot;((((D:0.4,C:0.4):4.8,((A:0.8,B:0.8):2.2)#H1:2.2::0.7):4.0,(#H1:0::0.3,E:3.0):6.2):2.0,O:11.2);&quot;</span><span class="p">);</span>
 </pre></div>
 
 
-<p>As previously, we can plot the network thanks to the <code>RCall</code> package. The <code>name</code> function is only instrumental here, to ensure that the figure is saved in the correct directory when the documentation is built. We only show the comands to actually save the plot in this first example for the interested reader, but we will hide those in the rest of the chapter, for the sake of clarity.</p>
+<p>As previously, we can plot the network thanks to the <code>RCall</code> package. The <code>name</code> function is only instrumental here, to ensure that the figure is saved in the correct directory when the documentation is built. We only show the commands to actually save the plot in this first example for the interested reader, but we will hide those in the rest of the chapter, for the sake of clarity.</p>
 <div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">PhyloPlots</span><span class="p">,</span> <span class="n">RCall</span>
-<span class="n">R</span><span class="s">&quot;name &lt;- function(x) file.path(</span><span class="se">\&quot;</span><span class="s">..</span><span class="se">\&quot;</span><span class="s">, </span><span class="se">\&quot;</span><span class="s">assets</span><span class="se">\&quot;</span><span class="s">, </span><span class="se">\&quot;</span><span class="s">figures</span><span class="se">\&quot;</span><span class="s">, x)&quot;</span>
-<span class="n">R</span><span class="s">&quot;svg(name(</span><span class="se">\&quot;</span><span class="s">truenet.svg</span><span class="se">\&quot;</span><span class="s">), width=8, height=4)&quot;</span>
+<span class="n">R</span><span class="s">&quot;name &lt;- function(x) file.path(&#39;..&#39;, &#39;assets&#39;, &#39;figures&#39;, x)&quot;</span>
+<span class="n">R</span><span class="s">&quot;svg(name(&#39;truenet.svg&#39;), width=8, height=4)&quot;</span>
 <span class="n">R</span><span class="s">&quot;par(mar = c(0, 0, 0, 0))&quot;</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">useEdgeLength</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">useEdgeLength</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">);</span>
 <span class="n">R</span><span class="s">&quot;dev.off()&quot;</span>
 </pre></div>
 
@@ -680,7 +675,7 @@
 </pre></div>
 
 
-<p>Phylogenetic regression / ANOVA is based on the <a href="https://github.com/JuliaStats/GLM.jl">GLM</a> package, with the network as an extra argument, using funtion <a href="../../lib/public/#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a>.</p>
+<p>Phylogenetic regression / ANOVA is based on the <a href="https://github.com/JuliaStats/GLM.jl">GLM</a> package, with the network as an extra argument, using function <a href="../../lib/public/#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a>.</p>
 <div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">StatsModels</span> <span class="c"># for statistical model formulas</span>
 <span class="n">fitTrait3</span> <span class="o">=</span> <span class="n">phyloNetworklm</span><span class="p">(</span><span class="nd">@formula</span><span class="p">(</span><span class="n">trait3</span> <span class="o">~</span> <span class="n">trait1</span> <span class="o">+</span> <span class="n">trait2</span><span class="p">),</span> <span class="n">dat</span><span class="p">,</span> <span class="n">truenet</span><span class="p">)</span>
 </pre></div>
@@ -706,7 +701,7 @@ AIC: 13.9703506922
 </pre></div>
 
 
-<p>From this, we can see that the intercept, the coefficient for trait 1 and the variance of the noise are correctly estimated (given that there are only 6 taxa). In addition, the Student test for the coefficient associated with trait 2 has a high p-value, which means that this coefficient is not significantly different from 0. This is consistent with the way we simulated trait 3.</p>
+<p>From this, we can see that the intercept, the coefficient for trait 1 and the variance of the noise are correctly estimated (given that there are only 6 taxa). In addition, the Student T test for the coefficient associated with trait 2 has a high p-value, which means that this coefficient is not significantly different from 0. This is consistent with the way we simulated trait 3.</p>
 <p>The function returns an object of type <a href="../../lib/public/#PhyloNetworks.PhyloNetworkLinearModel"><code>PhyloNetworkLinearModel</code></a><code>&lt;:LinPredModel</code>. It is a subtype of the GLM type <code>LinPredModel</code>, which means that all base functions from Julia <a href="https://github.com/JuliaStats/StatsBase.jl">StatsBase</a> can be applied to it. See the documentation for this type for a list of all functions that can be used. Some functions allow the user to retrieve directly the estimated parameters of the BM, and are specific to this object.</p>
 <div class="codehilite"><pre><span></span>julia&gt; sigma2_estim(fitTrait3) # estimated variance of the BM
 0.03471195929806232
@@ -744,9 +739,9 @@ julia&gt; mu_estim(fitTrait3) # estimated root value of the BM
 │ 12  │ 6          │ 2.8445          │
 │ 13  │ 7          │ 5.88204         │
 
-julia&gt; using StatsBase # for stderr(), aic(), likelihood() etc.
+julia&gt; using StatsBase # for stderror(), aic(), likelihood() etc.
 
-julia&gt; stderr(ancTrait1) # associated standard errors
+julia&gt; stderror(ancTrait1) # associated standard errors
 7-element Array{Float64,1}:
  0.312339
  0.429933
@@ -776,20 +771,20 @@ julia&gt; predint(ancTrait1, level=0.9) # prediction interval (with level 90%)
 
 <p>We can plot the ancestral states or prediction intervals on the tree, using the <code>nodeLabel</code> argument of the <code>plot</code> function.</p>
 <div class="codehilite"><pre><span></span><span class="n">ancExpe</span> <span class="o">=</span> <span class="n">expectationsPlot</span><span class="p">(</span><span class="n">ancTrait1</span><span class="p">);</span> <span class="c"># format expected ancestral states for the plot</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">ancExpe</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">ancExpe</span><span class="p">);</span>
 </pre></div>
 
 
 <p><img alt="ancestral_expe" src="../../assets/figures/ancestral_expe.svg" /></p>
 <div class="codehilite"><pre><span></span><span class="n">ancInt</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait1</span><span class="p">)</span> <span class="c"># format the prediction intervals for the plot</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span><span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">ancInt</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span><span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">ancInt</span><span class="p">);</span>
 </pre></div>
 
 
 <p><img alt="ancestral_predint" src="../../assets/figures/ancestral_predint.svg" /></p>
 <p>The <code>predint</code> and <code>predintPlot</code> functions have an optional argument to state the <code>level</code> of the prediction interval. If not given, the default value is 0.95.</p>
-<p>It is also possible to plot both the reconstructed state and the predicted value on the same plot, using the optional keywork argument <code>withExp</code>. As shown below, we could also use the <code>:RCall</code> method from the <a href="https://cecileane.github.io/PhyloPlots.jl/latest/lib/public/"><code>plot</code></a> function.</p>
-<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait1</span><span class="p">,</span> <span class="n">withExp</span><span class="o">=</span><span class="kc">true</span><span class="p">))</span>
+<p>It is also possible to plot both the reconstructed state and the predicted value on the same plot, using the optional keyword argument <code>withExp</code>. As shown below, we could also use the <code>:RCall</code> method from the <a href="https://cecileane.github.io/PhyloPlots.jl/latest/lib/public/"><code>plot</code></a> function.</p>
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait1</span><span class="p">,</span> <span class="n">withExp</span><span class="o">=</span><span class="kc">true</span><span class="p">));</span>
 </pre></div>
 
 
@@ -834,7 +829,7 @@ julia&gt; predint(ancTrait1, level=0.9) # prediction interval (with level 90%)
 
 
 <p>The prediction intervals ignore the fact that we estimated the process parameters, so they are less accurate and the function throws a warning. The output is an object of the same <a href="../../lib/public/#PhyloNetworks.ReconstructedStates"><code>ReconstructedStates</code></a> type as earlier, and the same extractors can be applied to it:</p>
-<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">expectationsPlot</span><span class="p">(</span><span class="n">ancTrait1Approx</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">expectationsPlot</span><span class="p">(</span><span class="n">ancTrait1Approx</span><span class="p">));</span>
 </pre></div>
 
 
@@ -849,8 +844,8 @@ julia&gt; predint(ancTrait1, level=0.9) # prediction interval (with level 90%)
 <span class="n">Stacktrace</span><span class="o">:</span>
  <span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="n">depwarn</span><span class="o">(::</span><span class="n">String</span><span class="o">,</span> <span class="o">::</span><span class="n">Symbol</span><span class="o">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">deprecated</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">70</span>
  <span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="n">Type</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/StatsModels/src/</span><span class="n">deprecated</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">2</span> <span class="o">[</span><span class="n">inlined</span><span class="o">]</span>
- <span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="err">#</span><span class="n">ancestralStateReconstruction</span><span class="err">#</span><span class="mi">559</span><span class="o">(::</span><span class="n">Array</span><span class="o">{</span><span class="n">Any</span><span class="o">,</span><span class="mi">1</span><span class="o">},</span> <span class="o">::</span><span class="n">Function</span><span class="o">,</span> <span class="o">::</span><span class="n">DataFrames</span><span class="o">.</span><span class="na">DataFrame</span><span class="o">,</span> <span class="o">::</span><span class="n">PhyloNetworks</span><span class="o">.</span><span class="na">HybridNetwork</span><span class="o">)</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/PhyloNetworks/src/</span><span class="n">traits</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">2408</span>
- <span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="n">ancestralStateReconstruction</span><span class="o">(::</span><span class="n">DataFrames</span><span class="o">.</span><span class="na">DataFrame</span><span class="o">,</span> <span class="o">::</span><span class="n">PhyloNetworks</span><span class="o">.</span><span class="na">HybridNetwork</span><span class="o">)</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/PhyloNetworks/src/</span><span class="n">traits</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">2402</span>
+ <span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="err">#</span><span class="n">ancestralStateReconstruction</span><span class="err">#</span><span class="mi">559</span><span class="o">(::</span><span class="n">Array</span><span class="o">{</span><span class="n">Any</span><span class="o">,</span><span class="mi">1</span><span class="o">},</span> <span class="o">::</span><span class="n">Function</span><span class="o">,</span> <span class="o">::</span><span class="n">DataFrames</span><span class="o">.</span><span class="na">DataFrame</span><span class="o">,</span> <span class="o">::</span><span class="n">PhyloNetworks</span><span class="o">.</span><span class="na">HybridNetwork</span><span class="o">)</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/PhyloNetworks/src/</span><span class="n">traits</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">2386</span>
+ <span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="n">ancestralStateReconstruction</span><span class="o">(::</span><span class="n">DataFrames</span><span class="o">.</span><span class="na">DataFrame</span><span class="o">,</span> <span class="o">::</span><span class="n">PhyloNetworks</span><span class="o">.</span><span class="na">HybridNetwork</span><span class="o">)</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/PhyloNetworks/src/</span><span class="n">traits</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">2380</span>
  <span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="n">cd</span><span class="o">(::</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Expanders</span><span class="o">.</span><span class="err">##</span><span class="mi">8</span><span class="err">#</span><span class="mi">10</span><span class="o">{</span><span class="n">Module</span><span class="o">},</span> <span class="o">::</span><span class="n">String</span><span class="o">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">file</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">70</span>
  <span class="o">[</span><span class="mi">6</span><span class="o">]</span> <span class="o">(::</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Utilities</span><span class="o">.</span><span class="err">##</span><span class="mi">19</span><span class="err">#</span><span class="mi">20</span><span class="o">{</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Expanders</span><span class="o">.</span><span class="err">##</span><span class="mi">7</span><span class="err">#</span><span class="mi">9</span><span class="o">{</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Documents</span><span class="o">.</span><span class="na">Page</span><span class="o">,</span><span class="n">Module</span><span class="o">},</span><span class="n">Base</span><span class="o">.</span><span class="na">PipeEndpoint</span><span class="o">,</span><span class="n">Base</span><span class="o">.</span><span class="na">PipeEndpoint</span><span class="o">,</span><span class="n">Pipe</span><span class="o">,</span><span class="n">Array</span><span class="o">{</span><span class="n">UInt8</span><span class="o">,</span><span class="mi">1</span><span class="o">}})()</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/Documenter/src/Utilities/</span><span class="n">Utilities</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">593</span>
  <span class="o">[</span><span class="mi">7</span><span class="o">]</span> <span class="n">withoutput</span><span class="o">(::</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Expanders</span><span class="o">.</span><span class="err">##</span><span class="mi">7</span><span class="err">#</span><span class="mi">9</span><span class="o">{</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Documents</span><span class="o">.</span><span class="na">Page</span><span class="o">,</span><span class="n">Module</span><span class="o">})</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/Documenter/src/Utilities/</span><span class="n">Utilities</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">591</span>
@@ -875,7 +870,7 @@ julia&gt; predint(ancTrait1, level=0.9) # prediction interval (with level 90%)
 </pre></div>
 
 
-<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait1Approx</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.9</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait1Approx</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.9</span><span class="p">));</span>
 </pre></div>
 
 
@@ -894,8 +889,8 @@ julia&gt; predint(ancTrait1, level=0.9) # prediction interval (with level 90%)
 <span class="n">Stacktrace</span><span class="o">:</span>
  <span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="n">depwarn</span><span class="o">(::</span><span class="n">String</span><span class="o">,</span> <span class="o">::</span><span class="n">Symbol</span><span class="o">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">deprecated</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">70</span>
  <span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="n">Type</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/StatsModels/src/</span><span class="n">deprecated</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">2</span> <span class="o">[</span><span class="n">inlined</span><span class="o">]</span>
- <span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="err">#</span><span class="n">ancestralStateReconstruction</span><span class="err">#</span><span class="mi">559</span><span class="o">(::</span><span class="n">Array</span><span class="o">{</span><span class="n">Any</span><span class="o">,</span><span class="mi">1</span><span class="o">},</span> <span class="o">::</span><span class="n">Function</span><span class="o">,</span> <span class="o">::</span><span class="n">DataFrames</span><span class="o">.</span><span class="na">DataFrame</span><span class="o">,</span> <span class="o">::</span><span class="n">PhyloNetworks</span><span class="o">.</span><span class="na">HybridNetwork</span><span class="o">)</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/PhyloNetworks/src/</span><span class="n">traits</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">2408</span>
- <span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="n">ancestralStateReconstruction</span><span class="o">(::</span><span class="n">DataFrames</span><span class="o">.</span><span class="na">DataFrame</span><span class="o">,</span> <span class="o">::</span><span class="n">PhyloNetworks</span><span class="o">.</span><span class="na">HybridNetwork</span><span class="o">)</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/PhyloNetworks/src/</span><span class="n">traits</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">2402</span>
+ <span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="err">#</span><span class="n">ancestralStateReconstruction</span><span class="err">#</span><span class="mi">559</span><span class="o">(::</span><span class="n">Array</span><span class="o">{</span><span class="n">Any</span><span class="o">,</span><span class="mi">1</span><span class="o">},</span> <span class="o">::</span><span class="n">Function</span><span class="o">,</span> <span class="o">::</span><span class="n">DataFrames</span><span class="o">.</span><span class="na">DataFrame</span><span class="o">,</span> <span class="o">::</span><span class="n">PhyloNetworks</span><span class="o">.</span><span class="na">HybridNetwork</span><span class="o">)</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/PhyloNetworks/src/</span><span class="n">traits</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">2386</span>
+ <span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="n">ancestralStateReconstruction</span><span class="o">(::</span><span class="n">DataFrames</span><span class="o">.</span><span class="na">DataFrame</span><span class="o">,</span> <span class="o">::</span><span class="n">PhyloNetworks</span><span class="o">.</span><span class="na">HybridNetwork</span><span class="o">)</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/PhyloNetworks/src/</span><span class="n">traits</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">2380</span>
  <span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="n">cd</span><span class="o">(::</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Expanders</span><span class="o">.</span><span class="err">##</span><span class="mi">8</span><span class="err">#</span><span class="mi">10</span><span class="o">{</span><span class="n">Module</span><span class="o">},</span> <span class="o">::</span><span class="n">String</span><span class="o">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">file</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">70</span>
  <span class="o">[</span><span class="mi">6</span><span class="o">]</span> <span class="o">(::</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Utilities</span><span class="o">.</span><span class="err">##</span><span class="mi">19</span><span class="err">#</span><span class="mi">20</span><span class="o">{</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Expanders</span><span class="o">.</span><span class="err">##</span><span class="mi">7</span><span class="err">#</span><span class="mi">9</span><span class="o">{</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Documents</span><span class="o">.</span><span class="na">Page</span><span class="o">,</span><span class="n">Module</span><span class="o">},</span><span class="n">Base</span><span class="o">.</span><span class="na">PipeEndpoint</span><span class="o">,</span><span class="n">Base</span><span class="o">.</span><span class="na">PipeEndpoint</span><span class="o">,</span><span class="n">Pipe</span><span class="o">,</span><span class="n">Array</span><span class="o">{</span><span class="n">UInt8</span><span class="o">,</span><span class="mi">1</span><span class="o">}})()</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/Documenter/src/Utilities/</span><span class="n">Utilities</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">593</span>
  <span class="o">[</span><span class="mi">7</span><span class="o">]</span> <span class="n">withoutput</span><span class="o">(::</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Expanders</span><span class="o">.</span><span class="err">##</span><span class="mi">7</span><span class="err">#</span><span class="mi">9</span><span class="o">{</span><span class="n">Documenter</span><span class="o">.</span><span class="na">Documents</span><span class="o">.</span><span class="na">Page</span><span class="o">,</span><span class="n">Module</span><span class="o">})</span> <span class="n">at</span> <span class="sr">/home/travis/.julia/v0.6/Documenter/src/Utilities/</span><span class="n">Utilities</span><span class="o">.</span><span class="na">jl</span><span class="o">:</span><span class="mi">591</span>
@@ -920,7 +915,7 @@ julia&gt; predint(ancTrait1, level=0.9) # prediction interval (with level 90%)
 </pre></div>
 
 
-<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait1Approx</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait1Approx</span><span class="p">));</span>
 </pre></div>
 
 
@@ -947,7 +942,7 @@ julia&gt; predint(ancTrait1, level=0.9) # prediction interval (with level 90%)
 </pre></div>
 
 
-<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait3</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">nodeLabel</span> <span class="o">=</span> <span class="n">predintPlot</span><span class="p">(</span><span class="n">ancTrait3</span><span class="p">));</span>
 </pre></div>
 
 
@@ -963,7 +958,17 @@ julia&gt; predint(ancTrait1, level=0.9) # prediction interval (with level 90%)
 <span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">trait3</span><span class="p">)</span>
     <span class="n">underHyb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">trait3</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">delta</span><span class="p">)</span> <span class="c"># add delta to tips A and B</span>
 <span class="k">end</span>
-<span class="n">trait3</span> <span class="c"># changed: +5 was added by the previous loop to A and B</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>julia&gt; trait3 # changed: +5 was added by the previous loop to A and B
+6-element Array{Float64,1}:
+ 16.673
+ 15.0831
+ 19.4522
+ 18.9712
+ 16.417
+ 22.0269
 </pre></div>
 
 
@@ -972,6 +977,19 @@ julia&gt; predint(ancTrait1, level=0.9) # prediction interval (with level 90%)
                 <span class="n">underHyb</span> <span class="o">=</span> <span class="n">underHyb</span><span class="p">,</span>
                 <span class="n">tipNames</span> <span class="o">=</span> <span class="n">tipLabels</span><span class="p">(</span><span class="n">sim1</span><span class="p">))</span>
 <span class="n">categorical!</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="o">:</span><span class="n">underHyb</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>julia&gt; dat
+6×5 DataFrames.DataFrame
+│ Row │ trait1  │ trait2   │ trait3  │ underHyb │ tipNames │
+├─────┼─────────┼──────────┼─────────┼──────────┼──────────┤
+│ 1   │ 4.08298 │ -7.34186 │ 16.673  │ false    │ D        │
+│ 2   │ 3.10782 │ -7.45085 │ 15.0831 │ false    │ C        │
+│ 3   │ 2.17078 │ -3.32538 │ 19.4522 │ true     │ A        │
+│ 4   │ 1.87333 │ -4.26472 │ 18.9712 │ true     │ B        │
+│ 5   │ 2.8445  │ -5.96857 │ 16.417  │ false    │ E        │
+│ 6   │ 5.88204 │ -1.99388 │ 22.0269 │ false    │ O        │
 </pre></div>
 
 
@@ -1004,7 +1022,7 @@ AIC: 15.9770745374
 <p>This is a very simple example of how to include transgressive evolution, but some general functions to test for it, on networks with more than on hybrid, are also available.</p>
 <p><a id='Pagel's-Lambda-1'></a></p>
 <h2 id="pagels-lambda">Pagel's Lambda</h2>
-<p>One classical question about trait evolution is the amount of "phylogenetic signal" in a dataset, that is, the importance of the tree structure to explain variation in the observed traits. One way of doing measuring that is to use Pagel's lambda<sup id="fnref:fn3"><a class="footnote-ref" href="#fn:fn3" rel="footnote">1</a></sup> transformation of the branch lengths. This model assumes a BM on a tree where the internal branches are multiplied by a factor λ, while the external branches are modified so that the total height of the tree is constant. Hence, λ varies between 0 (the tree has no influence on the data) and 1 (the tree is unchanged). Using the same branch length transformations, this model can be straightforwardly extended to phylogenetic networks.</p>
+<p>One classical question about trait evolution is the amount of "phylogenetic signal" in a dataset, that is, the importance of the tree structure to explain variation in the observed traits. One way of doing measuring that is to use Pagel's lambda<sup id="fnref:fn3"><a class="footnote-ref" href="#fn:fn3" rel="footnote">2</a></sup> transformation of the branch lengths. This model assumes a BM on a tree where the internal branches are multiplied by a factor λ, while the external branches are modified so that the total height of the tree is constant. Hence, λ varies between 0 (the tree has no influence on the data) and 1 (the tree is unchanged). Using the same branch length transformations, this model can be straightforwardly extended to phylogenetic networks.</p>
 <p>We can illustrate this with the predictor trait we used earlier. We use the same function as before, only indicating the model we want to use:</p>
 <div class="codehilite"><pre><span></span><span class="n">fitPagel</span> <span class="o">=</span> <span class="n">phyloNetworklm</span><span class="p">(</span><span class="nd">@formula</span><span class="p">(</span><span class="n">trait1</span> <span class="o">~</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dat</span><span class="p">,</span> <span class="n">truenet</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s">&quot;lambda&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1031,21 +1049,18 @@ AIC: 15.9770745374
 
 
 <p>As it is indeed generated according to a plain BM on the phylogeny, the estimated λ should be close to 1. It can be extracted with function <code>lambda_estim</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">lambda_estim</span><span class="p">(</span><span class="n">fitPagel</span><span class="p">)</span>
-</pre></div>
-
-
-<div class="codehilite"><pre><span></span>0.9073561228984233
+<div class="codehilite"><pre><span></span>julia&gt; lambda_estim(fitPagel)
+0.9073561228984233
 </pre></div>
 
 
 <p><a id='Shifts-and-transgressive-evolution-1'></a></p>
 <h2 id="shifts-and-transgressive-evolution">Shifts and transgressive evolution</h2>
-<p>In the ANOVA section above, we showed how to include transgressive evolution in a simple case. In general, transgressive evolution can be seen as a particuliar exemple of a <em>shifted BM</em> on the phylogenetic network.</p>
+<p>In the ANOVA section above, we showed how to include transgressive evolution in a simple case. In general, transgressive evolution can be seen as a particular example of a <em>shifted BM</em> on the phylogenetic network.</p>
 <p><a id='Simulation-of-a-Shifted-BM-1'></a></p>
 <h3 id="simulation-of-a-shifted-bm">Simulation of a Shifted BM</h3>
 <p>In a shifted BM, the trait evolves as a BM on the network most of the time, but <em>shifts</em> on some of the branches. The positions and values of the shifts can be stored in a <a href="../../lib/public/#PhyloNetworks.ShiftNet"><code>ShiftNet</code></a> object. For identifiability reasons, shifts are only allowed on tree-like branches. The position of the shifts can be given using vector of edges. To see this, let's first plot the network with its associated edges and node numbers.</p>
-<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">useEdgeLength</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">showEdgeNumber</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">truenet</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">useEdgeLength</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">showEdgeNumber</span><span class="o">=</span><span class="kc">true</span><span class="p">);</span>
 </pre></div>
 
 
@@ -1112,7 +1127,7 @@ AIC: 25.7992994631
 </pre></div>
 
 
-<p>Here, because there is only one hybrid in the network, we can directly see whether the ancestral transgressive evolution is significant or not thanks to the Student test on the coefficient associated with <code>shift_6</code>. In more complex cases, it is possible to do a Fisher test, thanks to the <code>GLM</code> function <code>ftest</code>.</p>
+<p>Here, because there is only one hybrid in the network, we can directly see whether the ancestral transgressive evolution is significant or not thanks to the Student T test on the coefficient associated with <code>shift_6</code>. In more complex cases, it is possible to do a Fisher F test, thanks to the <code>GLM</code> function <code>ftest</code>.</p>
 <div class="codehilite"><pre><span></span><span class="n">fit_null</span> <span class="o">=</span> <span class="n">phyloNetworklm</span><span class="p">(</span><span class="nd">@formula</span><span class="p">(</span><span class="n">trait</span> <span class="o">~</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dat</span><span class="p">,</span> <span class="n">truenet</span><span class="p">)</span> <span class="c"># fit against the null (no shift)</span>
 <span class="n">ftest</span><span class="p">(</span><span class="n">fit_sh</span><span class="p">,</span> <span class="n">fit_null</span><span class="p">)</span>                                      <span class="c"># nested models, from more complex to most simple</span>
 </pre></div>
@@ -1124,12 +1139,16 @@ Model 2        5   2   -1 8.6247 -6.5373 -0.2419 0.9413 12.5272 0.0240
 </pre></div>
 
 
-<p>Here, this test is equivalent to the Fisher test, and gives the same p-value.</p>
+<p>Here, this test is equivalent to the Fisher F test, and gives the same p-value.</p>
+<p>Note that, for conventional reasons, the <code>ftest</code> function always takes the <em>most complex</em> model as the first one. This means that, in the table of results, the models are actually named in a reverse order, so that "Model 2" is actually our model under H<sub>0</sub> (null model), and "Model 1" the one under H<sub>1</sub> (model with shifts).</p>
 <div class="footnote">
 <hr />
 <ol>
+<li id="fn:fnBastide2018">
+<p>Bastide, Solís-Lemus, Kriebel, Sparks, Ané (2018):               Phylogenetic Comparative Methods for Phylogenetic Networks with Reticulations.               Systematic Biology. doi:10.1093/sysbio/syy033&#160;<a class="footnote-backref" href="#fnref:fnBastide2018" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
 <li id="fn:fn3">
-<p>Pagel M (1999). Inferring the historical patterns of biological     evolution. Nature. 401: 877–884. doi:10.1038/44766&#160;<a class="footnote-backref" href="#fnref:fn3" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>Pagel M (1999). Inferring the historical patterns of biological     evolution. Nature. 401: 877–884. doi:10.1038/44766&#160;<a class="footnote-backref" href="#fnref:fn3" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
