@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="./assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.0">
+      <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.2">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="./assets/stylesheets/application.4f4f49e8.css">
+      <link rel="stylesheet" href="./assets/stylesheets/application.ba0fd1a6.css">
       
         <link rel="stylesheet" href="./assets/stylesheets/application-palette.6079476c.css">
       
@@ -357,6 +357,42 @@
 
 
   <li class="md-nav__item">
+    <a href="man/dist_reroot/" title="Network comparison and manipulation" class="md-nav__link">
+      Network comparison and manipulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="man/fixednetworkoptim/" title="Candidate Networks" class="md-nav__link">
+      Candidate Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="man/bootstrap/" title="Bootstrap" class="md-nav__link">
+      Bootstrap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="man/trait_tree/" title="Continuous Trait Evolution" class="md-nav__link">
       Continuous Trait Evolution
     </a>
@@ -526,6 +562,28 @@
 </li>
 </ul>
 </li>
+<li><a href="man/dist_reroot/#Comparing-and-manipulating-networks-1">Comparing and manipulating networks</a><ul>
+<li><a href="man/dist_reroot/#Comparing-networks-/-trees-1">Comparing networks / trees</a></li>
+<li><a href="man/dist_reroot/#Re-rooting-trees-and-networks-1">Re-rooting trees and networks</a></li>
+<li><a href="man/dist_reroot/#Extracting-the-major-tree-1">Extracting the major tree</a></li>
+<li><a href="man/dist_reroot/#Displayed-trees-and-subnetworks-1">Displayed trees and subnetworks</a></li>
+</ul>
+</li>
+<li><a href="man/fixednetworkoptim/#Candidate-Networks-1">Candidate Networks</a><ul>
+<li><a href="man/fixednetworkoptim/#Optimizing-parameters-for-a-given-network-1">Optimizing parameters for a given network</a></li>
+<li><a href="man/fixednetworkoptim/#Network-Score-with-no-optimization-1">Network Score with no optimization</a></li>
+</ul>
+</li>
+<li><a href="man/bootstrap/#Bootstrap-1">Bootstrap</a><ul>
+<li><a href="man/bootstrap/#Running-a-bootstrap-analysis-1">Running a bootstrap analysis</a></li>
+<li><a href="man/bootstrap/#support-for-tree-edges-1">support for tree edges</a></li>
+<li><a href="man/bootstrap/#support-for-hybrid-edges-and-hybrid-nodes-1">support for hybrid edges and hybrid nodes</a><ul>
+<li><a href="man/bootstrap/#Who-are-the-hybrids-in-bootstrap-networks?-1">Who are the hybrids in bootstrap networks?</a></li>
+<li><a href="man/bootstrap/#Where-is-the-origin-of-gene-flow?-1">Where is the origin of gene flow?</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="man/multiplealleles.md#Multiple-alleles-per-species-1">Multiple alleles per species</a></li>
 <li><a href="man/trait_tree/#Continuous-Trait-Evolution-1">Continuous Trait Evolution</a><ul>
 <li><a href="man/trait_tree/#Trait-simulation-1">Trait simulation</a></li>
@@ -672,6 +730,7 @@
 <li><a href="lib/internals/#PhyloNetworks.getMinorParent"><code>PhyloNetworks.getMinorParent</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.getMinorParentEdge"><code>PhyloNetworks.getMinorParentEdge</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.getParent-Tuple{PhyloNetworks.Edge}"><code>PhyloNetworks.getParent</code></a></li>
+<li><a href="lib/internals/#PhyloNetworks.getParents-Tuple{PhyloNetworks.Node}"><code>PhyloNetworks.getParents</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.getPartner-Tuple{Any}"><code>PhyloNetworks.getPartner</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.getTipSubmatrix-Tuple{Array{T,2} where T,PhyloNetworks.HybridNetwork}"><code>PhyloNetworks.getTipSubmatrix</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.initializeWeightsFromLeaves!-Tuple{AbstractArray,PhyloNetworks.HybridNetwork,Any,Any,Symbol}"><code>PhyloNetworks.initializeWeightsFromLeaves!</code></a></li>
@@ -711,10 +770,10 @@
 <li><a href="lib/internals/#PhyloNetworks.setBranchLength!-Tuple{PhyloNetworks.Edge,Number}"><code>PhyloNetworks.setBranchLength!</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.setGammaBLfromGammaz!-Tuple{PhyloNetworks.Node,PhyloNetworks.HybridNetwork}"><code>PhyloNetworks.setGammaBLfromGammaz!</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.setNonIdBL!-Tuple{PhyloNetworks.HybridNetwork}"><code>PhyloNetworks.setNonIdBL!</code></a></li>
-<li><a href="lib/internals/#PhyloNetworks.showQ-Tuple{PhyloNetworks.TraitSubstitutionModel}"><code>PhyloNetworks.showQ</code></a></li>
+<li><a href="lib/internals/#PhyloNetworks.showQ-Tuple{IO,PhyloNetworks.TraitSubstitutionModel}"><code>PhyloNetworks.showQ</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.sortUnionTaxa-Tuple{Any}"><code>PhyloNetworks.sortUnionTaxa</code></a></li>
-<li><a href="lib/internals/#PhyloNetworks.symmetricNet-Tuple{Int64,Int64,Int64,Real,Real}"><code>PhyloNetworks.symmetricNet</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.symmetricNet"><code>PhyloNetworks.symmetricNet</code></a></li>
+<li><a href="lib/internals/#PhyloNetworks.symmetricNet-Tuple{Int64,Int64,Int64,Real,Real}"><code>PhyloNetworks.symmetricNet</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.symmetricTree"><code>PhyloNetworks.symmetricTree</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.traverseContainRoot!-Tuple{PhyloNetworks.Node,PhyloNetworks.Edge,Array{PhyloNetworks.Edge,1},Array{Bool,1}}"><code>PhyloNetworks.traverseContainRoot!</code></a></li>
 <li><a href="lib/internals/#PhyloNetworks.updatePostOrder!"><code>PhyloNetworks.updatePostOrder!</code></a></li>
@@ -760,13 +819,13 @@
       <nav class="md-footer-nav__inner md-grid">
         
         
-          <a href="man/trait_tree/" title="Continuous Trait Evolution" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="man/dist_reroot/" title="Network comparison and manipulation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Continuous Trait Evolution
+                Network comparison and manipulation
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
