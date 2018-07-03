@@ -4,7 +4,8 @@ makedocs()
 
 deploydocs(
     deps   = Deps.pip("pygments", "mkdocs", "mkdocs-material", "python-markdown-math"),
-    repo = "github.com/crsl4/PhyloNetworks.jl.git",
+    repo = "github.com/pbastide/PhyloNetworks.jl.git",
     julia  = "0.6",
-    osname = "linux"
+    osname = "linux",
+    latest = "weave_doc"
 )
