@@ -357,6 +357,54 @@
 
 
   <li class="md-nav__item">
+    <a href="man/installation/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="man/inputdata/" title="Input Data for SNaQ" class="md-nav__link">
+      Input Data for SNaQ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="man/ticr_howtogetQuartetCFs/" title="TICR pipeline" class="md-nav__link">
+      TICR pipeline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="man/snaq_plot/" title="Network estimation and display" class="md-nav__link">
+      Network estimation and display
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="man/dist_reroot/" title="Network comparison and manipulation" class="md-nav__link">
       Network comparison and manipulation
     </a>
@@ -381,8 +429,32 @@
 
 
   <li class="md-nav__item">
+    <a href="man/expectedCFs/" title="Extract Expected CFs" class="md-nav__link">
+      Extract Expected CFs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="man/bootstrap/" title="Bootstrap" class="md-nav__link">
       Bootstrap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="man/multiplealleles/" title="Multiple Alleles" class="md-nav__link">
+      Multiple Alleles
     </a>
   </li>
 
@@ -553,13 +625,36 @@
 <p><a id='Manual-Outline-1'></a></p>
 <h2 id="manual-outline">Manual Outline</h2>
 <ul>
-<li><a href="man/ticr_howtogetQuartetCFs.md#TICR-pipeline-1">TICR pipeline</a><ul>
-<li><a href="man/ticr_howtogetQuartetCFs.md#To-run-MrBayes:-You-already-have-alignments-1">To run MrBayes: You already have alignments</a></li>
-<li><a href="man/ticr_howtogetQuartetCFs.md#To-run-BUCKy:-You-already-have-MrBayes-output-1">To run BUCKy: You already have MrBayes output</a><ul>
-<li><a href="man/ticr_howtogetQuartetCFs.md#To-run-mbsum-on-the-output-of-MrBayes-for-each-gene-1">To run mbsum on the output of MrBayes for each gene</a></li>
-<li><a href="man/ticr_howtogetQuartetCFs.md#To-run-bucky-on-all-4-taxon-sets:-you-already-have-the-mbsum-output-1">To run bucky on all 4-taxon sets: you already have the mbsum output</a></li>
+<li><a href="man/installation/#Installation-1">Installation</a><ul>
+<li><a href="man/installation/#Installation-of-Julia-1">Installation of Julia</a></li>
+<li><a href="man/installation/#Installation-of-the-package-PhyloNetworks-1">Installation of the package PhyloNetworks</a></li>
+<li><a href="man/installation/#Test-example-1">Test example</a></li>
+<li><a href="man/installation/#Julia-types-1">Julia types</a></li>
 </ul>
 </li>
+<li><a href="man/inputdata/#Input-for-SNaQ-1">Input for SNaQ</a><ul>
+<li><a href="man/inputdata/#Tutorial-data:-gene-trees-1">Tutorial data: gene trees</a></li>
+<li><a href="man/inputdata/#Tutorial-data:-quartet-CFs-1">Tutorial data: quartet CFs</a></li>
+<li><a href="man/inputdata/#Tutorial-data:-starting-tree-1">Tutorial data: starting tree</a></li>
+</ul>
+</li>
+<li><a href="man/ticr_howtogetQuartetCFs/#TICR-pipeline-1">TICR pipeline</a><ul>
+<li><a href="man/ticr_howtogetQuartetCFs/#To-run-MrBayes:-You-already-have-alignments-1">To run MrBayes: You already have alignments</a></li>
+<li><a href="man/ticr_howtogetQuartetCFs/#To-run-BUCKy:-You-already-have-MrBayes-output-1">To run BUCKy: You already have MrBayes output</a><ul>
+<li><a href="man/ticr_howtogetQuartetCFs/#To-run-mbsum-on-the-output-of-MrBayes-for-each-gene-1">To run mbsum on the output of MrBayes for each gene</a></li>
+<li><a href="man/ticr_howtogetQuartetCFs/#To-run-bucky-on-all-4-taxon-sets:-you-already-have-the-mbsum-output-1">To run bucky on all 4-taxon sets: you already have the mbsum output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="man/snaq_plot/#Getting-a-Network-1">Getting a Network</a><ul>
+<li><a href="man/snaq_plot/#Network-Estimation-1">Network Estimation</a></li>
+<li><a href="man/snaq_plot/#parallel-computation-1">parallel computation</a></li>
+<li><a href="man/snaq_plot/#choosing-the-number-of-hybridizations-1">choosing the number of hybridizations</a></li>
+<li><a href="man/snaq_plot/#Network-Visualization-1">Network Visualization</a></li>
+<li><a href="man/snaq_plot/#Re-rooting-networks-1">Re-rooting networks</a></li>
+<li><a href="man/snaq_plot/#Candidate-Network-Evaluation-1">Candidate Network Evaluation</a></li>
+<li><a href="man/snaq_plot/#SNaQ-error-reporting-1">SNaQ error reporting</a></li>
 </ul>
 </li>
 <li><a href="man/dist_reroot/#Comparing-and-manipulating-networks-1">Comparing and manipulating networks</a><ul>
@@ -574,6 +669,7 @@
 <li><a href="man/fixednetworkoptim/#Network-Score-with-no-optimization-1">Network Score with no optimization</a></li>
 </ul>
 </li>
+<li><a href="man/expectedCFs/#Extract-Expected-CFs-1">Extract Expected CFs</a></li>
 <li><a href="man/bootstrap/#Bootstrap-1">Bootstrap</a><ul>
 <li><a href="man/bootstrap/#Running-a-bootstrap-analysis-1">Running a bootstrap analysis</a></li>
 <li><a href="man/bootstrap/#support-for-tree-edges-1">support for tree edges</a></li>
@@ -584,7 +680,7 @@
 </li>
 </ul>
 </li>
-<li><a href="man/multiplealleles.md#Multiple-alleles-per-species-1">Multiple alleles per species</a></li>
+<li><a href="man/multiplealleles/#Multiple-alleles-per-species-1">Multiple alleles per species</a></li>
 <li><a href="man/trait_tree/#Continuous-Trait-Evolution-1">Continuous Trait Evolution</a><ul>
 <li><a href="man/trait_tree/#Trait-simulation-1">Trait simulation</a></li>
 <li><a href="man/trait_tree/#Phylogenetic-regression-1">Phylogenetic regression</a></li>
@@ -828,13 +924,13 @@
       <nav class="md-footer-nav__inner md-grid">
         
         
-          <a href="man/dist_reroot/" title="Network comparison and manipulation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="man/installation/" title="Installation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Network comparison and manipulation
+                Installation
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

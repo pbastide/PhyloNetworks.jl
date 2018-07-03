@@ -278,6 +278,54 @@
 
 
   <li class="md-nav__item">
+    <a href="../../man/installation/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../man/inputdata/" title="Input Data for SNaQ" class="md-nav__link">
+      Input Data for SNaQ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../man/ticr_howtogetQuartetCFs/" title="TICR pipeline" class="md-nav__link">
+      TICR pipeline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../man/snaq_plot/" title="Network estimation and display" class="md-nav__link">
+      Network estimation and display
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../man/dist_reroot/" title="Network comparison and manipulation" class="md-nav__link">
       Network comparison and manipulation
     </a>
@@ -302,8 +350,32 @@
 
 
   <li class="md-nav__item">
+    <a href="../../man/expectedCFs/" title="Extract Expected CFs" class="md-nav__link">
+      Extract Expected CFs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../man/bootstrap/" title="Bootstrap" class="md-nav__link">
       Bootstrap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../man/multiplealleles/" title="Multiple Alleles" class="md-nav__link">
+      Multiple Alleles
     </a>
   </li>
 
@@ -610,7 +682,7 @@
 <strong><code>PhyloNetworks.ANode</code></strong> &mdash; <em>Type</em>.</p>
 <p><code>ANode</code></p>
 <p>Abstract node. An object of type <code>Edge</code> has a <code>node</code> attribute, which is an vector of (2) ANode objects. The object of type <code>Node</code> is an <code>ANode</code>, and has an <code>edge</code> attribute, which is vector of <code>Edge</code> objects.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/types.jl#L17-L24' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/types.jl#L17-L24' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.MatrixTopologicalOrder' href='#PhyloNetworks.MatrixTopologicalOrder'>#</a>
 <strong><code>PhyloNetworks.MatrixTopologicalOrder</code></strong> &mdash; <em>Type</em>.</p>
 <p><code>MatrixTopologicalOrder</code></p>
@@ -618,9 +690,25 @@
 <p>The following functions and extractors can be applied to it: <a href="../public/#PhyloNetworks.tipLabels"><code>tipLabels</code></a>, <code>obj[:Tips]</code>, <code>obj[:InternalNodes]</code>, <code>obj[:TipsNodes]</code> (see documentation for function <a href="./#Base.getindex"><code>getindex(::MatrixTopologicalOrder, ::Symbol)</code></a>).</p>
 <p>Functions <a href="../public/#PhyloNetworks.sharedPathMatrix"><code>sharedPathMatrix</code></a> and <a href="../public/#PhyloNetworks.simulate"><code>simulate</code></a> return objects of this type.</p>
 <p>The <code>MatrixTopologicalOrder</code> object has fields: <code>V</code>, <code>nodeNumbersTopOrder</code>, <code>internalNodeNumbers</code>, <code>tipNumbers</code>, <code>tipNames</code>, <code>indexation</code>. Type in "?MatrixTopologicalOrder.field" to get documentation on a specific field.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/traits.jl#L11-L22' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/traits.jl#L11-L22' class='documenter-source'>source</a><br></p>
 <p><a id='functions-1'></a></p>
 <h2 id="functions">functions</h2>
+<p><a id='Base.getindex' href='#Base.getindex'>#</a>
+<strong><code>Base.getindex</code></strong> &mdash; <em>Function</em>.</p>
+<p><code>getindex(obj, d)</code></p>
+<p>Getting submatrices of an object of type <a href="../public/#PhyloNetworks.TraitSimulation"><code>TraitSimulation</code></a>.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>obj::TraitSimulation</code>: the matrix from which to extract.</li>
+<li>
+<p><code>d::Symbol</code>: a symbol precising which sub-matrix to extract. Can be:</p>
+<ul>
+<li><code>:Tips</code> columns and/or rows corresponding to the tips</li>
+<li><code>:InternalNodes</code> columns and/or rows corresponding to the internal nodes</li>
+</ul>
+</li>
+</ul>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/traits.jl#L1002-L1012' class='documenter-source'>source</a><br></p>
 <p><a id='Base.getindex' href='#Base.getindex'>#</a>
 <strong><code>Base.getindex</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>getindex(obj, d,[ indTips, msng])</code></p>
@@ -639,23 +727,7 @@
 </ul>
 </li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/traits.jl#L223-L237' class='documenter-source'>source</a><br></p>
-<p><a id='Base.getindex' href='#Base.getindex'>#</a>
-<strong><code>Base.getindex</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>getindex(obj, d)</code></p>
-<p>Getting submatrices of an object of type <a href="../public/#PhyloNetworks.TraitSimulation"><code>TraitSimulation</code></a>.</p>
-<p><strong>Arguments</strong></p>
-<ul>
-<li><code>obj::TraitSimulation</code>: the matrix from which to extract.</li>
-<li>
-<p><code>d::Symbol</code>: a symbol precising which sub-matrix to extract. Can be:</p>
-<ul>
-<li><code>:Tips</code> columns and/or rows corresponding to the tips</li>
-<li><code>:InternalNodes</code> columns and/or rows corresponding to the internal nodes</li>
-</ul>
-</li>
-</ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/traits.jl#L1002-L1012' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/traits.jl#L223-L237' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.addAlternativeHybridizations!-Tuple{PhyloNetworks.HybridNetwork,DataFrames.DataFrame}' href='#PhyloNetworks.addAlternativeHybridizations!-Tuple{PhyloNetworks.HybridNetwork,DataFrames.DataFrame}'>#</a>
 <strong><code>PhyloNetworks.addAlternativeHybridizations!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">addAlternativeHybridizations</span><span class="o">!(</span><span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">,</span> <span class="nt">BSe</span><span class="p">::</span><span class="nd">DataFrame</span><span class="o">;</span>
@@ -674,7 +746,7 @@
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/addHybrid.jl#L354-L378' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/addHybrid.jl#L354-L378' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.afterOptBL!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.DataCF,Bool,Bool,Bool,Integer,Array{Int64,1}}' href='#PhyloNetworks.afterOptBL!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.DataCF,Bool,Bool,Bool,Integer,Array{Int64,1}}'>#</a>
 <strong><code>PhyloNetworks.afterOptBL!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>afterOptBL</code> road map</p>
@@ -701,7 +773,7 @@
 </li>
 </ul>
 <p><strong> Important: </strong> <code>afterOptBL</code> is doing only one change, but we need to repeat multiple times to be sure that we fix all the gamma zero problems, which is why we call <code>afterOptBLRepeat</code></p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/optimization.jl#L568-L592' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/optimization.jl#L568-L592' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.afterOptBLAll!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.DataCF,Integer,Bool,Float64,Float64,Bool,Array{Int64,1},Float64,Float64,Float64}' href='#PhyloNetworks.afterOptBLAll!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.DataCF,Integer,Bool,Float64,Float64,Bool,Array{Int64,1},Float64,Float64,Float64}'>#</a>
 <strong><code>PhyloNetworks.afterOptBLAll!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>afterOptBLAll</code> road map</p>
@@ -735,25 +807,25 @@
 </li>
 </ul>
 <p>If first while ends by <code>tries&gt;N</code>, then it checks one last time the flags, if bad h/hz will move down one level, and exit</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/optimization.jl#L754-L773' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/optimization.jl#L754-L773' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.afterOptBLRepeat!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.DataCF,Integer,Bool,Bool,Bool,Array{Int64,1}}' href='#PhyloNetworks.afterOptBLRepeat!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.DataCF,Integer,Bool,Bool,Bool,Array{Int64,1}}'>#</a>
 <strong><code>PhyloNetworks.afterOptBLRepeat!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>afterOptBLRepeat</code> road map</p>
 <p><code>afterOptBL</code> is doing only one change, but we need to repeat multiple times to be sure that we fix all the gamma zero problems, which is why we call <code>afterOptBLRepeat</code>. This function will repeat <code>afterOptBL</code> every time a successful change happened; this is done only if <code>closeN=false</code>, because we would delete/add hybridizations and need to stop after tried N times. If <code>closeN=true</code> (default), then <code>afterOptBLRepeat</code> only does one <code>afterOptBL</code>, because in this case, only the neighbor edges need to be tested, and this would have been done already in <code>gammaZero</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/optimization.jl#L683-L689' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/optimization.jl#L683-L689' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.anova-Union{Tuple{T}, Tuple{Vararg{StatsModels.DataFrameRegressionModel{PhyloNetworks.PhyloNetworkLinearModel,T},N} where N}} where T' href='#PhyloNetworks.anova-Union{Tuple{T}, Tuple{Vararg{StatsModels.DataFrameRegressionModel{PhyloNetworks.PhyloNetworkLinearModel,T},N} where N}} where T'>#</a>
 <strong><code>PhyloNetworks.anova</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>anova(objs::PhyloNetworkLinearModel...)</code></p>
 <p>Takes several nested fits of the same data, and computes the F statistic for each pair of models.</p>
 <p>The fits must be results of function <a href="../public/#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a> called on the same data, for models that have more and more effects.</p>
 <p>Returns a DataFrame object with the anova table.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/traits.jl#L1764-L1774' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/traits.jl#L1764-L1774' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.assignhybridnames!-Tuple{PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.assignhybridnames!-Tuple{PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.assignhybridnames!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>assignhybridnames!(net)</code></p>
 <p>Assign names to hybrid nodes in the network <code>net</code>. Hybrid nodes with an empty <code>name</code> field ("") are modified with a name that does not conflict with other hybrid names in the network. The preferred name is "#H3" if the node number is 3 or -3, but an index other than 3 would be used if "#H3" were the name of another hybrid node already.</p>
 <p>If two hybrid nodes have non-empty and equal names, the name of one of them is changed and re-assigned as described above (with a warning).</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L1219-L1229' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L1219-L1229' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.blobInfo' href='#PhyloNetworks.blobInfo'>#</a>
 <strong><code>PhyloNetworks.blobInfo</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>blobInfo(network, ignoreTrivial=true)
@@ -777,7 +849,7 @@
 </ul>
 <p>Blobs are ordered in reverse topological ordering (aka post order). If <code>ignoreTrivial</code> is true, trivial components are ignored.</p>
 <p>keyword argument: <code>checkPreorder</code>, true by default. If false, the <code>isChild1</code> edge field and the <code>net.nodes_changed</code> network field are supposed to be correct.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/biconnectedComponents.jl#L115-L140' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/biconnectedComponents.jl#L115-L140' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.breakedge!-Tuple{PhyloNetworks.Edge,PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.breakedge!-Tuple{PhyloNetworks.Edge,PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.breakedge!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>breakedge!(Edge, HybridNetwork)
@@ -787,7 +859,7 @@
 <p>breaks an edge into 2 edges (each of length half that of original edge). creates new node of degree 2. Useful to root network along an edge.</p>
 <p>warning: updates <code>isChild1</code> and <code>containRoot</code>, but does NOT update attributes like: inCycle, partition, gammaz, etc.</p>
 <p>returns the index of the newly created node in the network</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/manipulateNet.jl#L349-L359' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/manipulateNet.jl#L349-L359' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.calculateObsCFAll!-Tuple{PhyloNetworks.DataCF,Union{Array{Int64,1}, Array{String,1}}}' href='#PhyloNetworks.calculateObsCFAll!-Tuple{PhyloNetworks.DataCF,Union{Array{Int64,1}, Array{String,1}}}'>#</a>
 <strong><code>PhyloNetworks.calculateObsCFAll!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>calculateObsCFAll!(DataCF, taxa::Union{Vector{String}, Vector{Int}})
@@ -805,7 +877,7 @@
 
 
 <p>update the .obsCF values of the quartets based on the trees, but returns nothing.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readData.jl#L414-L427' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readData.jl#L414-L427' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.checkNumHybEdges!-Tuple{PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.checkNumHybEdges!-Tuple{PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.checkNumHybEdges!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>`checkNumHybEdges!(net)`
@@ -819,7 +891,7 @@
 <li>exactly 2 incoming parent hybrid edges</li>
 </ul>
 <p>Run after <code>storeHybrids!</code>. See also <code>check2HybEdges</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L544-L552' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L544-L552' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.deleteEdge!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.Edge}' href='#PhyloNetworks.deleteEdge!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.Edge}'>#</a>
 <strong><code>PhyloNetworks.deleteEdge!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>deleteEdge!(net::HybridNetwork,  e::Edge, part=true)
@@ -828,7 +900,7 @@ deleteEdge!(net::QuartetNetwork, e::Edge)
 
 
 <p>Delete edge <code>e</code> from <code>net.edge</code> and update <code>net.numEdges</code>. If <code>part</code> is true, update the network's partition field.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L529-L535' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L529-L535' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.deleteHybridEdge!' href='#PhyloNetworks.deleteHybridEdge!'>#</a>
 <strong><code>PhyloNetworks.deleteHybridEdge!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>deleteHybridEdge!(net::HybridNetwork, edge::Edge, keepNodes=false)
@@ -844,7 +916,7 @@ deleteEdge!(net::QuartetNetwork, e::Edge)
 <li>does <strong>not</strong> update containRoot (could be implemented later)</li>
 <li>does <strong>not</strong> update attributes needed for snaq! (like containRoot, inCycle, edge.z, edge.y etc.)</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/deleteHybrid.jl#L291-L308' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/deleteHybrid.jl#L291-L308' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.deleteLeaf!-Tuple{PhyloNetworks.Network,AbstractString}' href='#PhyloNetworks.deleteLeaf!-Tuple{PhyloNetworks.Network,AbstractString}'>#</a>
 <strong><code>PhyloNetworks.deleteLeaf!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>deleteLeaf!(net::HybridNetwork, leaf::AbstractString)</code> <code>deleteLeaf!(net::Network, leaf::Node)</code></p>
@@ -855,13 +927,13 @@ deleteEdge!(net::QuartetNetwork, e::Edge)
 <li>does not care where the root is and does not update it to a sensible location if the root is affected by the leaf removal.</li>
 <li>does not merge edges, i.e. does not remove all nodes of degree 2. Within snaq!, this is used to extract quartets and to keep track of which edge lengths in the original network map to the quartet network.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/pseudolik.jl#L349-L363' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/pseudolik.jl#L349-L363' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.deleteNode!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.Node}' href='#PhyloNetworks.deleteNode!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.Node}'>#</a>
 <strong><code>PhyloNetworks.deleteNode!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>deleteNode!(net::HybridNetwork, n::Node)</code></p>
 <p>deletes a Node from a network, i.e. removes it from net.node, and from net.hybrid or net.leaf as appropriate. Updates attributes numNodes, numTaxa, numHybrids (it does not update net.names though).</p>
 <p>Warning: if the root is deleted, the new root is arbitrarily set to the first node in the list. This is intentional to save time because this function is used frequently in snaq!, which handles semi-directed (unrooted) networks.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L466-L478' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L466-L478' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.descendants-Tuple{PhyloNetworks.Edge}' href='#PhyloNetworks.descendants-Tuple{PhyloNetworks.Edge}'>#</a>
 <strong><code>PhyloNetworks.descendants</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>descendants(edge::Edge)
@@ -885,7 +957,7 @@ julia&gt; PhyloNetworks.descendants(net5.edge[12]) # descendants of 12th
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/compareNetworks.jl#L214-L237' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/compareNetworks.jl#L214-L237' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.displayedNetworks!' href='#PhyloNetworks.displayedNetworks!'>#</a>
 <strong><code>PhyloNetworks.displayedNetworks!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>displayedNetworks!(net::HybridNetwork, node::Node, keepNode=false)
@@ -897,7 +969,7 @@ julia&gt; PhyloNetworks.descendants(net5.edge[12]) # descendants of 12th
 <li>the original network is modified: the minor edge removed.</li>
 <li>returns one HybridNetwork object: the network with the major edge removed</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/compareNetworks.jl#L294-L303' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/compareNetworks.jl#L294-L303' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.fuseedgesat!-Tuple{Integer,PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.fuseedgesat!-Tuple{Integer,PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.fuseedgesat!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>fuseedgesat!(i::Integer,net::HybridNetwork)
@@ -906,7 +978,7 @@ julia&gt; PhyloNetworks.descendants(net5.edge[12]) # descendants of 12th
 
 <p>Removes <code>i</code>th node in net.node, if it is of degree 2. The parent and child edges of this node are fused. Reverts the action of breakedge!.</p>
 <p>returns the fused edge.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/manipulateNet.jl#L387-L395' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/manipulateNet.jl#L387-L395' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.gammaZero!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.DataCF,PhyloNetworks.Edge,Bool,Bool,Integer,Array{Int64,1}}' href='#PhyloNetworks.gammaZero!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.DataCF,PhyloNetworks.Edge,Bool,Bool,Integer,Array{Int64,1}}'>#</a>
 <strong><code>PhyloNetworks.gammaZero!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>gammaZero</code> road map</p>
@@ -919,7 +991,7 @@ julia&gt; PhyloNetworks.descendants(net5.edge[12]) # descendants of 12th
 <li>If still problem or worse pseudolik, we call <code>moveHybrid</code></li>
 </ol>
 <p><strong> Important: </strong> Any function (<code>afterOptBL</code>) calling <code>gammaZero</code> is assuming that it only made a change, so if the returned value is true, then a change was made, and the other function needs to run <code>optBL</code> and check that all parameters are 'valid'. If the returned value is false, then no change was possible and we need to remove a hybridization if the problem is h==0,1; hz==0,1. If the problem is t==0, we ignore this problem.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/optimization.jl#L513-L524' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/optimization.jl#L513-L524' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getChild-Tuple{PhyloNetworks.Edge}' href='#PhyloNetworks.getChild-Tuple{PhyloNetworks.Edge}'>#</a>
 <strong><code>PhyloNetworks.getChild</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>getChild(edge::Edge)
@@ -927,7 +999,7 @@ julia&gt; PhyloNetworks.descendants(net5.edge[12]) # descendants of 12th
 
 
 <p>Return child node using the <code>isChild1</code> attribute of the edge.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L162-L166' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L162-L166' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getChildren-Tuple{PhyloNetworks.Node}' href='#PhyloNetworks.getChildren-Tuple{PhyloNetworks.Node}'>#</a>
 <strong><code>PhyloNetworks.getChildren</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>getChildren(node)
@@ -936,7 +1008,7 @@ julia&gt; PhyloNetworks.descendants(net5.edge[12]) # descendants of 12th
 
 <p>return a vector with all children <em>nodes</em> of <code>node</code>.   <strong>warning</strong>: assume <code>isChild1</code> field (for edges) are correct</p>
 <p>To get all parent <em>nodes</em>: see <a href="./#PhyloNetworks.getParents-Tuple{PhyloNetworks.Node}"><code>getParents</code></a>.  </p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/manipulateNet.jl#L567-L574' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/manipulateNet.jl#L567-L574' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getDataValue!-Tuple{IO,Int64,Array{Int64,1}}' href='#PhyloNetworks.getDataValue!-Tuple{IO,Int64,Array{Int64,1}}'>#</a>
 <strong><code>PhyloNetworks.getDataValue!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>getdataValue!(s::IO, int, numLeft::Array{Int,1})
@@ -944,7 +1016,7 @@ julia&gt; PhyloNetworks.descendants(net5.edge[12]) # descendants of 12th
 
 
 <p>Helper function for <code>parseEdgeData!</code>. Read a single floating point edge data value in a tree topology. Return -1.0 if no value exists before the next colon, return the value as a float otherwise. Modifies s by advancing past the next colon character. Only call this function to read a value when you know a numerical value exists!</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L258-L266' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L258-L266' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getMajorParent-Tuple{PhyloNetworks.Node}' href='#PhyloNetworks.getMajorParent-Tuple{PhyloNetworks.Node}'>#</a>
 <strong><code>PhyloNetworks.getMajorParent</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>getMajorParent(node::Node)
@@ -953,7 +1025,7 @@ getMinorParent(node::Node)
 
 
 <p>Return major or minor parent of a node using the <code>isChild1</code> field of edges (and assuming correct <code>isMajor</code> field). See also <a href="./#PhyloNetworks.getMajorParentEdge-Tuple{PhyloNetworks.Node}"><code>getMajorParentEdge</code></a> and <a href="./#PhyloNetworks.getMinorParentEdge"><code>getMinorParentEdge</code></a></p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L218-L225' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L218-L225' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getMajorParentEdge-Tuple{PhyloNetworks.Node}' href='#PhyloNetworks.getMajorParentEdge-Tuple{PhyloNetworks.Node}'>#</a>
 <strong><code>PhyloNetworks.getMajorParentEdge</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>getMajorParentEdge(node)
@@ -963,7 +1035,7 @@ getMinorParentEdge(node)
 
 <p>return the parent edge of a given node: the major / minor if hybrid.   <strong>warning</strong>: assume isChild1 and isMajor attributes are correct</p>
 <p>To get all parent <em>nodes</em>: see <a href="./#PhyloNetworks.getParents-Tuple{PhyloNetworks.Node}"><code>getParents</code></a>.  </p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/manipulateNet.jl#L540-L548' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/manipulateNet.jl#L540-L548' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getMinorParent' href='#PhyloNetworks.getMinorParent'>#</a>
 <strong><code>PhyloNetworks.getMinorParent</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>getMajorParent(node::Node)
@@ -972,7 +1044,7 @@ getMinorParent(node::Node)
 
 
 <p>Return major or minor parent of a node using the <code>isChild1</code> field of edges (and assuming correct <code>isMajor</code> field). See also <a href="./#PhyloNetworks.getMajorParentEdge-Tuple{PhyloNetworks.Node}"><code>getMajorParentEdge</code></a> and <a href="./#PhyloNetworks.getMinorParentEdge"><code>getMinorParentEdge</code></a></p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L235' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L235' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getMinorParentEdge' href='#PhyloNetworks.getMinorParentEdge'>#</a>
 <strong><code>PhyloNetworks.getMinorParentEdge</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>getMajorParentEdge(node)
@@ -982,7 +1054,7 @@ getMinorParentEdge(node)
 
 <p>return the parent edge of a given node: the major / minor if hybrid.   <strong>warning</strong>: assume isChild1 and isMajor attributes are correct</p>
 <p>To get all parent <em>nodes</em>: see <a href="./#PhyloNetworks.getParents-Tuple{PhyloNetworks.Node}"><code>getParents</code></a>.  </p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/manipulateNet.jl#L557' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/manipulateNet.jl#L557' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getParent-Tuple{PhyloNetworks.Edge}' href='#PhyloNetworks.getParent-Tuple{PhyloNetworks.Edge}'>#</a>
 <strong><code>PhyloNetworks.getParent</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>getParent(e::Edge)
@@ -990,7 +1062,7 @@ getMinorParentEdge(node)
 
 
 <p>Return parent node of edge <code>e</code> using the <code>isChild1</code> attribute of the edge. To get parents of nodes: see <a href="./#PhyloNetworks.getParents-Tuple{PhyloNetworks.Node}"><code>getParents</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L171-L176' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L171-L176' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getParents-Tuple{PhyloNetworks.Node}' href='#PhyloNetworks.getParents-Tuple{PhyloNetworks.Node}'>#</a>
 <strong><code>PhyloNetworks.getParents</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>getParents(n::Node)
@@ -998,7 +1070,7 @@ getMinorParentEdge(node)
 
 
 <p>Get vector of all parent nodes of <code>n</code>, based on <code>isChild1</code> field (for edges). To get the parent node of an edge: see <a href="./#PhyloNetworks.getParent-Tuple{PhyloNetworks.Edge}"><code>getParent</code></a>.   To get individual parent edges (rather than all parent <em>nodes</em>): see <a href="./#PhyloNetworks.getMajorParentEdge-Tuple{PhyloNetworks.Node}"><code>getMajorParentEdge</code></a> and <code>getMinorParentEdge</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/manipulateNet.jl#L519-L526' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/manipulateNet.jl#L519-L526' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getPartner-Tuple{Any}' href='#PhyloNetworks.getPartner-Tuple{Any}'>#</a>
 <strong><code>PhyloNetworks.getPartner</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>getPartner(edge::Edge)
@@ -1012,7 +1084,7 @@ getPartner(edge::Edge, node::Node)
 <li>no in-coming polytomy: a node has 0, 1 or 2 parents, no more</li>
 </ul>
 <p>When <code>node</code> is given, it is assumed to be the child of <code>edge</code> (the first form calls the second).</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L182-L194' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L182-L194' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getTipSubmatrix-Tuple{Array{T,2} where T,PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.getTipSubmatrix-Tuple{Array{T,2} where T,PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.getTipSubmatrix</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>getTipSubmatrix(M, net; indexation=:both)
@@ -1021,7 +1093,7 @@ getPartner(edge::Edge, node::Node)
 
 <p>Extract submatrix of M, with rows and/or columns corresponding to tips in the network, ordered like in <code>net.leaf</code>. In M, rows and/or columns are assumed ordered as in <code>net.nodes_changed</code>.</p>
 <p>indexation: one of <code>:rows</code>, <code>:cols</code> or <code>:both</code>: are nodes numbers indexed in the matrix by rows, by columns, or both? Subsetting is taken accordingly.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/pairwiseDistanceLS.jl#L77-L87' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/pairwiseDistanceLS.jl#L77-L87' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.hybridEdges-Tuple{PhyloNetworks.Node,PhyloNetworks.Edge}' href='#PhyloNetworks.hybridEdges-Tuple{PhyloNetworks.Node,PhyloNetworks.Edge}'>#</a>
 <strong><code>PhyloNetworks.hybridEdges</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>hybridEdges(node::Node, e::Edge)
@@ -1030,7 +1102,7 @@ getPartner(edge::Edge, node::Node)
 
 <p>Return the 2 edges connected to <code>node</code> other than <code>e</code>, in the same order as <code>node.edge</code>, except that <code>e</code> absent from the list.</p>
 <p>Despite what the name suggest, <code>node</code> need not be a hybrid node! <code>node</code> is assumed to have 3 edges, though.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L775-L784' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L775-L784' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.hybridEdges-Tuple{PhyloNetworks.Node}' href='#PhyloNetworks.hybridEdges-Tuple{PhyloNetworks.Node}'>#</a>
 <strong><code>PhyloNetworks.hybridEdges</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>hybridEdges(node::Node)
@@ -1054,7 +1126,7 @@ getPartner(edge::Edge, node::Node)
 <ul>
 <li>e3 is an external edge from <code>node</code> to a leaf, if one exists.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L701-L723' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L701-L723' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.initializeWeightsFromLeaves!-Tuple{AbstractArray,PhyloNetworks.HybridNetwork,Any,Any,Symbol}' href='#PhyloNetworks.initializeWeightsFromLeaves!-Tuple{AbstractArray,PhyloNetworks.HybridNetwork,Any,Any,Symbol}'>#</a>
 <strong><code>PhyloNetworks.initializeWeightsFromLeaves!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>initializeWeightsFromLeaves!(w, net, tips, stateset, criterion)
@@ -1066,7 +1138,7 @@ getPartner(edge::Edge, node::Node)
 <ul>
 <li>softwired parsimony: lineage states are in this order: ∅,{1},{2},{3},...,{nstates}</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/parsimony.jl#L632-L641' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/parsimony.jl#L632-L641' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.initializeWeightsFromLeavesSoftwired!-Tuple{AbstractArray,PhyloNetworks.HybridNetwork,Any,Any}' href='#PhyloNetworks.initializeWeightsFromLeavesSoftwired!-Tuple{AbstractArray,PhyloNetworks.HybridNetwork,Any,Any}'>#</a>
 <strong><code>PhyloNetworks.initializeWeightsFromLeavesSoftwired!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>initializeWeightsFromLeavesSoftwired!(w, net, tips, charset)
@@ -1074,7 +1146,7 @@ getPartner(edge::Edge, node::Node)
 
 
 <p>Modify weight in w: to Inf for w[n, s] if the "tips" data has a state different from s at node number n. Assumes that w was initialized to 0 for the leaves.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/parsimony.jl#L346-L352' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/parsimony.jl#L346-L352' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.majoredgelength-Tuple{PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.majoredgelength-Tuple{PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.majoredgelength</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>majoredgelength(net::HybridNetwork)
@@ -1101,7 +1173,7 @@ getPartner(edge::Edge, node::Node)
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/interop.jl#L61-L89' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/interop.jl#L61-L89' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.majoredgematrix-Tuple{PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.majoredgematrix-Tuple{PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.majoredgematrix</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>majoredgematrix(net::HybridNetwork)
@@ -1125,7 +1197,7 @@ julia&gt; PhyloNetworks.majoredgematrix(net)
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/interop.jl#L20-L43' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/interop.jl#L20-L43' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.makemissing!-Tuple{AbstractArray{T,1} where T}' href='#PhyloNetworks.makemissing!-Tuple{AbstractArray{T,1} where T}'>#</a>
 <strong><code>PhyloNetworks.makemissing!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>makemissing!(x::AbstractVector)
@@ -1133,7 +1205,7 @@ julia&gt; PhyloNetworks.majoredgematrix(net)
 
 
 <p>Turn to <code>missing</code> any element of <code>x</code> exactly equal to -1.0. Used for branch lengths and γs. <code>x</code> needs to accept missing values. If not, this can be done with <code>allowmissing(x)</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/interop.jl#L4-L10' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/interop.jl#L4-L10' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.mapAllelesCFtable!-Tuple{DataFrames.DataFrame,DataFrames.DataFrame,Array{Int64,1},Bool,AbstractString}' href='#PhyloNetworks.mapAllelesCFtable!-Tuple{DataFrames.DataFrame,DataFrames.DataFrame,Array{Int64,1},Bool,AbstractString}'>#</a>
 <strong><code>PhyloNetworks.mapAllelesCFtable!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>mapAllelesCFtable!(quartet CF DataFrame, mapping DataFrame, columns, write?, filename)
@@ -1143,7 +1215,7 @@ julia&gt; PhyloNetworks.majoredgematrix(net)
 <p>Modify (and return) the quartet concordance factor (CF) DataFrame: replace each allele name by the species name that the allele maps onto based on the mapping data frame. This mapping data frame should have columns named "allele" and "species" (see <code>rename!</code> to change column names if need be).</p>
 <p>If <code>write?</code> is <code>true</code>, the modified data frame is written to a file named "filename".</p>
 <p>Warning: <a href="../public/#PhyloNetworks.mapAllelesCFtable"><code>mapAllelesCFtable</code></a> takes the quartet data file as its second argument, while <code>mapAllelesCFtable!</code> takes the quartet data (which it modifies) as its first argument.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/multipleAlleles.jl#L49-L62' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/multipleAlleles.jl#L49-L62' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.minorreticulationgamma-Tuple{PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.minorreticulationgamma-Tuple{PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.minorreticulationgamma</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>minorreticulationgamma(net::HybridNetwork)
@@ -1161,7 +1233,7 @@ julia&gt; PhyloNetworks.majoredgematrix(net)
 
 
 <hr />
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/interop.jl#L168-L185' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/interop.jl#L168-L185' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.minorreticulationlength-Tuple{PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.minorreticulationlength-Tuple{PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.minorreticulationlength</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>minorreticulationlength(net::HybridNetwork)
@@ -1178,7 +1250,7 @@ julia&gt; PhyloNetworks.majoredgematrix(net)
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/interop.jl#L139-L156' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/interop.jl#L139-L156' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.minorreticulationmatrix-Tuple{PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.minorreticulationmatrix-Tuple{PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.minorreticulationmatrix</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>minorreticulationmatrix(net::HybridNetwork)
@@ -1194,7 +1266,7 @@ julia&gt; PhyloNetworks.majoredgematrix(net)
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/interop.jl#L108-L125' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/interop.jl#L108-L125' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.moveHybrid!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.Edge,Bool,Bool,Integer,Array{Int64,1}}' href='#PhyloNetworks.moveHybrid!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.Edge,Bool,Bool,Integer,Array{Int64,1}}'>#</a>
 <strong><code>PhyloNetworks.moveHybrid!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>moveHybrid</code> road map</p>
@@ -1204,7 +1276,7 @@ julia&gt; PhyloNetworks.majoredgematrix(net)
 <li><code>closeN=true</code> will try move origin/target on all neighbors (first choose minor/major edge at random, then make list of all neighbor edges and tries to put the hybrid node in all the neighbors until successful move); if false, will delete and add hybrid until successful move up to N times (this is never tested)</li>
 </ul>
 <p>Returns true if change was successful (not testing <code>optBL</code> again), and false if we could not move anything</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/optimization.jl#L467-L477' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/optimization.jl#L467-L477' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.optBL!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.DataCF,Bool,Float64,Float64,Float64,Float64}' href='#PhyloNetworks.optBL!-Tuple{PhyloNetworks.HybridNetwork,PhyloNetworks.DataCF,Bool,Float64,Float64,Float64,Float64}'>#</a>
 <strong><code>PhyloNetworks.optBL!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>optBL</code> road map</p>
@@ -1250,7 +1322,7 @@ julia&gt; PhyloNetworks.majoredgematrix(net)
 </li>
 </ul>
 <p>Finally, we call <code>NLopt.optimize</code>, and we update the <code>net.loglik</code> and <code>net.ht</code> at the end. After <code>optBL</code>, we want to call <code>afterOptBLAll</code> (or <code>afterOptBLAllMultipleAlleles</code>) to check if there are <code>h==0,1</code>; <code>t==0</code>; <code>hz==0,1</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/optimization.jl#L304-L341' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/optimization.jl#L304-L341' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.optTopLevel!-Tuple{PhyloNetworks.HybridNetwork,Float64,Integer,PhyloNetworks.DataCF,Integer,Float64,Float64,Float64,Float64,Bool,Bool,Array{Int64,1},IO,IO,Bool}' href='#PhyloNetworks.optTopLevel!-Tuple{PhyloNetworks.HybridNetwork,Float64,Integer,PhyloNetworks.DataCF,Integer,Float64,Float64,Float64,Float64,Bool,Bool,Array{Int64,1},IO,IO,Bool}'>#</a>
 <strong><code>PhyloNetworks.optTopLevel!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>optTopLevel</code> road map</p>
@@ -1287,7 +1359,7 @@ julia&gt; PhyloNetworks.majoredgematrix(net)
 </ul>
 <p>end while</p>
 <p>After choosing the best network <code>newT</code>, we do one last more thorough optimization of branch lengths with <code>optBL</code>, we change non identifiable branch lengths to -1 and return <code>newT</code></p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/optimization.jl#L1145-L1200' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/optimization.jl#L1145-L1200' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.optTopRun1!-Tuple{PhyloNetworks.HybridNetwork,Any,Integer,PhyloNetworks.DataCF,Integer,Float64,Float64,Float64,Float64,Bool,Bool,Array{Int64,1},Integer,IO,Bool,Float64,IO}' href='#PhyloNetworks.optTopRun1!-Tuple{PhyloNetworks.HybridNetwork,Any,Integer,PhyloNetworks.DataCF,Integer,Float64,Float64,Float64,Float64,Bool,Bool,Array{Int64,1},Integer,IO,Bool,Float64,IO}'>#</a>
 <strong><code>PhyloNetworks.optTopRun1!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>optTopRun1</code> roadmap</p>
@@ -1298,7 +1370,7 @@ julia&gt; PhyloNetworks.majoredgematrix(net)
 <p>If the starting topology is a network, then with probability <code>1-probST</code> it will modify one randomly chosen hybrid edge: with prob 0.5, the function will move origin, with prob 0.5 will do move target</p>
 <p>If there are multiple alleles (<code>d.repSpecies</code> not empty), then the function has to check that the starting topology does not violate the multiple alleles condition.</p>
 <p>After modifying the starting topology with NNI and/or move origin/target, the function calls <code>optTopLevel</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/optimization.jl#L1787-L1798' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/optimization.jl#L1787-L1798' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.optTopRuns!-Tuple{PhyloNetworks.HybridNetwork,Float64,Integer,PhyloNetworks.DataCF,Integer,Float64,Float64,Float64,Float64,Bool,Bool,Array{Int64,1},Integer,AbstractString,AbstractString,Integer,Float64}' href='#PhyloNetworks.optTopRuns!-Tuple{PhyloNetworks.HybridNetwork,Float64,Integer,PhyloNetworks.DataCF,Integer,Float64,Float64,Float64,Float64,Bool,Bool,Array{Int64,1},Integer,AbstractString,AbstractString,Integer,Float64}'>#</a>
 <strong><code>PhyloNetworks.optTopRuns!</code></strong> &mdash; <em>Method</em>.</p>
 <p>Road map for various functions behind snaq!</p>
@@ -1324,7 +1396,7 @@ snaqDebug
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/optimization.jl#L1552-L1580' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/optimization.jl#L1552-L1580' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.pairwiseTaxonDistanceGrad-Tuple{PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.pairwiseTaxonDistanceGrad-Tuple{PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.pairwiseTaxonDistanceGrad</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>pairwiseTaxonDistanceGrad(net; checkEdgeNumber=true, nodeAges=[])
@@ -1333,7 +1405,7 @@ snaqDebug
 
 <p>3-dim array: gradient of pairwise distances between all nodes. (internal and leaves); gradient with respect to edge lengths if <code>nodeAges</code> is empty; with respect to node ages otherwise. Assume correct <code>net.nodes_changed</code> (preorder).   This gradient depends on the network's topology and γ's only, not on branch lengths or node ages (distances are linear in either).</p>
 <p>WARNING: edge numbers need to range between 1 and #edges.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/pairwiseDistanceLS.jl#L143-L154' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/pairwiseDistanceLS.jl#L143-L154' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.parseEdgeData!-Tuple{IO,PhyloNetworks.Edge,PhyloNetworks.Node,Array{Int64,1}}' href='#PhyloNetworks.parseEdgeData!-Tuple{IO,PhyloNetworks.Edge,PhyloNetworks.Node,Array{Int64,1}}'>#</a>
 <strong><code>PhyloNetworks.parseEdgeData!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>parseEdgeData!(s::IO, edge, node, numberOfLeftParentheses::Array{Int,1})
@@ -1341,7 +1413,7 @@ snaqDebug
 
 
 <p>Helper function for readSubtree!, fixes a bug from using setGamma Modifies <code>e</code> according to the specified edge length and gamma values in the tree topology. Advances the stream <code>s</code> past any existing edge data. Edges in a topology may optionally be followed by ":edgeLen:bootstrap:gamma" where edgeLen, bootstrap, and gamma are decimal values.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L288-L296' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L288-L296' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.parseHybridNode!-Tuple{PhyloNetworks.Node,PhyloNetworks.Node,String,PhyloNetworks.HybridNetwork,Array{String,1}}' href='#PhyloNetworks.parseHybridNode!-Tuple{PhyloNetworks.Node,PhyloNetworks.Node,String,PhyloNetworks.HybridNetwork,Array{String,1}}'>#</a>
 <strong><code>PhyloNetworks.parseHybridNode!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>parseHybridNode!(node, parentNode, hybridName, net, hybrids)
@@ -1349,7 +1421,7 @@ snaqDebug
 
 
 <p>Helper function for <code>readSubtree!</code>. Create the parent edge for <code>node</code>. Return this edge, and the hybrid node retained (<code>node</code> or its clone in the newick string). Insert new edge and appropriate node into <code>net</code> and <code>hybrids</code> accordingly. Handles any type of given hybrid node. Called after a <code>#</code> has been found in a tree topology.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L158-L166' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L158-L166' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.parseRemainingSubtree!-Tuple{IO,Array{Int64,1},PhyloNetworks.HybridNetwork,Array{String,1}}' href='#PhyloNetworks.parseRemainingSubtree!-Tuple{IO,Array{Int64,1},PhyloNetworks.HybridNetwork,Array{String,1}}'>#</a>
 <strong><code>PhyloNetworks.parseRemainingSubtree!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>parseRemainingSubtree!(s::IO, numLeft, net, hybrids)
@@ -1358,7 +1430,7 @@ snaqDebug
 
 <p>Create internal node. Helper for <a href="./#PhyloNetworks.readSubtree!-Tuple{IO,PhyloNetworks.Node,Array{Int64,1},PhyloNetworks.HybridNetwork,Array{String,1}}"><code>readSubtree!</code></a>, which creates the parent edge of the node created by <code>parseRemainingSubtree!</code>: <code>readSubtree!</code> calls <code>parseRemainingSubtree!</code>, and vice versa. Called once a <code>(</code> has been read in a tree topology and reads until the corresponding <code>)</code> has been found. This function performs the recursive step for <code>readSubtree!</code>. Advances <code>s</code> past the subtree, adds discovered nodes and edges to <code>net</code>, and <code>hybrids</code>.</p>
 <p>Does <em>not</em> read the node name and the edge information of the subtree root: this is done by <a href="./#PhyloNetworks.readSubtree!-Tuple{IO,PhyloNetworks.Node,Array{Int64,1},PhyloNetworks.HybridNetwork,Array{String,1}}"><code>readSubtree!</code></a></p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L125-L137' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L125-L137' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.parseTreeNode!-Tuple{PhyloNetworks.Node,PhyloNetworks.Node,PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.parseTreeNode!-Tuple{PhyloNetworks.Node,PhyloNetworks.Node,PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.parseTreeNode!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>parseTreeNode!(node, parentNode, net)
@@ -1366,13 +1438,13 @@ snaqDebug
 
 
 <p>Helper function for <code>readSubtree!</code>. Insert the input tree node and associated edge (created here) into <code>net</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L242-L247' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L242-L247' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.parsimonyBottomUpFitch!-Union{Tuple{PhyloNetworks.Node,Dict{Int64,Set{T}},Array{Int64,1}}, Tuple{T}} where T' href='#PhyloNetworks.parsimonyBottomUpFitch!-Union{Tuple{PhyloNetworks.Node,Dict{Int64,Set{T}},Array{Int64,1}}, Tuple{T}} where T'>#</a>
 <strong><code>PhyloNetworks.parsimonyBottomUpFitch!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>parsimonyBottomUpFitch!(node, states, score)</code></p>
 <p>Bottom-up phase (from tips to root) of the Fitch algorithm: assign sets of character states to internal nodes based on character states at tips. Polytomies okay. Assumes a <em>tree</em> (no reticulation) and correct isChild1 attribute.</p>
 <p>output: dictionary with state sets and most parsimonious score</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/parsimony.jl#L2-L11' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/parsimony.jl#L2-L11' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.parsimonyBottomUpGF!-Tuple{PhyloNetworks.Node,PhyloNetworks.Node,Integer,AbstractArray,AbstractArray,AbstractArray,AbstractArray}' href='#PhyloNetworks.parsimonyBottomUpGF!-Tuple{PhyloNetworks.Node,PhyloNetworks.Node,Integer,AbstractArray,AbstractArray,AbstractArray,AbstractArray}'>#</a>
 <strong><code>PhyloNetworks.parsimonyBottomUpGF!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>`parsimonyBottomUpGF!(node, blobroot, nchar, w, scores,
@@ -1389,14 +1461,14 @@ snaqDebug
 <li><code>costmatrix1</code>[i,j] and <code>costmatrix2</code>[k][i,j]: 2d array and vector of 2d arrays containing the cost of going to character j starting from character i when the end node has a single parent, or the cost of a child node having character j when its parents have characters k and i. These cost matrices are pre-computed depending on the parsimony criterion (softwired, hardwired, parental etc.)</li>
 </ul>
 <p>used by <a href="../public/#PhyloNetworks.parsimonyGF"><code>parsimonyGF</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/parsimony.jl#L666-L700' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/parsimony.jl#L666-L700' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.parsimonyBottomUpSoftwired!-Tuple{PhyloNetworks.Node,PhyloNetworks.Node,Integer,AbstractArray,AbstractArray}' href='#PhyloNetworks.parsimonyBottomUpSoftwired!-Tuple{PhyloNetworks.Node,PhyloNetworks.Node,Integer,AbstractArray,AbstractArray}'>#</a>
 <strong><code>PhyloNetworks.parsimonyBottomUpSoftwired!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>parsimonyBottomUpSoftwired!(node, blobroot, states, w, scores)</code></p>
 <p>Computing the MP scores (one for each assignment of the root state) of a swicthing as described in Algorithm 1 in the following paper:</p>
 <p>Fischer, M., van Iersel, L., Kelk, S., Scornavacca, C. (2015). On computing the Maximum Parsimony score of a phylogenetic network. SIAM J. Discrete Math., 29(1):559-585.</p>
 <p>Assumes a <em>switching</em> (ie correct <code>fromBadDiamondI</code> field) and correct isChild1 field. The field <code>isExtBadTriangle</code> is used to know which nodes are at the root of a blob.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/parsimony.jl#L164-L176' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/parsimony.jl#L164-L176' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.parsimonyDiscreteFitch-Union{Tuple{PhyloNetworks.HybridNetwork,Dict{String,T}}, Tuple{T}} where T' href='#PhyloNetworks.parsimonyDiscreteFitch-Union{Tuple{PhyloNetworks.HybridNetwork,Dict{String,T}}, Tuple{T}} where T'>#</a>
 <strong><code>PhyloNetworks.parsimonyDiscreteFitch</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>parsimonyDiscreteFitch(net, tipdata)
@@ -1405,18 +1477,18 @@ snaqDebug
 
 <p>Calculate the most parsimonious (MP) score of a network given a discrete character at the tips. The softwired parsimony concept is used: where the number of state transitions is minimized over all trees displayed in the network. Tip data can be given in a data frame, in which case the taxon names are to appear in column 1 or in a column named "taxon" or "species", and trait values are to appear in column 2 or in a column named "trait". Alternatively, tip data can be given as a dictionary taxon =&gt; trait.</p>
 <p>also return the union of all optimized character states at each internal node as obtained by Fitch algorithm, where the union is taken over displayed trees with the MP score.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/parsimony.jl#L85-L100' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/parsimony.jl#L85-L100' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.parsimonySummaryFitch-Union{Tuple{PhyloNetworks.HybridNetwork,Dict{Int64,Set{T}}}, Tuple{T}} where T' href='#PhyloNetworks.parsimonySummaryFitch-Union{Tuple{PhyloNetworks.HybridNetwork,Dict{Int64,Set{T}}}, Tuple{T}} where T'>#</a>
 <strong><code>PhyloNetworks.parsimonySummaryFitch</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>parsimonySummaryFitch(tree, nodestates)</code></p>
 <p>summarize character states at nodes, assuming a <em>tree</em></p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/parsimony.jl#L67-L71' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/parsimony.jl#L67-L71' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.parsimonyTopDownFitch!-Union{Tuple{PhyloNetworks.Node,Dict{Int64,Set{T}}}, Tuple{T}} where T' href='#PhyloNetworks.parsimonyTopDownFitch!-Union{Tuple{PhyloNetworks.Node,Dict{Int64,Set{T}}}, Tuple{T}} where T'>#</a>
 <strong><code>PhyloNetworks.parsimonyTopDownFitch!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>parsimonyTopDownFitch!(node, states)</code></p>
 <p>Top-down phase (root to tips) of the Fitch algorithm: constrains character states at internal nodes based on the state of the root. Assumes a <em>tree</em>: no reticulation.</p>
 <p>output: dictionary with state sets</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/parsimony.jl#L43-L51' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/parsimony.jl#L43-L51' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.proposedTop!-Tuple{Integer,PhyloNetworks.HybridNetwork,Bool,Integer,Integer,Array{Int64,1},Array{Int64,1},Bool}' href='#PhyloNetworks.proposedTop!-Tuple{Integer,PhyloNetworks.HybridNetwork,Bool,Integer,Integer,Array{Int64,1},Array{Int64,1},Bool}'>#</a>
 <strong><code>PhyloNetworks.proposedTop!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>proposedTop!(move,newT,random,count,N,movescount,movesfail,multall)</code> road map</p>
@@ -1458,12 +1530,12 @@ snaqDebug
 </ul>
 <p>choose an edge for nni that does not have a neighbor hybrid. It will try to find such an edge N times, and if it fails, it will return false (unsuccessful move). N=10 by default. If N=1, it rarely finds such an edge if the network is small or complex. The function cannot choose an external edge. it will update locally the attributes.</p>
 <p><strong> Important: </strong> All the moves undo what they did if the move was not successful, so at the end you either have a <code>newT</code> with a new move and with all good attributes, or the same <code>newT</code> that started. This is important to avoid having to do deepcopy of the network before doing the move. Also, after each move, when we update the attributes, we do not update the attributes of the whole network, we only update the attributes of the edges that were affected by the move. This saves time, but makes the code quite clunky. Only the case of multiple alleles the moves does not undo what it did, because it finds out that it failed after the function is over, so just need to treat this case special.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/optimization.jl#L1024-L1066' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/optimization.jl#L1024-L1066' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.readStartTop-Tuple{AbstractString,PhyloNetworks.DataCF}' href='#PhyloNetworks.readStartTop-Tuple{AbstractString,PhyloNetworks.DataCF}'>#</a>
 <strong><code>PhyloNetworks.readStartTop</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>readStartTop(treefile,d::DataCF)</code></p>
 <p>function to read a tree in parenthetical format from text file treefile and a DataCF object to update the branch lengths according to the average observed CF for any given edge.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readData.jl#L788-L792' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readData.jl#L788-L792' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.readSubtree!-Tuple{IO,PhyloNetworks.Node,Array{Int64,1},PhyloNetworks.HybridNetwork,Array{String,1}}' href='#PhyloNetworks.readSubtree!-Tuple{IO,PhyloNetworks.Node,Array{Int64,1},PhyloNetworks.HybridNetwork,Array{String,1}}'>#</a>
 <strong><code>PhyloNetworks.readSubtree!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>readSubtree!(s::IO, parentNode, numLeft, net, hybrids)
@@ -1472,7 +1544,7 @@ snaqDebug
 
 <p>Recursive helper method for <code>readTopology</code>: read a subtree from an extended Newick topology. input <code>s</code>: IOStream/IOBuffer.</p>
 <p>Reads additional info formatted as: <code>:length:bootstrap:gamma</code>. Allows for name of internal nodes without # after closing parenthesis: (1,2)A. Warning if hybrid edge without γ, or if γ (ignored) without hybrid edge</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L392-L402' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L392-L402' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.recursionPostOrder-Tuple{Array{PhyloNetworks.Node,1},Function,Function,Function,Any}' href='#PhyloNetworks.recursionPostOrder-Tuple{Array{PhyloNetworks.Node,1},Function,Function,Function,Any}'>#</a>
 <strong><code>PhyloNetworks.recursionPostOrder</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>recursionPostOrder(nodes, init_function, tip_function, node_function,
@@ -1483,7 +1555,7 @@ updatePostOrder(index, nodes, updated_matrix, tip_function, node_function,
 
 
 <p>Generic tool to apply a post-order (or topological ordering) algorithm. Used by <code>descendenceMatrix</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/traits.jl#L154-L162' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/traits.jl#L154-L162' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.recursionPreOrder!' href='#PhyloNetworks.recursionPreOrder!'>#</a>
 <strong><code>PhyloNetworks.recursionPreOrder!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>recursionPreOrder(nodes, init_function, root_function, tree_node_function,
@@ -1496,7 +1568,7 @@ updatePreOrder(index, nodes, updated_matrix, root_function, tree_node_function,
 
 
 <p>Generic tool to apply a pre-order (or topological ordering) algorithm. Used by <code>sharedPathMatrix</code> and by <code>pairwiseTaxonDistanceMatrix</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/traits.jl#L94' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/traits.jl#L94' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.recursionPreOrder-Tuple{Array{PhyloNetworks.Node,1},Function,Function,Function,Function,Any}' href='#PhyloNetworks.recursionPreOrder-Tuple{Array{PhyloNetworks.Node,1},Function,Function,Function,Function,Any}'>#</a>
 <strong><code>PhyloNetworks.recursionPreOrder</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>recursionPreOrder(nodes, init_function, root_function, tree_node_function,
@@ -1509,7 +1581,7 @@ updatePreOrder(index, nodes, updated_matrix, root_function, tree_node_function,
 
 
 <p>Generic tool to apply a pre-order (or topological ordering) algorithm. Used by <code>sharedPathMatrix</code> and by <code>pairwiseTaxonDistanceMatrix</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/traits.jl#L74-L84' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/traits.jl#L74-L84' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.removeHybrid!-Tuple{PhyloNetworks.Network,PhyloNetworks.Node}' href='#PhyloNetworks.removeHybrid!-Tuple{PhyloNetworks.Network,PhyloNetworks.Node}'>#</a>
 <strong><code>PhyloNetworks.removeHybrid!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>removeHybrid!(net::Network, n::Node)
@@ -1517,7 +1589,7 @@ updatePreOrder(index, nodes, updated_matrix, root_function, tree_node_function,
 
 
 <p>Delete a hybrid node <code>n</code> from <code>net.hybrid</code>, and update <code>net.numHybrid</code>. The actual node <code>n</code> is not deleted. It is kept in the full list <code>net.node</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L565-L570' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L565-L570' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.resetNodeNumbers!-Tuple{PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.resetNodeNumbers!-Tuple{PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.resetNodeNumbers!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">resetNodeNumbers</span><span class="o">!(</span><span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">;</span> <span class="nt">checkPreorder</span><span class="o">=</span><span class="nt">true</span><span class="o">,</span> <span class="nt">ape</span><span class="o">=</span><span class="nt">true</span><span class="o">)</span>
@@ -1546,7 +1618,7 @@ Node    In Cycle        isHybrid        hasHybEdge      Node label      isLeaf  
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/manipulateNet.jl#L849-L878' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/manipulateNet.jl#L849-L878' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.sameTaxa-Tuple{PhyloNetworks.Quartet,PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.sameTaxa-Tuple{PhyloNetworks.Quartet,PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.sameTaxa</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>sameTaxa(Quartet, HybridNetwork)
@@ -1555,7 +1627,7 @@ Node    In Cycle        isHybrid        hasHybEdge      Node label      isLeaf  
 
 <p>Return <code>true</code> if all taxa in the quartet are represented in the network, <code>false</code> if one or more taxa in the quartet does not appear in the network.</p>
 <p>warning: the name can cause confusion. A more appropriate name might be "in", or "taxain", or "taxonsubset", or etc.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readData.jl#L326-L334' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readData.jl#L326-L334' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.sampleBootstrapTrees-Tuple{Array{Array{PhyloNetworks.HybridNetwork,1},1}}' href='#PhyloNetworks.sampleBootstrapTrees-Tuple{Array{Array{PhyloNetworks.HybridNetwork,1},1}}'>#</a>
 <strong><code>PhyloNetworks.sampleBootstrapTrees</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>sampleBootstrapTrees(vector of tree lists; seed=0::Integer, generesampling=false, row=0)
@@ -1570,7 +1642,7 @@ sampleBootstrapTrees!(tree list, vector of tree lists; seed=0::Integer, generesa
 <li><code>row=i</code>: samples the ith bootstrap tree for each gene. <code>row</code> is turned back to 0 if gene resampling is true.</li>
 </ul>
 <p>output: one vector of trees. the modifying function (!) modifies the input tree list and returns it.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/bootstrap.jl#L29-L47' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/bootstrap.jl#L29-L47' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.sampleCFfromCI' href='#PhyloNetworks.sampleCFfromCI'>#</a>
 <strong><code>PhyloNetworks.sampleCFfromCI</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>sampleCFfromCI(data frame, seed=0)
@@ -1585,7 +1657,7 @@ sampleCFfromCI!(data frame, seed=0)
 </ul>
 <p>Warning: the modifying version does <em>not</em> check the data frame: assumes correct columns.</p>
 <p>optional argument: <code>delim=','</code> by default: how columns are delimited.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/bootstrap.jl#L86-L106' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/bootstrap.jl#L86-L106' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.setBLfromDivergenceTimes!-Tuple{PhyloNetworks.HybridNetwork,Dict{Int64,Float64}}' href='#PhyloNetworks.setBLfromDivergenceTimes!-Tuple{PhyloNetworks.HybridNetwork,Dict{Int64,Float64}}'>#</a>
 <strong><code>PhyloNetworks.setBLfromDivergenceTimes!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>setBLfromDivergenceTimes!(net::HybridNetwork, divergenceTimes::Dict{Int64,Float64})
@@ -1593,17 +1665,17 @@ sampleCFfromCI!(data frame, seed=0)
 
 
 <p>Modify branch lengths in <code>net</code> to match input divergence times. Assumes correct <code>isChild1</code> field for all edges in the network.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/pairwiseDistanceLS.jl#L1-L6' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/pairwiseDistanceLS.jl#L1-L6' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.setBranchLength!-Tuple{PhyloNetworks.Edge,Number}' href='#PhyloNetworks.setBranchLength!-Tuple{PhyloNetworks.Edge,Number}'>#</a>
 <strong><code>PhyloNetworks.setBranchLength!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>setBranchLength!(Edge,new length)</code></p>
 <p>sets the length of an Edge object. The new length needs to be non-negative, or -1.0 to be interpreted as missing. Example: if net is a HybridNetwork object, do printEdges(net) to see the list of all edges with their lengths. The length of the 3rd edge can be changed to 1.2 with setBranchLength!(net.edge[3],1.2). It can also be set to missing with setBranchLength!(net.edge[3],-1.0)</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L867-L872' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L867-L872' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.setGammaBLfromGammaz!-Tuple{PhyloNetworks.Node,PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.setGammaBLfromGammaz!-Tuple{PhyloNetworks.Node,PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.setGammaBLfromGammaz!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>setGammaBLfromGammaz!(node, network)</code></p>
 <p>Update the γ values of the two sister hybrid edges in a bad diamond I, given the <code>gammaz</code> values of their parent nodes, and updates the branch lengths t1 and t2 of their parent edges (those across from the hybrid nodes), in such a way that t1=t2 and that these branch lengths and γ values are consistent with the <code>gammaz</code> values in the network.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/auxiliary.jl#L941-L948' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/auxiliary.jl#L941-L948' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.setNonIdBL!-Tuple{PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.setNonIdBL!-Tuple{PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.setNonIdBL!</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>setNonIdBL!(net)</code></p>
@@ -1614,7 +1686,7 @@ sampleCFfromCI!(data frame, seed=0)
 <li>a bad diamond I: the edges across from the hybrid node have non identifiable lengths but are kept, because the two γ*(1-exp(-t)) values are identifiable.</li>
 </ul>
 <p>will break if <code>inCycle</code> attributes are not initialized (at -1) or giving a correct node number.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/descriptive.jl#L76-L88' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/descriptive.jl#L76-L88' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.showQ-Tuple{IO,PhyloNetworks.TraitSubstitutionModel}' href='#PhyloNetworks.showQ-Tuple{IO,PhyloNetworks.TraitSubstitutionModel}'>#</a>
 <strong><code>PhyloNetworks.showQ</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>showQ(IO, model)
@@ -1622,7 +1694,7 @@ sampleCFfromCI!(data frame, seed=0)
 
 
 <p>Print the Q matrix to the screen, with trait states as labels on rows and columns. adapted from prettyprint function by mcreel, found 2017/10 at https://discourse.julialang.org/t/display-of-arrays-with-row-and-column-names/1961/6</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/substitutionModels.jl#L22-L28' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/substitutionModels.jl#L22-L28' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.sortUnionTaxa!-Tuple{Any}' href='#PhyloNetworks.sortUnionTaxa!-Tuple{Any}'>#</a>
 <strong><code>PhyloNetworks.sortUnionTaxa!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>sortUnionTaxa!(taxa)
@@ -1630,7 +1702,7 @@ sampleCFfromCI!(data frame, seed=0)
 
 
 <p>Take a vector of strings <code>taxa</code>, sort it numerically if elements can be parsed as an integer, alphabetically otherwise.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readData.jl#L381-L386' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readData.jl#L381-L386' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.symmetricNet' href='#PhyloNetworks.symmetricNet'>#</a>
 <strong><code>PhyloNetworks.symmetricNet</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>symmetricNet(n, h, gamma)
@@ -1638,7 +1710,7 @@ sampleCFfromCI!(data frame, seed=0)
 
 
 <p>Create a string with a symmetric net with 2^n tips, numbered from 1 to 2^n The total height of the network is set to 1. Hybrids are added from level h to h-1 symmetrically.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L1457-L1463' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L1457-L1463' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.symmetricNet-Tuple{Int64,Int64,Int64,Real,Real}' href='#PhyloNetworks.symmetricNet-Tuple{Int64,Int64,Int64,Real,Real}'>#</a>
 <strong><code>PhyloNetworks.symmetricNet</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>symmetricNet(n, i, j, gamma)
@@ -1646,7 +1718,7 @@ sampleCFfromCI!(data frame, seed=0)
 
 
 <p>Create a string with a symmetric net with 2^n tips, numbered from 1 to 2^n All the branch length are set equal to 1. One hybrid branch, going from level i to level j is added, with weigth gamma. The tree can be created with function readTopology.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L1420-L1427' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L1420-L1427' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.symmetricTree' href='#PhyloNetworks.symmetricTree'>#</a>
 <strong><code>PhyloNetworks.symmetricTree</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>symmetricTree(n, i=1)
@@ -1654,7 +1726,7 @@ sampleCFfromCI!(data frame, seed=0)
 
 
 <p>Create a string with a symmetric tree with 2^n tips, numbered from i to i+2^n-1. All the branch length are set equal to 1. The tree can be created with function readTopology.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L1398-L1404' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L1398-L1404' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.synchronizePartnersData!-Tuple{PhyloNetworks.Edge,PhyloNetworks.Node}' href='#PhyloNetworks.synchronizePartnersData!-Tuple{PhyloNetworks.Edge,PhyloNetworks.Node}'>#</a>
 <strong><code>PhyloNetworks.synchronizePartnersData!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>synchronizePartnersData!(e::Edge, n::Node)
@@ -1668,7 +1740,7 @@ sampleCFfromCI!(data frame, seed=0)
 <li>update <code>isMajor</code> to match the γ information: the major edge is the one with γ &gt; 0.5.</li>
 </ul>
 <p><strong>Warnings</strong>: does not check that <code>e</code> is a hybrid edge, nor that <code>n</code> is the child of <code>e</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L316-L328' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L316-L328' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.taxadiff-Tuple{Array{PhyloNetworks.Quartet,1},PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.taxadiff-Tuple{Array{PhyloNetworks.Quartet,1},PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.taxadiff</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>taxadiff(Vector{Quartet}, network; multiplealleles=true)
@@ -1682,7 +1754,7 @@ taxadiff(DataCF, network; multiplealleles=true)
 <li>taxa in the network but in none of the quartets.</li>
 </ul>
 <p>When <code>multiplealleles</code> is true, the taxon names that end with "__2" are ignored in the quartets: they are not expected to appear in the networks that users give as input, or get as output.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readData.jl#L342-L354' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readData.jl#L342-L354' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.traverseContainRoot!-Tuple{PhyloNetworks.Node,PhyloNetworks.Edge,Array{PhyloNetworks.Edge,1},Array{Bool,1}}' href='#PhyloNetworks.traverseContainRoot!-Tuple{PhyloNetworks.Node,PhyloNetworks.Edge,Array{PhyloNetworks.Edge,1},Array{Bool,1}}'>#</a>
 <strong><code>PhyloNetworks.traverseContainRoot!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>updateContainRoot!(HybridNetwork, Node)
@@ -1699,7 +1771,7 @@ traverseContainRoot!(Node, Edge, edges_changed::Array{Edge,1}, rightDir::Vector{
 <li>assumes correct isMajor attributes: to stop the recursion at minor hybrid edges.</li>
 <li>assumes correct hybrid attributes of both nodes &amp; edges: to check if various hybridizations have compatible directions. For each hybrid node that is encountered, checks if it was reached via a hybrid edge (ok) or tree edge (not ok).</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/update.jl#L117-L144' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/update.jl#L117-L144' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.updatePostOrder!' href='#PhyloNetworks.updatePostOrder!'>#</a>
 <strong><code>PhyloNetworks.updatePostOrder!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>recursionPostOrder(nodes, init_function, tip_function, node_function,
@@ -1710,7 +1782,7 @@ updatePostOrder(index, nodes, updated_matrix, tip_function, node_function,
 
 
 <p>Generic tool to apply a post-order (or topological ordering) algorithm. Used by <code>descendenceMatrix</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/traits.jl#L175' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/traits.jl#L175' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.updatePreOrder!' href='#PhyloNetworks.updatePreOrder!'>#</a>
 <strong><code>PhyloNetworks.updatePreOrder!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>recursionPreOrder(nodes, init_function, root_function, tree_node_function,
@@ -1723,7 +1795,7 @@ updatePreOrder(index, nodes, updated_matrix, root_function, tree_node_function,
 
 
 <p>Generic tool to apply a pre-order (or topological ordering) algorithm. Used by <code>sharedPathMatrix</code> and by <code>pairwiseTaxonDistanceMatrix</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/traits.jl#L109' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/traits.jl#L109' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.writeTopologyLevel1-Tuple{PhyloNetworks.HybridNetwork}' href='#PhyloNetworks.writeTopologyLevel1-Tuple{PhyloNetworks.HybridNetwork}'>#</a>
 <strong><code>PhyloNetworks.writeTopologyLevel1</code></strong> &mdash; <em>Method</em>.</p>
 <p><code>writeTopologyLevel1(net::HybridNetwork)</code></p>
@@ -1739,7 +1811,7 @@ updatePreOrder(index, nodes, updated_matrix, root_function, tree_node_function,
 <li>multall: (default false). set to true when there are multiple alleles per population.</li>
 </ul>
 <p>The topology may be written using a root different than net.root, if net.root is incompatible with one of more hybrid node. Missing hybrid names are written as "#Hi" where "i" is the hybrid node number if possible.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/7db2abf3b9faa7525ebcec646f48ffb5181263b2/src/readwrite.jl#L1078-L1102' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/4812bef11b13bc3532c8818fed19502d31094291/src/readwrite.jl#L1078-L1102' class='documenter-source'>source</a><br></p>
                 
                   
                 

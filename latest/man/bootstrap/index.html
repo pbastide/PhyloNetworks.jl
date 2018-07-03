@@ -280,6 +280,54 @@
 
 
   <li class="md-nav__item">
+    <a href="../installation/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../inputdata/" title="Input Data for SNaQ" class="md-nav__link">
+      Input Data for SNaQ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ticr_howtogetQuartetCFs/" title="TICR pipeline" class="md-nav__link">
+      TICR pipeline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../snaq_plot/" title="Network estimation and display" class="md-nav__link">
+      Network estimation and display
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../dist_reroot/" title="Network comparison and manipulation" class="md-nav__link">
       Network comparison and manipulation
     </a>
@@ -294,6 +342,18 @@
   <li class="md-nav__item">
     <a href="../fixednetworkoptim/" title="Candidate Networks" class="md-nav__link">
       Candidate Networks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../expectedCFs/" title="Extract Expected CFs" class="md-nav__link">
+      Extract Expected CFs
     </a>
   </li>
 
@@ -379,6 +439,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../multiplealleles/" title="Multiple Alleles" class="md-nav__link">
+      Multiple Alleles
+    </a>
   </li>
 
         
@@ -533,7 +605,7 @@
 <h2 id="running-a-bootstrap-analysis">Running a bootstrap analysis</h2>
 <p>There are two ways to do a bootstrap analysis.</p>
 <ul>
-<li>From quartet CFs with credibility intervals, such as if we used BUCKy. The <a href="ticr_howtogetQuartetCFs.md#TICR-pipeline-1">TICR pipeline</a> outputs a CF table with extra columns for credibility intervals. We could then read that table and get bootstrap networks like this, and tweak options as needed:</li>
+<li>From quartet CFs with credibility intervals, such as if we used BUCKy. The <a href="../ticr_howtogetQuartetCFs/#TICR-pipeline-1">TICR pipeline</a> outputs a CF table with extra columns for credibility intervals. We could then read that table and get bootstrap networks like this, and tweak options as needed:</li>
 </ul>
 <div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">CSV</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">CSV</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;tableCF_withCI.csv&quot;</span><span class="p">)</span>
@@ -809,7 +881,7 @@ julia&gt; std(BSgam[:,2])
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../fixednetworkoptim/" title="Candidate Networks" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../expectedCFs/" title="Extract Expected CFs" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -818,19 +890,19 @@ julia&gt; std(BSgam[:,2])
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Candidate Networks
+                Extract Expected CFs
               </span>
             </div>
           </a>
         
         
-          <a href="../trait_tree/" title="Continuous Trait Evolution" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../multiplealleles/" title="Multiple Alleles" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Continuous Trait Evolution
+                Multiple Alleles
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
