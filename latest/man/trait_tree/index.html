@@ -812,10 +812,10 @@ AIC: 13.9703506922
 <p>From this, we can see that the intercept, the coefficient for trait 1 and the variance of the noise are correctly estimated (given that there are only 6 taxa). In addition, the Student T test for the coefficient associated with trait 2 has a high p-value, which means that this coefficient is not significantly different from 0. This is consistent with the way we simulated trait 3.</p>
 <p>The function returns an object of type <a href="../../lib/public/#PhyloNetworks.PhyloNetworkLinearModel"><code>PhyloNetworkLinearModel</code></a><code>&lt;:LinPredModel</code>. It is a subtype of the GLM type <code>LinPredModel</code>, which means that all base functions from Julia <a href="https://github.com/JuliaStats/StatsBase.jl">StatsBase</a> can be applied to it. See the documentation for this type for a list of all functions that can be used. Some functions allow the user to retrieve directly the estimated parameters of the BM, and are specific to this object.</p>
 <div class="codehilite"><pre><span></span>julia&gt; sigma2_estim(fitTrait3) # estimated variance of the BM
-0.034711959298062325
+0.03471195929806232
 
 julia&gt; mu_estim(fitTrait3) # estimated root value of the BM
-11.956367929622921
+11.956367929622969
 </pre></div>
 
 
@@ -1112,7 +1112,7 @@ AIC: 15.9770745374
 
 <p>As it is indeed generated according to a plain BM on the phylogeny, the estimated λ should be close to 1. It can be extracted with function <code>lambda_estim</code>:</p>
 <div class="codehilite"><pre><span></span>julia&gt; lambda_estim(fitPagel)
-0.9073561228997326
+0.9073561228984233
 </pre></div>
 
 
