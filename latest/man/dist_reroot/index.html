@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.2">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.2">
     
     
       
@@ -369,6 +369,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#what-if-the-root-conflicts-with-the-direction-of-a-reticulation" title="What if the root conflicts with the direction of a reticulation?" class="md-nav__link">
+    What if the root conflicts with the direction of a reticulation?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#extracting-the-major-tree" title="Extracting the major tree" class="md-nav__link">
     Extracting the major tree
   </a>
@@ -541,6 +548,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#what-if-the-root-conflicts-with-the-direction-of-a-reticulation" title="What if the root conflicts with the direction of a reticulation?" class="md-nav__link">
+    What if the root conflicts with the direction of a reticulation?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#extracting-the-major-tree" title="Extracting the major tree" class="md-nav__link">
     Extracting the major tree
   </a>
@@ -626,9 +640,47 @@ julia&gt; hardwiredClusterDistance(astraltree, net0, true)
 <p><img alt="net0_O" src="../../assets/figures/net0_O.svg" /></p>
 <p>Note that, as in previous chapters, we use the possibilities of <code>RCall</code> to save the plot. We only show this commands once, but they will be run behind the scene each time a plot is called.</p>
 <p>After trees/networks are rooted with a correct outgroup, their visualization is more meaningful.</p>
-<p>With 1 or more hybridization, the direction of hybrid edges constrain the position of the root, which cannot be downstream of hybrid edges. An attempt to re-root the network at a position incompatible with hybrid edges will fail.</p>
 <p>Networks can be re-rooted at a given node or along a given edge. Get help (type <code>?</code>) on the functions <code>rootatnode!</code> and <code>rootonedge!</code> for more info. There are examples in the <a href="../bootstrap/#Bootstrap-1">Bootstrap</a> section.</p>
 <p>If the network is plotted with crossing edges, you may identify ways to rotate the children edges at some nodes to untangle some crossing edges. This can be done using the function <code>rotate!</code>. See an example in the <a href="../bootstrap/#Bootstrap-1">Bootstrap</a> section, or type <code>?</code> then <code>rotate!</code>.</p>
+<p><a id='What-if-the-root-conflicts-with-the-direction-of-a-reticulation?-1'></a></p>
+<h2 id="what-if-the-root-conflicts-with-the-direction-of-a-reticulation">What if the root conflicts with the direction of a reticulation?</h2>
+<p>With 1 hybridization or more, the direction of hybrid edges constrain the position of the root. The root cannot be downstream of hybrid edges. Any hybrid node has to be younger than, or of the same age as both of its parents. So time has to flow "downwards" of any hybrid node, and the root cannot be placed "below" a hybrid node. An attempt to re-root the network at a position incompatible with hybrid edges will fail, with a <code>RootMismatch</code> error. To show an example, let's use the network below. We plotted the edge numbers, because we will want to use them later to place the root.</p>
+<div class="codehilite"><pre><span></span><span class="n">net7taxa</span> <span class="o">=</span> <span class="n">readTopology</span><span class="p">(</span><span class="s">&quot;(C,D,((O,(E,#H7:::0.196):0.314):0.664,(B,((A1,A2))#H7:::0.804):10.0):10.0);&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">net7taxa</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">showEdgeNumber</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">tipOffset</span><span class="o">=</span><span class="mf">0.2</span><span class="p">);</span>
+</pre></div>
+
+
+<p><img alt="reroot net7taxa 1" src="../../assets/figures/reroot_net7taxa_1.svg" /></p>
+<p>Let's imagine that the A1 and A2 are our outgroups, and we estimated the network above. According to this network, time must flow from the hybrid node towards A1 and A2. So any attempt to reroot the network with A1 as outgroup, or with A2 as outgroup, or with the A clade (on edge 11), will fail with a <code>RootMismatch</code> error:</p>
+<div class="codehilite"><pre><span></span><span class="n">rootatnode!</span><span class="p">(</span><span class="n">net7taxa</span><span class="p">,</span> <span class="s">&quot;A1&quot;</span><span class="p">);</span> <span class="c"># ERROR: RootMismatch: non-leaf node 5 had 0 children. ...</span>
+<span class="n">rootatnode!</span><span class="p">(</span><span class="n">net7taxa</span><span class="p">,</span> <span class="s">&quot;A2&quot;</span><span class="p">);</span> <span class="c"># ERROR: RootMismatch (again)</span>
+<span class="n">rootonedge!</span><span class="p">(</span><span class="n">net7taxa</span><span class="p">,</span> <span class="mi">11</span><span class="p">);</span>   <span class="c"># ERROR: RootMismatch (again)</span>
+</pre></div>
+
+
+<p>In this case, however, it is possible to root the network on either parent edge of the hybrid node. These edges have numbers 12 and 5, based on the plot above. We get these 2 rooted versions of the network:</p>
+<div class="codehilite"><pre><span></span><span class="n">R</span><span class="s">&quot;layout(matrix(1:2,1,2))&quot;</span><span class="p">;</span>
+<span class="n">rootonedge!</span><span class="p">(</span><span class="n">net7taxa</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">net7taxa</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">tipOffset</span><span class="o">=</span><span class="mf">0.2</span><span class="p">);</span>
+<span class="n">R</span><span class="s">&quot;mtext(&#39;rooted on hybrid edge 12 (major)&#39;, line=-1)&quot;</span>
+<span class="n">rootonedge!</span><span class="p">(</span><span class="n">net7taxa</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">net7taxa</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">tipOffset</span><span class="o">=</span><span class="mf">0.2</span><span class="p">);</span>
+<span class="n">R</span><span class="s">&quot;mtext(&#39;rooted on hybrid edge 5 (minor)&#39;, line=-1)&quot;</span>
+</pre></div>
+
+
+<p><img alt="reroot net7taxa 2" src="../../assets/figures/reroot_net7taxa_2.svg" /></p>
+<p>On the second plot, the A clade does not <em>appear</em> to be an outgroup, but this is just because the plot follows the major tree primarily, based the major hybrid edges (those with γ&gt;0.5). We can display the exact same network differently, by changing the γ inheritance values to invert the major/minor consideration of the hybrid edges.</p>
+<div class="codehilite"><pre><span></span><span class="n">net7taxa</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="c"># just to check that it&#39;s one of the 2 hybrid edges of interest</span>
+<span class="n">setGamma!</span><span class="p">(</span><span class="n">net7taxa</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="mf">0.501</span><span class="p">)</span> <span class="c"># switch major/minor edges</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">net7taxa</span><span class="p">,</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">tipOffset</span><span class="o">=</span><span class="mf">0.2</span><span class="p">);</span> <span class="c"># not showing gamma values, because we changed them artificially</span>
+<span class="n">R</span><span class="s">&quot;mtext(&#39;rooted on hybrid edge 5 (considered major)&#39;, line=-1)&quot;</span>
+</pre></div>
+
+
+<p><img alt="reroot net7taxa 3" src="../../assets/figures/reroot_net7taxa_3.svg" /></p>
+<p>Conclusion, in this particular example: it is possible to re-root the network to a place where the A clade is indeed an outgroup. But it did require some care, and we discovered that there are 2 acceptable rooting options. The first is more plausible, if we think that the <em>species tree</em> is the <em>major tree</em>, meaning that any gene flow or introgression event replaced less than 50% of the genes in the recipient population.</p>
+<p>In other cases, it may not be possible to re-root the network with a known outgroup. It would be the case if A1 was the only outgroup, and if A2 was an ingroup taxon. In such a case, the outgroup knowledge tells us that our estimated network is wrong. One (or more) reticulation in the network must be incorrect. Its placement might be correct, but then its direction would be incorrect. If the network was estimated via <code>snaq!</code>, check tips about <a href="../fixednetworkoptim/#Candidate-networks-compatible-with-a-known-outgroup-1">Candidate networks compatible with a known outgroup</a>.</p>
 <p><a id='Extracting-the-major-tree-1'></a></p>
 <h2 id="extracting-the-major-tree">Extracting the major tree</h2>
 <p>We can also compare the networks estimated with h=0 (net0) and h=1 (net1):</p>
@@ -812,7 +864,7 @@ tip labels: C, D, O, E, ...
     
       <script src="../../assets/javascripts/application.a59e2a89.js"></script>
       
-      <script>app.initialize({version:"0.17.4",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
       
         <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       

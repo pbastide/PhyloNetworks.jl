@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.2">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.2">
     
     
       
@@ -350,8 +350,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parallel-computation" title="parallel computation" class="md-nav__link">
-    parallel computation
+  <a href="#parallel-computations" title="parallel computations" class="md-nav__link">
+    parallel computations
   </a>
   
 </li>
@@ -555,8 +555,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parallel-computation" title="parallel computation" class="md-nav__link">
-    parallel computation
+  <a href="#parallel-computations" title="parallel computations" class="md-nav__link">
+    parallel computations
   </a>
   
 </li>
@@ -663,7 +663,7 @@ with -loglik 53.53150526187732
 </pre></div>
 
 
-<p>when viewing these result files with <code>less</code> within Julia, use arrows to scroll down and type <code>q</code> to quit viewing the files. The file <code>net1.networks</code> contains a list of networks obtained from the estimated network, <code>net1</code>, by changing the direction of each hybridization, and by moving the placement of the hybrid node to another node inside the cycle, along with its pseudolikelihood score.</p>
+<p>when viewing these result files with <code>less</code> within Julia, use arrows to scroll down and type <code>q</code> to quit viewing the files. The file <code>net1.networks</code> contains a list of networks that are slight modifications of the best (estimated) network <code>net1</code>. The modifications changed the direction of one reticulation at a time, by moving the placement of one hybrid node to another node inside the same cycle. For each modified network, the pseudolikelihood score was calculated.</p>
 <p>The function name <code>snaq!</code> ends with ! because it modifies the argument <code>raxmlCF</code> by including the expected CF. Type <code>?</code> then <code>snaq!</code> to get help on that function.</p>
 <p>The main output file, here <code>net1.out</code> (or <code>snaq.out</code> by default) has the estimated network in parenthetical format, but we can also print it directly to the screen:</p>
 <div class="codehilite"><pre><span></span><span class="nt">julia</span><span class="o">&gt;</span> <span class="nt">net1</span>
@@ -717,8 +717,8 @@ with -loglik 53.53150526187732
 </pre></div>
 
 
-<p><a id='parallel-computation-1'></a></p>
-<h2 id="parallel-computation">parallel computation</h2>
+<p><a id='parallel-computations-1'></a></p>
+<h2 id="parallel-computations">parallel computations</h2>
 <p>For network estimation, multiple runs can done in parallel. For example, if your machine has 4 or more processors (or cores), you can tell julia to use 4 processors by starting julia with <code>julia -p 4</code>, or by starting julia the usual way (<code>julia</code>) and then adding processors with:</p>
 <div class="codehilite"><pre><span></span><span class="n">addprocs</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
@@ -732,6 +732,64 @@ with -loglik 53.53150526187732
 <p>After that, running any of the <code>snaq!(...)</code> command will use different cores for different runs, as processors become available. Fewer details are printed to the log file when multiple cores are used in parallel.</p>
 <p>When running <code>bootsnaq</code>, the analysis of each bootstrap replicate will use multiple cores to parallelize separate runs of that particular bootstrap replicate. You may parallelize things further by running <code>bootsnaq</code> multiple times (on separate machines for instance), each time for a small subset of bootstrap replicates, and with a different seed each time.</p>
 <p>We may tell julia to add more processors than our machine has, but we will not receive any performance benefits. At any time during the julia session, <code>nworkers()</code> tells us how many worker processors julia has access to.</p>
+<p>Below is an example of how to use a cluster, to run many independent <code>snaq!</code> searches in parallel on a cluster running the <a href="https://slurm.schedmd.com">slurm</a> job manager (other managers would require a different, but similar submit file). This example uses 2 files:</p>
+<ol>
+<li>a julia script file, to do many runs of <code>snaq!</code> in parallel, asking for many cores (default: 10 runs, asking for 10 cores). This julia script can take arguments: the maximum allowed number of hybridizations <code>hmax</code>, and the number of runs (to run 50 runs instead of 10, say).</li>
+<li>a submit file, to launch the julia script.</li>
+</ol>
+<p><strong>First</strong>: the example julia script, below, is assumed (by the submit file) to be called <code>runSNaQ.jl</code>. It uses a starting tree that is assumed to be available in a file named <code>astraltree.tre</code>, but that could be modified (to use a network with h=1 to start the search with hmax=2 for instance). It also assumes that the quartet concordance factor data are in file <code>tableCF_speciesNames.csv</code>. Again, this file name should be adjusted. To run this julia script for 50 runs and hmax=3, do <code>julia runSNaQ.jl 3 50</code>.</p>
+<div class="codehilite"><pre><span></span><span class="c">#!/usr/bin/env julia</span>
+
+<span class="c"># file &quot;runSNaQ.jl&quot;. run in the shell like this in general:</span>
+<span class="c"># julia runSNaQ.jl hvalue nruns</span>
+<span class="c"># example for h=2 and default 10 runs:</span>
+<span class="c"># julia runSNaQ.jl 2</span>
+<span class="c"># or example for h=3 and 50 runs:</span>
+<span class="c"># julia runSNaQ.jl 3 50</span>
+
+<span class="n">length</span><span class="p">(</span><span class="nb">ARGS</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">||</span>
+    <span class="n">error</span><span class="p">(</span><span class="s">&quot;need 1 or 2 arguments: # reticulations (h) and # runs (optional, 10 by default)&quot;</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="nb">ARGS</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">nruns</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">if</span> <span class="n">length</span><span class="p">(</span><span class="nb">ARGS</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
+    <span class="n">nruns</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="nb">ARGS</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">end</span>
+<span class="n">outputfile</span> <span class="o">=</span> <span class="n">string</span><span class="p">(</span><span class="s">&quot;net&quot;</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="s">&quot;_&quot;</span><span class="p">,</span> <span class="n">nruns</span><span class="p">,</span> <span class="s">&quot;runs&quot;</span><span class="p">)</span> <span class="c"># example: &quot;net2_10runs&quot;</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">1234</span> <span class="o">+</span> <span class="n">h</span> <span class="c"># change as desired! Best to have it different for different h</span>
+<span class="n">info</span><span class="p">(</span><span class="s">&quot;will run SNaQ with h=&quot;</span><span class="p">,</span><span class="n">h</span><span class="p">,</span>
+    <span class="s">&quot;, # of runs=&quot;</span><span class="p">,</span><span class="n">nruns</span><span class="p">,</span>
+    <span class="s">&quot;, seed=&quot;</span><span class="p">,</span><span class="n">seed</span><span class="p">,</span>
+    <span class="s">&quot;, output will go to: &quot;</span><span class="p">,</span> <span class="n">outputfile</span><span class="p">)</span>
+
+<span class="n">addprocs</span><span class="p">(</span><span class="n">nruns</span><span class="p">)</span>
+<span class="nd">@everywhere</span> <span class="k">using</span> <span class="n">PhyloNetworks</span>
+<span class="n">net0</span> <span class="o">=</span> <span class="n">readTopology</span><span class="p">(</span><span class="s">&quot;astraltree.tre&quot;</span><span class="p">);</span>
+<span class="n">df_sp</span> <span class="o">=</span> <span class="n">CSV</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;tableCF_speciesNames.csv&quot;</span><span class="p">,</span> <span class="n">categorical</span><span class="o">=</span><span class="kc">false</span><span class="p">);</span>
+<span class="n">d_sp</span> <span class="o">=</span> <span class="n">readTableCF!</span><span class="p">(</span><span class="n">df_sp</span><span class="p">);</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">snaq!</span><span class="p">(</span><span class="n">net0</span><span class="p">,</span> <span class="n">d_sp</span><span class="p">,</span> <span class="n">hmax</span><span class="o">=</span><span class="n">h</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">outputfile</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="n">nruns</span><span class="p">)</span>
+</pre></div>
+
+
+<p>When julia is called on a script, whatever comes after "julia scriptname" is given to julia in an array of values. This array is called <code>ARGS</code>. So if we call a script like this: <code>julia runSNaQ.jl 2</code> then the script will know the arguments through <code>ARGS</code>, which would contain a single element, <code>"2"</code>. This first element is just a string, at this stage. We want to use it as a number, so we ask julia to parse the string into an integer.</p>
+<p><strong>Second</strong>: we need a "submit" file to ask a job scheduler like <a href="https://slurm.schedmd.com">slurm</a> to submit our julia script to a cluster. In the submit file below, the first 5 lines set things up for slurm. They are most likely to be specific to your cluster. The main idea here is to use a slurm "array" from 0 to 3, to run our julia script multiple times, 4 times actually: from hmax=0 to hmax=3. Each would do 30 runs. Then log out of the cluster and go for coffee... 😃</p>
+<div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH -o path/to/slurm/log/file/runsnaq_slurm%a.log</span>
+<span class="c1">#SBATCH -J runsnaq</span>
+<span class="c1">#SBATCH --array=0-3</span>
+<span class="c1">#SBATCH -n 120</span>
+<span class="c1">## --array: to run multiple instances of this script,</span>
+<span class="c1">##          one for each value in the array</span>
+<span class="c1">## -J job name</span>
+<span class="c1">## -n number of cores</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;slurm task ID = </span><span class="nv">$SLURM_ARRAY_TASK_ID</span><span class="s2"> used as hmax&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;start of SNaQ parallel runs on </span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">&quot;</span>
+<span class="c1"># finally: launch the julia script, using Julia executable appropriate for slurm, with full paths:</span>
+/workspace/software/bin/julia --history-file<span class="o">=</span>no -- runSNaQ.jl <span class="nv">$SLURM_ARRAY_TASK_ID</span> <span class="m">30</span> &gt; net<span class="nv">$SLURM_ARRAY_TASK_ID_30runs</span>.screenlog <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="nb">echo</span> <span class="s2">&quot;end of SNaQ run ...&quot;</span>
+</pre></div>
+
+
 <p><a id='choosing-the-number-of-hybridizations-1'></a></p>
 <h2 id="choosing-the-number-of-hybridizations">choosing the number of hybridizations</h2>
 <p>Each network has a <code>loglik</code> attribute, which is its pseudo deviance: twice the negative log-likelihood up to a constant (the constant is such that the score is 0 if the network fits the data perfectly). The lower the better. We can plot these scores across hybrid values:</p>
@@ -785,7 +843,7 @@ with -loglik 53.53150526187732
 <p><img alt="net1_4" src="../../assets/figures/snaqplot_net1_4.svg" /></p>
 <p><a id='Re-rooting-networks-1'></a></p>
 <h2 id="re-rooting-networks">Re-rooting networks</h2>
-<p>SNaQ infers an unrooted semi-directed network. The direction of hybrid edges can be inferred, but the direction of tree edges cannot be inferred. To obtain a representative visualization, it is best to root the network first, using one or more outgroup. Go to <a href="../dist_reroot/#Comparing-and-manipulating-networks-1">Comparing and manipulating networks</a> for this.</p>
+<p>SNaQ infers an unrooted semi-directed network. The direction of hybrid edges can be inferred, but the direction of tree edges cannot be inferred. To obtain a representative visualization, it is best to root the network first, using one or more outgroup. Go to <a href="../dist_reroot/#Re-rooting-trees-and-networks-1">Re-rooting trees and networks</a> for this. If your outgroup conflicts with the direction of reticulations in the estimated network, see section <a href="../fixednetworkoptim/#Candidate-networks-compatible-with-a-known-outgroup-1">Candidate networks compatible with a known outgroup</a>.</p>
 <p><a id='Candidate-Network-Evaluation-1'></a></p>
 <h2 id="candidate-network-evaluation">Candidate Network Evaluation</h2>
 <p>From a set of candidate networks, one might simply need to score of each network to pick the best. Here, the score is the negative log pseudo-likelihood, and the lower the better. See the section to get the score of <a href="../fixednetworkoptim/#Candidate-Networks-1">Candidate Networks</a>.</p>
@@ -870,7 +928,7 @@ with -loglik 53.53150526187732
     
       <script src="../../assets/javascripts/application.a59e2a89.js"></script>
       
-      <script>app.initialize({version:"0.17.4",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
       
         <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       

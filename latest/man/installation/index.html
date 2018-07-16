@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.2">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.2">
     
     
       
@@ -702,16 +702,16 @@ PhyloNetworks.Quartet
 julia&gt; net = readTopology(str);
 
 julia&gt; printEdges(net)
-Edge    Node1   Node2   InCycle containRoot istIdentitiable Length  isHybrid    Gamma   isMajor
-1   1   -2  -1  true        false       NA  false       1.0 true
-2   2   -4  -1  true        false       NA  false       1.0 true
-3   -4  3   -1  false       false       NA  true        NA  false
-4   -4  -3  -1  true        true        NA  false       1.0 true
-5   4   -5  -1  true        false       NA  false       1.0 true
-6   5   3   -1  true        false       NA  false       1.0 true
-7   3   -5  -1  false       true        NA  true        NA  true
-8   -5  -3  -1  true        true        NA  false       1.0 true
-9   -3  -2  -1  true        true        NA  false       1.0 true
+edge parent child  length  hybrid isMajor gamma   containRoot inCycle istIdentitiable
+1    -2     1              false  true    1       true        -1      false
+2    -4     2              false  true    1       true        -1      false
+3    -4     3              true   false           false       -1      false
+4    -3     -4             false  true    1       true        -1      true 
+5    -5     4              false  true    1       true        -1      false
+6    3      5              false  true    1       true        -1      false
+7    -5     3              true   true            false       -1      true 
+8    -3     -5             false  true    1       true        -1      true 
+9    -2     -3             false  true    1       true        -1      true
 </pre></div>
 
 
@@ -721,16 +721,16 @@ Edge    Node1   Node2   InCycle containRoot istIdentitiable Length  isHybrid    
 julia&gt; setGamma!(net.edge[3],0.8)
 
 julia&gt; printEdges(net)
-Edge    Node1   Node2   InCycle containRoot istIdentitiable Length  isHybrid    Gamma   isMajor
-1   1   -2  -1  true        false       1.9 false       1.0 true
-2   2   -4  -1  true        false       NA  false       1.0 true
-3   -4  3   -1  false       false       NA  true        0.8 true
-4   -4  -3  -1  true        true        NA  false       1.0 true
-5   4   -5  -1  true        false       NA  false       1.0 true
-6   5   3   -1  true        false       NA  false       1.0 true
-7   3   -5  -1  false       true        NA  true        0.2 false
-8   -5  -3  -1  true        true        NA  false       1.0 true
-9   -3  -2  -1  true        true        NA  false       1.0 true
+edge parent child  length  hybrid isMajor gamma   containRoot inCycle istIdentitiable
+1    -2     1      1.900   false  true    1       true        -1      false
+2    -4     2              false  true    1       true        -1      false
+3    -4     3              true   true    0.8     false       -1      false
+4    -3     -4             false  true    1       true        -1      true 
+5    -5     4              false  true    1       true        -1      false
+6    3      5              false  true    1       true        -1      false
+7    -5     3              true   false   0.2     false       -1      true 
+8    -3     -5             false  true    1       true        -1      true 
+9    -2     -3             false  true    1       true        -1      true
 </pre></div>
 
 
@@ -812,7 +812,7 @@ Edge    Node1   Node2   InCycle containRoot istIdentitiable Length  isHybrid    
     
       <script src="../../assets/javascripts/application.a59e2a89.js"></script>
       
-      <script>app.initialize({version:"0.17.4",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
       
         <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       

@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.2">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.2">
     
     
       
@@ -380,6 +380,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#candidate-networks-compatible-with-a-known-outgroup" title="Candidate networks compatible with a known outgroup" class="md-nav__link">
+    Candidate networks compatible with a known outgroup
+  </a>
+  
+</li>
+      
       
       
       
@@ -526,6 +533,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#candidate-networks-compatible-with-a-known-outgroup" title="Candidate networks compatible with a known outgroup" class="md-nav__link">
+    Candidate networks compatible with a known outgroup
+  </a>
+  
+</li>
+      
       
       
       
@@ -592,6 +606,113 @@ julia&gt; truenet.loglik
 
 
 <p>This function is not maximizing the pseudolikelihood, it is simply computing the pseudolikelihood (or deviance) for the given branch lengths and probabilities of inheritance. At the moment, both of these functions require that the given network is of level 1 (cycles don't overlap).</p>
+<p><a id='Candidate-networks-compatible-with-a-known-outgroup-1'></a></p>
+<h2 id="candidate-networks-compatible-with-a-known-outgroup">Candidate networks compatible with a known outgroup</h2>
+<p>If the network was estimated via <code>snaq!</code>, it might turn out to be impossible to root our estimated network with a known outgroup (see section <a href="../dist_reroot/#What-if-the-root-conflicts-with-the-direction-of-a-reticulation?-1">What if the root conflicts with the direction of a reticulation?</a>.) At this time, <code>snaq!</code> does not impose any rooting constraint on the network: the search for the lowest score considers all level-1 networks, including those that are incompatible with a known outgroup. (The monophyly of outgroups is not imposed either, like in many other methods.)</p>
+<p>If the estimated network cannot be rooted with the known outgroup, we can check the <code>.networks</code> output file. It has a list of networks that are slight modifications of the best network, where the modifications changed the direction of one reticulation at a time. For each modified network, the score was calculated. So if we find in this list a modified network that has a score close to that of the best network, and that can be re-rooted with our known root position, then this modified network is a better candidate than the network with the best score.</p>
+<p>Below is what the <code>net1.networks</code> file looks like, after performing the analysis in the section <a href="../snaq_plot/#Network-Estimation-1">Network Estimation</a>. Scroll to the right to see the scores.</p>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="nt">C</span><span class="o">,</span><span class="nt">D</span><span class="o">,((</span><span class="nt">O</span><span class="o">,(</span><span class="nt">E</span><span class="o">,</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">19558838614943078</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">31352437658618976</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">6640664399202987</span><span class="o">,(</span><span class="nt">B</span><span class="o">,(</span><span class="nt">A</span><span class="o">)</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">8044116138505693</span><span class="o">)</span><span class="p">:</span><span class="nd">10</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span><span class="p">:</span><span class="nd">10</span><span class="p">.</span><span class="nc">0</span><span class="o">);,</span> <span class="nt">with</span> <span class="nt">-loglik</span> <span class="nt">28</span><span class="p">.</span><span class="nc">31506721890958</span> <span class="o">(</span><span class="nt">best</span> <span class="nt">network</span> <span class="nt">found</span><span class="o">,</span> <span class="nt">remaining</span> <span class="nt">sorted</span> <span class="nt">by</span> <span class="nt">log-pseudolik</span><span class="o">;</span> <span class="nt">the</span> <span class="nt">smaller</span><span class="o">,</span> <span class="nt">the</span> <span class="nt">better</span><span class="o">)</span>
+<span class="o">(</span><span class="nt">C</span><span class="o">,</span><span class="nt">D</span><span class="o">,((</span><span class="nt">O</span><span class="o">,(</span><span class="nt">E</span><span class="o">)</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">8150784689693145</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">9336405757682176</span><span class="o">,(</span><span class="nt">B</span><span class="o">,(</span><span class="nt">A</span><span class="o">,</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">18492153103068557</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">25386142779877724</span><span class="o">)</span><span class="p">:</span><span class="nd">1</span><span class="p">.</span><span class="nc">8758156446611114</span><span class="o">)</span><span class="p">:</span><span class="nd">10</span><span class="p">.</span><span class="nc">0</span><span class="o">);,</span> <span class="nt">with</span> <span class="nt">-loglik</span> <span class="nt">31</span><span class="p">.</span><span class="nc">535560380783814</span>
+<span class="o">(</span><span class="nt">B</span><span class="o">,</span><span class="p">#</span><span class="nn">H7</span><span class="p">:</span><span class="nd">9</span><span class="p">.</span><span class="nc">90999345612101</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">2555404440833535</span><span class="o">,(</span><span class="nt">A</span><span class="o">,(</span><span class="nt">E</span><span class="o">,(</span><span class="nt">O</span><span class="o">,((</span><span class="nt">C</span><span class="o">,</span><span class="nt">D</span><span class="o">)</span><span class="p">:</span><span class="nd">10</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span><span class="p">#</span><span class="nn">H7</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">3419231810962026</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">7444595559166465</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">19994859441332047</span><span class="o">)</span><span class="p">:</span><span class="nd">2</span><span class="p">.</span><span class="nc">5014911511063644</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">7957621793330066</span><span class="o">);,</span> <span class="nt">with</span> <span class="nt">-loglik</span> <span class="nt">56</span><span class="p">.</span><span class="nc">64548310161462</span>
+<span class="o">(</span><span class="nt">C</span><span class="o">,</span><span class="nt">D</span><span class="o">,((</span><span class="nt">O</span><span class="o">,(</span><span class="nt">E</span><span class="o">,((</span><span class="nt">B</span><span class="o">)</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">7957543284159452</span><span class="o">,</span><span class="nt">A</span><span class="o">)</span><span class="p">:</span><span class="nd">4</span><span class="p">.</span><span class="nc">786202415937916</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">004527712280136759</span><span class="o">)</span><span class="p">:</span><span class="nd">1</span><span class="p">.</span><span class="nc">7952610454570868</span><span class="o">,</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">20424567158405482</span><span class="o">)</span><span class="p">:</span><span class="nd">10</span><span class="p">.</span><span class="nc">0</span><span class="o">);,</span> <span class="nt">with</span> <span class="nt">-loglik</span> <span class="nt">67</span><span class="p">.</span><span class="nc">17775727492258</span>
+<span class="o">(</span><span class="nt">C</span><span class="o">,</span><span class="nt">D</span><span class="o">,(</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">32947301811471164</span><span class="o">,(</span><span class="nt">B</span><span class="o">,(</span><span class="nt">A</span><span class="o">,(</span><span class="nt">E</span><span class="o">,(</span><span class="nt">O</span><span class="o">)</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">6705269818852884</span><span class="o">)</span><span class="p">:</span><span class="nd">1</span><span class="p">.</span><span class="nc">371799259141243</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span><span class="p">:</span><span class="nd">6</span><span class="p">.</span><span class="nc">397073999864152</span><span class="o">)</span><span class="p">:</span><span class="nd">7</span><span class="p">.</span><span class="nc">677245926003807</span><span class="o">);,</span> <span class="nt">with</span> <span class="nt">-loglik</span> <span class="nt">199</span><span class="p">.</span><span class="nc">11401961057143</span>
+</pre></div>
+
+
+<p>We can read this file and look at its list of networks like this:</p>
+<div class="codehilite"><pre><span></span><span class="nt">julia</span><span class="o">&gt;</span> <span class="nt">file</span> <span class="o">=</span> <span class="s2">&quot;net1.networks&quot;</span><span class="o">;</span>
+
+<span class="nt">julia</span><span class="o">&gt;</span> <span class="err">#</span> <span class="nt">or</span> <span class="nt">use</span> <span class="nt">the</span> <span class="nt">example</span> <span class="nt">file</span> <span class="nt">available</span> <span class="nt">with</span> <span class="nt">the</span> <span class="nt">package</span><span class="o">:</span>
+       <span class="nt">file</span> <span class="o">=</span> <span class="nt">joinpath</span><span class="o">(</span><span class="nt">Pkg</span><span class="p">.</span><span class="nc">dir</span><span class="o">(</span><span class="s2">&quot;PhyloNetworks&quot;</span><span class="o">),</span><span class="s2">&quot;examples&quot;</span><span class="o">,</span><span class="s2">&quot;net1.networks&quot;</span><span class="o">);</span>
+
+<span class="nt">julia</span><span class="o">&gt;</span> <span class="nt">netlist</span> <span class="o">=</span> <span class="nt">readMultiTopology</span><span class="o">(</span><span class="nt">file</span><span class="o">)</span> <span class="err">#</span> <span class="nt">read</span> <span class="nt">the</span> <span class="nt">full</span> <span class="nt">list</span> <span class="nt">of</span> <span class="nt">networks</span> <span class="nt">in</span> <span class="nt">that</span> <span class="nt">file</span>
+<span class="nt">5-element</span> <span class="nt">Array</span><span class="p">{</span><span class="err">PhyloNetworks.HybridNetwork,1</span><span class="p">}</span><span class="o">:</span>
+ <span class="nt">PhyloNetworks</span><span class="p">.</span><span class="nc">HybridNetwork</span><span class="o">,</span> <span class="nt">Rooted</span> <span class="nt">Network</span>
+<span class="nt">12</span> <span class="nt">edges</span>
+<span class="nt">12</span> <span class="nt">nodes</span><span class="o">:</span> <span class="nt">6</span> <span class="nt">tips</span><span class="o">,</span> <span class="nt">1</span> <span class="nt">hybrid</span> <span class="nt">nodes</span><span class="o">,</span> <span class="nt">5</span> <span class="nt">internal</span> <span class="nt">tree</span> <span class="nt">nodes</span><span class="o">.</span>
+<span class="nt">tip</span> <span class="nt">labels</span><span class="o">:</span> <span class="nt">C</span><span class="o">,</span> <span class="nt">D</span><span class="o">,</span> <span class="nt">O</span><span class="o">,</span> <span class="nt">E</span><span class="o">,</span> <span class="o">...</span>
+<span class="o">(</span><span class="nt">C</span><span class="o">,</span><span class="nt">D</span><span class="o">,((</span><span class="nt">O</span><span class="o">,(</span><span class="nt">E</span><span class="o">,</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">196</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">314</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">664</span><span class="o">,(</span><span class="nt">B</span><span class="o">,(</span><span class="nt">A</span><span class="o">)</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">804</span><span class="o">)</span><span class="p">:</span><span class="nd">10</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span><span class="p">:</span><span class="nd">10</span><span class="p">.</span><span class="nc">0</span><span class="o">);</span>
+
+ <span class="nt">PhyloNetworks</span><span class="p">.</span><span class="nc">HybridNetwork</span><span class="o">,</span> <span class="nt">Rooted</span> <span class="nt">Network</span>
+<span class="nt">12</span> <span class="nt">edges</span>
+<span class="nt">12</span> <span class="nt">nodes</span><span class="o">:</span> <span class="nt">6</span> <span class="nt">tips</span><span class="o">,</span> <span class="nt">1</span> <span class="nt">hybrid</span> <span class="nt">nodes</span><span class="o">,</span> <span class="nt">5</span> <span class="nt">internal</span> <span class="nt">tree</span> <span class="nt">nodes</span><span class="o">.</span>
+<span class="nt">tip</span> <span class="nt">labels</span><span class="o">:</span> <span class="nt">C</span><span class="o">,</span> <span class="nt">D</span><span class="o">,</span> <span class="nt">O</span><span class="o">,</span> <span class="nt">E</span><span class="o">,</span> <span class="o">...</span>
+<span class="o">(</span><span class="nt">C</span><span class="o">,</span><span class="nt">D</span><span class="o">,((</span><span class="nt">O</span><span class="o">,(</span><span class="nt">E</span><span class="o">)</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">815</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">934</span><span class="o">,(</span><span class="nt">B</span><span class="o">,(</span><span class="nt">A</span><span class="o">,</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">185</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">254</span><span class="o">)</span><span class="p">:</span><span class="nd">1</span><span class="p">.</span><span class="nc">876</span><span class="o">)</span><span class="p">:</span><span class="nd">10</span><span class="p">.</span><span class="nc">0</span><span class="o">);</span>
+
+ <span class="nt">PhyloNetworks</span><span class="p">.</span><span class="nc">HybridNetwork</span><span class="o">,</span> <span class="nt">Rooted</span> <span class="nt">Network</span>
+<span class="nt">12</span> <span class="nt">edges</span>
+<span class="nt">12</span> <span class="nt">nodes</span><span class="o">:</span> <span class="nt">6</span> <span class="nt">tips</span><span class="o">,</span> <span class="nt">1</span> <span class="nt">hybrid</span> <span class="nt">nodes</span><span class="o">,</span> <span class="nt">5</span> <span class="nt">internal</span> <span class="nt">tree</span> <span class="nt">nodes</span><span class="o">.</span>
+<span class="nt">tip</span> <span class="nt">labels</span><span class="o">:</span> <span class="nt">B</span><span class="o">,</span> <span class="nt">A</span><span class="o">,</span> <span class="nt">E</span><span class="o">,</span> <span class="nt">O</span><span class="o">,</span> <span class="o">...</span>
+<span class="o">(</span><span class="nt">B</span><span class="o">,</span><span class="p">#</span><span class="nn">H7</span><span class="p">:</span><span class="nd">9</span><span class="p">.</span><span class="nc">91</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">256</span><span class="o">,(</span><span class="nt">A</span><span class="o">,(</span><span class="nt">E</span><span class="o">,(</span><span class="nt">O</span><span class="o">,((</span><span class="nt">C</span><span class="o">,</span><span class="nt">D</span><span class="o">)</span><span class="p">:</span><span class="nd">10</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span><span class="p">#</span><span class="nn">H7</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">342</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">744</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">2</span><span class="o">)</span><span class="p">:</span><span class="nd">2</span><span class="p">.</span><span class="nc">501</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">796</span><span class="o">);</span>
+
+ <span class="nt">PhyloNetworks</span><span class="p">.</span><span class="nc">HybridNetwork</span><span class="o">,</span> <span class="nt">Rooted</span> <span class="nt">Network</span>
+<span class="nt">12</span> <span class="nt">edges</span>
+<span class="nt">12</span> <span class="nt">nodes</span><span class="o">:</span> <span class="nt">6</span> <span class="nt">tips</span><span class="o">,</span> <span class="nt">1</span> <span class="nt">hybrid</span> <span class="nt">nodes</span><span class="o">,</span> <span class="nt">5</span> <span class="nt">internal</span> <span class="nt">tree</span> <span class="nt">nodes</span><span class="o">.</span>
+<span class="nt">tip</span> <span class="nt">labels</span><span class="o">:</span> <span class="nt">C</span><span class="o">,</span> <span class="nt">D</span><span class="o">,</span> <span class="nt">O</span><span class="o">,</span> <span class="nt">E</span><span class="o">,</span> <span class="o">...</span>
+<span class="o">(</span><span class="nt">C</span><span class="o">,</span><span class="nt">D</span><span class="o">,((</span><span class="nt">O</span><span class="o">,(</span><span class="nt">E</span><span class="o">,((</span><span class="nt">B</span><span class="o">)</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">796</span><span class="o">,</span><span class="nt">A</span><span class="o">)</span><span class="p">:</span><span class="nd">4</span><span class="p">.</span><span class="nc">786</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">005</span><span class="o">)</span><span class="p">:</span><span class="nd">1</span><span class="p">.</span><span class="nc">795</span><span class="o">,</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">204</span><span class="o">)</span><span class="p">:</span><span class="nd">10</span><span class="p">.</span><span class="nc">0</span><span class="o">);</span>
+
+ <span class="nt">PhyloNetworks</span><span class="p">.</span><span class="nc">HybridNetwork</span><span class="o">,</span> <span class="nt">Rooted</span> <span class="nt">Network</span>
+<span class="nt">12</span> <span class="nt">edges</span>
+<span class="nt">12</span> <span class="nt">nodes</span><span class="o">:</span> <span class="nt">6</span> <span class="nt">tips</span><span class="o">,</span> <span class="nt">1</span> <span class="nt">hybrid</span> <span class="nt">nodes</span><span class="o">,</span> <span class="nt">5</span> <span class="nt">internal</span> <span class="nt">tree</span> <span class="nt">nodes</span><span class="o">.</span>
+<span class="nt">tip</span> <span class="nt">labels</span><span class="o">:</span> <span class="nt">C</span><span class="o">,</span> <span class="nt">D</span><span class="o">,</span> <span class="nt">B</span><span class="o">,</span> <span class="nt">A</span><span class="o">,</span> <span class="o">...</span>
+<span class="o">(</span><span class="nt">C</span><span class="o">,</span><span class="nt">D</span><span class="o">,(</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">329</span><span class="o">,(</span><span class="nt">B</span><span class="o">,(</span><span class="nt">A</span><span class="o">,(</span><span class="nt">E</span><span class="o">,(</span><span class="nt">O</span><span class="o">)</span><span class="p">#</span><span class="nn">H7</span><span class="o">:</span><span class="p">::</span><span class="nd">0</span><span class="p">.</span><span class="nc">671</span><span class="o">)</span><span class="p">:</span><span class="nd">1</span><span class="p">.</span><span class="nc">372</span><span class="o">)</span><span class="p">:</span><span class="nd">0</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span><span class="p">:</span><span class="nd">6</span><span class="p">.</span><span class="nc">397</span><span class="o">)</span><span class="p">:</span><span class="nd">7</span><span class="p">.</span><span class="nc">677</span><span class="o">);</span>
+</pre></div>
+
+
+<p>Next, we would like to extract the network scores from the file. Below is a one-liner to do this (we make Julia send a <code>sed</code> command to the shell –sorry, Mac or Linux for this.)</p>
+<div class="codehilite"><pre><span></span>julia&gt; scoresInString = readstring(`sed -E &#39;s/.+with -loglik ([0-9]+.[0-9]+).+/\1/&#39; $file`)
+&quot;28.31506721890958\n31.53556038078381\n56.6454831016146\n67.1777572749225\n199.1140196105714\n&quot;
+
+julia&gt; scores = parse.(Float64, split(scoresInString))
+5-element Array{Float64,1}:
+  28.3151
+  31.5356
+  56.6455
+  67.1778
+ 199.114
+
+julia&gt; # next: update the &quot;loglik&quot; of each network with the score read from the file
+       for i in eachindex(netlist)
+          netlist[i].loglik = scores[i]
+          println(&quot;net $i in the list: score = &quot;,scores[i])
+       end
+net 1 in the list: score = 28.31506721890958
+net 2 in the list: score = 31.53556038078381
+net 3 in the list: score = 56.6454831016146
+net 4 in the list: score = 67.1777572749225
+net 5 in the list: score = 199.1140196105714
+</pre></div>
+
+
+<p>The first network in the list is the best network returned by <code>snaq!</code>. We see that the second network has a score that's not too far, but the other networks have worse scores. The best network and its best modification (second network in the list) are shown below. We chose to show edge numbers, to use them later to re-root the networks.</p>
+<div class="codehilite"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">netlist</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">showEdgeNumber</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">tipOffset</span><span class="o">=</span><span class="mf">0.1</span><span class="p">);</span>
+<span class="n">R</span><span class="s">&quot;mtext(&#39;best net, score=28.3&#39;, line=-1)&quot;</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">netlist</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">showEdgeNumber</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">tipOffset</span><span class="o">=</span><span class="mf">0.1</span><span class="p">);</span>
+<span class="n">R</span><span class="s">&quot;mtext(&#39;direction modified, score=31.5&#39;, line=-1)&quot;</span><span class="p">;</span>
+</pre></div>
+
+
+<p><img alt="othernets before reroot" src="../../assets/figures/fixednetworkoptim_othernets1.svg" /></p>
+<p>Now imagine that our outgroup is taxon A.</p>
+<ul>
+<li>best network: we would get a "RootMismatch" error if we tried to set the root on the external edge 9 to A, with <code>rootatnode!(netlist[1], "A")</code> (see section <a href="../dist_reroot/#What-if-the-root-conflicts-with-the-direction-of-a-reticulation?-1">What if the root conflicts with the direction of a reticulation?</a>). But we could root the best network on the major parent edge to A, edge 10 (rooted network on the left below).</li>
+<li>For the second best network in our list, there are 2 ways to root it with A: on the external edge 8 to A (top right), or on its parent edge 10 (bottom right). These 2 options give quite different rooted versions of the network, one of which requires the existence of an unsampled taxon, sister to BOECD, that would have contributed to introgression into an ancestor of E. The second rooted version says that an ancestor of (or sister to) A contributed to the introgression into the ancestor of E. A is an outgroup in both cases, but the second case is more parsimonious, in the sense that it does not require the existence of an unsampled taxon.</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="n">rootonedge!</span><span class="p">(</span><span class="n">netlist</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">10</span><span class="p">);</span> <span class="c"># root best net to make A outgroup</span>
+<span class="n">rotate!</span><span class="p">(</span><span class="n">netlist</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mi">4</span><span class="p">);</span> <span class="c"># to &#39;un-cross&#39; edges</span>
+<span class="n">rotate!</span><span class="p">(</span><span class="n">netlist</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mi">6</span><span class="p">);</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">netlist</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">tipOffset</span><span class="o">=</span><span class="mf">0.1</span><span class="p">);</span>
+<span class="n">R</span><span class="s">&quot;mtext(&#39;best net, score=28.3&#39;, line=-1)&quot;</span><span class="p">;</span>
+<span class="n">rootatnode!</span><span class="p">(</span><span class="n">netlist</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s">&quot;A&quot;</span><span class="p">);</span> <span class="c"># net with modified direction: first way to make A outgroup</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">netlist</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">tipOffset</span><span class="o">=</span><span class="mf">0.1</span><span class="p">);</span>
+<span class="n">R</span><span class="s">&quot;mtext(&#39;second best in list, score=31.5</span><span class="se">\n</span><span class="s">requires unsampled population&#39;, line=-2)&quot;</span><span class="p">;</span>
+<span class="n">rootonedge!</span><span class="p">(</span><span class="n">netlist</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">10</span><span class="p">)</span> <span class="c"># net with modified direction: second way to make A outgroup</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">netlist</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">:</span><span class="n">R</span><span class="p">,</span> <span class="n">showGamma</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">tipOffset</span><span class="o">=</span><span class="mf">0.1</span><span class="p">);</span>
+<span class="n">R</span><span class="s">&quot;mtext(&#39;second best in list, score=31.5</span><span class="se">\n</span><span class="s">different root position&#39;, line=-2)&quot;</span><span class="p">;</span>
+</pre></div>
+
+
+<p><img alt="othernets after reroot" src="../../assets/figures/fixednetworkoptim_othernets2.svg" /></p>
                 
                   
                 
@@ -665,7 +786,7 @@ julia&gt; truenet.loglik
     
       <script src="../../assets/javascripts/application.a59e2a89.js"></script>
       
-      <script>app.initialize({version:"0.17.4",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
       
         <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       
