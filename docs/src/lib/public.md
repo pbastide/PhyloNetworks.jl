@@ -81,6 +81,8 @@ topologyQPseudolik!
 fittedQuartetCF
 bootsnaq
 calibrateFromPairwiseDistances!
+ticr
+ticr!
 ```
 ## network Comparisons
 
@@ -129,6 +131,7 @@ nStates
 Q
 P
 randomTrait
+fitDiscrete
 ```
 
 ```@meta
