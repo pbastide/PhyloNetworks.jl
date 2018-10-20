@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.2">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.4">
     
     
       
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.ba0fd1a6.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.6079476c.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
       
       
         
@@ -209,11 +209,11 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <span class="md-nav__button md-logo">
+    <a href="../.." title="PhyloNetworks.jl" class="md-nav__button md-logo">
       
         <img src="../../snaq_small.png" width="48" height="48">
       
-    </span>
+    </a>
     PhyloNetworks.jl
   </label>
   
@@ -415,6 +415,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#model-and-variance-matrix" title="Model and Variance Matrix" class="md-nav__link">
+    Model and Variance Matrix
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#trait-simulation" title="Trait simulation" class="md-nav__link">
     Trait simulation
   </a>
@@ -521,6 +528,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../parsimony/" title="Parsimony on networks" class="md-nav__link">
+      Parsimony on networks
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -593,6 +612,13 @@
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#model-and-variance-matrix" title="Model and Variance Matrix" class="md-nav__link">
+    Model and Variance Matrix
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#trait-simulation" title="Trait simulation" class="md-nav__link">
@@ -728,6 +754,27 @@
 
 
 <p><img alt="truenet" src="../../assets/figures/truenet.svg" /></p>
+<p><a id='Model-and-Variance-Matrix-1'></a></p>
+<h2 id="model-and-variance-matrix">Model and Variance Matrix</h2>
+<p>Assuming that the network is known and that the continuous traits evolve like a Brownian Motion (BM) in time, it is possible to compute the expected variance covariance matrix between tip measurements. This can be done using function <a href="../../lib/public/#PhyloNetworks.vcv"><code>vcv</code></a>, whose syntax is inspired from the well known corresponding <a href="https://CRAN.R-project.org/package=ape"><code>ape</code></a> function.</p>
+<div class="codehilite"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">vcv</span><span class="p">(</span><span class="n">truenet</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>6×6 DataFrames.DataFrame
+│ Row │ D    │ C    │ A     │ B     │ E    │ O    │
+├─────┼──────┼──────┼───────┼───────┼──────┼──────┤
+│ 1   │ 11.2 │ 10.8 │ 4.8   │ 4.8   │ 2.0  │ 0.0  │
+│ 2   │ 10.8 │ 11.2 │ 4.8   │ 4.8   │ 2.0  │ 0.0  │
+│ 3   │ 4.8  │ 4.8  │ 8.596 │ 7.796 │ 3.86 │ 0.0  │
+│ 4   │ 4.8  │ 4.8  │ 7.796 │ 8.596 │ 3.86 │ 0.0  │
+│ 5   │ 2.0  │ 2.0  │ 3.86  │ 3.86  │ 11.2 │ 0.0  │
+│ 6   │ 0.0  │ 0.0  │ 0.0   │ 0.0   │ 0.0  │ 11.2 │
+</pre></div>
+
+
+<p>The matrix is returned as a <code>DataFrame</code>, with columns named by the tips of the network to allow for easy identification.</p>
+<p>The computation of this matrix is based on the more general function <a href="../../lib/public/#PhyloNetworks.sharedPathMatrix"><code>sharedPathMatrix</code></a>. It is at the core of all the Phylogenetic Comparative Methods described below.</p>
 <p><a id='Trait-simulation-1'></a></p>
 <h2 id="trait-simulation">Trait simulation</h2>
 <p>We start by generating continuous traits to study. We simulate three traits on the network (two independent, one dependent), using a Brownian Motion (BM) model of trait evolution on the network. We start by choosing the parameters of the BM (ancestral mean and variance), by creating objects of class <a href="../../lib/public/#PhyloNetworks.ParamsBM"><code>ParamsBM</code></a><code>&lt;:ParamsProcess</code>.</p>
@@ -1207,7 +1254,7 @@ Model 2        5   2   -1 8.6247 -6.5373 -0.2419 0.9413 12.5272 0.0240
 <hr />
 <ol>
 <li id="fn:fnBastide2018">
-<p>Bastide, Solís-Lemus, Kriebel, Sparks, Ané (2018):               Phylogenetic Comparative Methods for Phylogenetic Networks with Reticulations.               Systematic Biology. doi:10.1093/sysbio/syy033&#160;<a class="footnote-backref" href="#fnref:fnBastide2018" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>Bastide, Solís-Lemus, Kriebel, Sparks, Ané (2018):               Phylogenetic Comparative Methods for Phylogenetic Networks with Reticulations.               Systematic Biology 67(5):800–820. doi:10.1093/sysbio/syy033&#160;<a class="footnote-backref" href="#fnref:fnBastide2018" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:fn3">
 <p>Pagel M (1999). Inferring the historical patterns of biological     evolution. Nature. 401: 877–884. doi:10.1038/44766&#160;<a class="footnote-backref" href="#fnref:fn3" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
@@ -1249,13 +1296,13 @@ Model 2        5   2   -1 8.6247 -6.5373 -0.2419 0.9413 12.5272 0.0240
           </a>
         
         
-          <a href="../../lib/public/" title="Public" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../parsimony/" title="Parsimony on networks" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Public
+                Parsimony on networks
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -1285,7 +1332,7 @@ Model 2        5   2   -1 8.6247 -6.5373 -0.2419 0.9413 12.5272 0.0240
       
     </div>
     
-      <script src="../../assets/javascripts/application.a59e2a89.js"></script>
+      <script src="../../assets/javascripts/application.30f6b8b1.js"></script>
       
       <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
       

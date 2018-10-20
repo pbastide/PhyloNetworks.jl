@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.2">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.4">
     
     
       
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.ba0fd1a6.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.6079476c.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
       
       
         
@@ -209,11 +209,11 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <span class="md-nav__button md-logo">
+    <a href="../.." title="PhyloNetworks.jl" class="md-nav__button md-logo">
       
         <img src="../../snaq_small.png" width="48" height="48">
       
-    </span>
+    </a>
     PhyloNetworks.jl
   </label>
   
@@ -460,6 +460,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../parsimony/" title="Parsimony on networks" class="md-nav__link">
+      Parsimony on networks
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -608,7 +620,6 @@
 <h2 id="re-rooting-trees-and-networks">Re-rooting trees and networks</h2>
 <p>We can re-root our networks with the outgroup, O, and then re-compare the ASTRAL tree and the SNaQ tree as rooted topologies (and find no difference):</p>
 <div class="codehilite"><pre><span></span>julia&gt; rootatnode!(astraltree, &quot;O&quot;)
-INFO: node 2 is a leaf. Will create a new node if needed, to set taxon &quot;O&quot; as outgroup.
 PhyloNetworks.HybridNetwork, Rooted Network
 10 edges
 11 nodes: 6 tips, 0 hybrid nodes, 5 internal tree nodes.
@@ -616,7 +627,6 @@ tip labels: E, O, C, D, ...
 (O,(((C,D):3.029,(B,A):1.324):0.464,E));
 
 julia&gt; rootatnode!(net0, &quot;O&quot;)
-INFO: node 5 is a leaf. Will create a new node if needed, to set taxon &quot;O&quot; as outgroup.
 PhyloNetworks.HybridNetwork, Rooted Network
 10 edges
 11 nodes: 6 tips, 0 hybrid nodes, 5 internal tree nodes.
@@ -685,7 +695,6 @@ julia&gt; hardwiredClusterDistance(astraltree, net0, true)
 <h2 id="extracting-the-major-tree">Extracting the major tree</h2>
 <p>We can also compare the networks estimated with h=0 (net0) and h=1 (net1):</p>
 <div class="codehilite"><pre><span></span><span class="nt">julia</span><span class="o">&gt;</span> <span class="nt">rootatnode</span><span class="o">!(</span><span class="nt">net1</span><span class="o">,</span> <span class="s2">&quot;O&quot;</span><span class="o">);</span> <span class="err">#</span> <span class="nt">the</span> <span class="o">;</span> <span class="nt">suppresses</span> <span class="nt">screen</span> <span class="nt">output</span>
-<span class="nt">INFO</span><span class="o">:</span> <span class="nt">node</span> <span class="nt">3</span> <span class="nt">is</span> <span class="nt">a</span> <span class="nt">leaf</span><span class="o">.</span> <span class="nt">Will</span> <span class="nt">create</span> <span class="nt">a</span> <span class="nt">new</span> <span class="nt">node</span> <span class="nt">if</span> <span class="nt">needed</span><span class="o">,</span> <span class="nt">to</span> <span class="nt">set</span> <span class="nt">taxon</span> <span class="s2">&quot;O&quot;</span> <span class="nt">as</span> <span class="nt">outgroup</span><span class="o">.</span>
 <span class="nt">PhyloNetworks</span><span class="p">.</span><span class="nc">HybridNetwork</span><span class="o">,</span> <span class="nt">Rooted</span> <span class="nt">Network</span>
 <span class="nt">13</span> <span class="nt">edges</span>
 <span class="nt">13</span> <span class="nt">nodes</span><span class="o">:</span> <span class="nt">6</span> <span class="nt">tips</span><span class="o">,</span> <span class="nt">1</span> <span class="nt">hybrid</span> <span class="nt">nodes</span><span class="o">,</span> <span class="nt">6</span> <span class="nt">internal</span> <span class="nt">tree</span> <span class="nt">nodes</span><span class="o">.</span>
@@ -862,7 +871,7 @@ tip labels: C, D, O, E, ...
       
     </div>
     
-      <script src="../../assets/javascripts/application.a59e2a89.js"></script>
+      <script src="../../assets/javascripts/application.30f6b8b1.js"></script>
       
       <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
       

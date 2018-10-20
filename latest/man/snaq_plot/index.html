@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.2">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.4">
     
     
       
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.ba0fd1a6.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.6079476c.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
       
       
         
@@ -209,11 +209,11 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <span class="md-nav__button md-logo">
+    <a href="../.." title="PhyloNetworks.jl" class="md-nav__button md-logo">
       
         <img src="../../snaq_small.png" width="48" height="48">
       
-    </span>
+    </a>
     PhyloNetworks.jl
   </label>
   
@@ -470,6 +470,18 @@
   <li class="md-nav__item">
     <a href="../trait_tree/" title="Continuous Trait Evolution" class="md-nav__link">
       Continuous Trait Evolution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../parsimony/" title="Parsimony on networks" class="md-nav__link">
+      Parsimony on networks
     </a>
   </li>
 
@@ -764,6 +776,7 @@ with -loglik 53.53150526187732
 <span class="n">addprocs</span><span class="p">(</span><span class="n">nruns</span><span class="p">)</span>
 <span class="nd">@everywhere</span> <span class="k">using</span> <span class="n">PhyloNetworks</span>
 <span class="n">net0</span> <span class="o">=</span> <span class="n">readTopology</span><span class="p">(</span><span class="s">&quot;astraltree.tre&quot;</span><span class="p">);</span>
+<span class="k">using</span> <span class="n">CSV</span>
 <span class="n">df_sp</span> <span class="o">=</span> <span class="n">CSV</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;tableCF_speciesNames.csv&quot;</span><span class="p">,</span> <span class="n">categorical</span><span class="o">=</span><span class="kc">false</span><span class="p">);</span>
 <span class="n">d_sp</span> <span class="o">=</span> <span class="n">readTableCF!</span><span class="p">(</span><span class="n">df_sp</span><span class="p">);</span>
 <span class="n">net</span> <span class="o">=</span> <span class="n">snaq!</span><span class="p">(</span><span class="n">net0</span><span class="p">,</span> <span class="n">d_sp</span><span class="p">,</span> <span class="n">hmax</span><span class="o">=</span><span class="n">h</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">outputfile</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="n">nruns</span><span class="p">)</span>
@@ -771,7 +784,7 @@ with -loglik 53.53150526187732
 
 
 <p>When julia is called on a script, whatever comes after "julia scriptname" is given to julia in an array of values. This array is called <code>ARGS</code>. So if we call a script like this: <code>julia runSNaQ.jl 2</code> then the script will know the arguments through <code>ARGS</code>, which would contain a single element, <code>"2"</code>. This first element is just a string, at this stage. We want to use it as a number, so we ask julia to parse the string into an integer.</p>
-<p><strong>Second</strong>: we need a "submit" file to ask a job scheduler like <a href="https://slurm.schedmd.com">slurm</a> to submit our julia script to a cluster. In the submit file below, the first 5 lines set things up for slurm. They are most likely to be specific to your cluster. The main idea here is to use a slurm "array" from 0 to 3, to run our julia script multiple times, 4 times actually: from hmax=0 to hmax=3. Each would do 30 runs. Then log out of the cluster and go for coffee... 😃</p>
+<p><strong>Second</strong>: we need a "submit" file to ask a job scheduler like <a href="https://slurm.schedmd.com">slurm</a> to submit our julia script to a cluster. In the submit file below, the first 5 lines set things up for slurm. They are most likely to be specific to your cluster. The main idea here is to use a slurm "array" from 0 to 3, to run our julia script multiple times, 4 times actually: from hmax=0 to hmax=3. Each would do 30 runs. Then log out of the cluster and go for coffee.</p>
 <div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1">#SBATCH -o path/to/slurm/log/file/runsnaq_slurm%a.log</span>
 <span class="c1">#SBATCH -J runsnaq</span>
@@ -926,7 +939,7 @@ with -loglik 53.53150526187732
       
     </div>
     
-      <script src="../../assets/javascripts/application.a59e2a89.js"></script>
+      <script src="../../assets/javascripts/application.30f6b8b1.js"></script>
       
       <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
       

@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.2">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.4">
     
     
       
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.ba0fd1a6.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.6079476c.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
       
       
         
@@ -209,11 +209,11 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <span class="md-nav__button md-logo">
+    <a href="../.." title="PhyloNetworks.jl" class="md-nav__button md-logo">
       
         <img src="../../snaq_small.png" width="48" height="48">
       
-    </span>
+    </a>
     PhyloNetworks.jl
   </label>
   
@@ -388,6 +388,18 @@
   <li class="md-nav__item">
     <a href="../../man/trait_tree/" title="Continuous Trait Evolution" class="md-nav__link">
       Continuous Trait Evolution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../man/parsimony/" title="Parsimony on networks" class="md-nav__link">
+      Parsimony on networks
     </a>
   </li>
 
@@ -666,6 +678,7 @@
 <li><a href="./#PhyloNetworks.Q"><code>PhyloNetworks.Q</code></a></li>
 <li><a href="./#PhyloNetworks.ancestralStateReconstruction"><code>PhyloNetworks.ancestralStateReconstruction</code></a></li>
 <li><a href="./#PhyloNetworks.biconnectedComponents"><code>PhyloNetworks.biconnectedComponents</code></a></li>
+<li><a href="./#PhyloNetworks.blobDecomposition"><code>PhyloNetworks.blobDecomposition</code></a></li>
 <li><a href="./#PhyloNetworks.bootsnaq"><code>PhyloNetworks.bootsnaq</code></a></li>
 <li><a href="./#PhyloNetworks.calibrateFromPairwiseDistances!"><code>PhyloNetworks.calibrateFromPairwiseDistances!</code></a></li>
 <li><a href="./#PhyloNetworks.cladewiseorder!"><code>PhyloNetworks.cladewiseorder!</code></a></li>
@@ -690,6 +703,7 @@
 <li><a href="./#PhyloNetworks.lambda_estim"><code>PhyloNetworks.lambda_estim</code></a></li>
 <li><a href="./#PhyloNetworks.majorTree"><code>PhyloNetworks.majorTree</code></a></li>
 <li><a href="./#PhyloNetworks.mapAllelesCFtable"><code>PhyloNetworks.mapAllelesCFtable</code></a></li>
+<li><a href="./#PhyloNetworks.maxParsimonyNet"><code>PhyloNetworks.maxParsimonyNet</code></a></li>
 <li><a href="./#PhyloNetworks.minorTreeAt"><code>PhyloNetworks.minorTreeAt</code></a></li>
 <li><a href="./#PhyloNetworks.mu_estim"><code>PhyloNetworks.mu_estim</code></a></li>
 <li><a href="./#PhyloNetworks.nStates"><code>PhyloNetworks.nStates</code></a></li>
@@ -733,6 +747,7 @@
 <li><a href="./#PhyloNetworks.topologyMaxQPseudolik!"><code>PhyloNetworks.topologyMaxQPseudolik!</code></a></li>
 <li><a href="./#PhyloNetworks.topologyQPseudolik!"><code>PhyloNetworks.topologyQPseudolik!</code></a></li>
 <li><a href="./#PhyloNetworks.treeEdgesBootstrap"><code>PhyloNetworks.treeEdgesBootstrap</code></a></li>
+<li><a href="./#PhyloNetworks.vcv"><code>PhyloNetworks.vcv</code></a></li>
 <li><a href="./#PhyloNetworks.writeMultiTopology"><code>PhyloNetworks.writeMultiTopology</code></a></li>
 <li><a href="./#PhyloNetworks.writeSubTree!"><code>PhyloNetworks.writeSubTree!</code></a></li>
 <li><a href="./#PhyloNetworks.writeTopology"><code>PhyloNetworks.writeTopology</code></a></li>
@@ -746,7 +761,7 @@
 
 
 <p><a href="./#PhyloNetworks.TraitSubstitutionModel"><code>TraitSubstitutionModel</code></a> for binary traits (with 2 states). Default labels are "0" and "1". α is the rate of transition from "0" to "1", and β from "1" to "0".</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L109-L115' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L109-L115' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.DataCF' href='#PhyloNetworks.DataCF'>#</a>
 <strong><code>PhyloNetworks.DataCF</code></strong> &mdash; <em>Type</em>.</p>
 <p><code>DataCF type</code></p>
@@ -759,7 +774,7 @@
 <li>repSpecies (taxon names that were repeated in table of CF or input gene trees: used inside snaq for multiple alleles case)</li>
 </ul>
 <p>The list of Quartet may be accessed with the attribute .quartet. If the input was a list of trees, the HybridNetwork's can be accessed with the attribute .tree. For example, if the DataCF object is named d, d.quartet[1] will show the first quartet and d.tree[1] will print the first input tree.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/types.jl#L241-L256' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/types.jl#L241-L256' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.EqualRatesSubstitutionModel' href='#PhyloNetworks.EqualRatesSubstitutionModel'>#</a>
 <strong><code>PhyloNetworks.EqualRatesSubstitutionModel</code></strong> &mdash; <em>Type</em>.</p>
 <div class="codehilite"><pre><span></span>EqualRatesSubstitutionModel(numberStates, α, labels)
@@ -767,7 +782,7 @@
 
 
 <p><a href="./#PhyloNetworks.TraitSubstitutionModel"><code>TraitSubstitutionModel</code></a> for traits with any number of states and equal substitution rates α between all states. Default labels are "1","2",...</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L243-L249' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L243-L249' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.HybridNetwork' href='#PhyloNetworks.HybridNetwork'>#</a>
 <strong><code>PhyloNetworks.HybridNetwork</code></strong> &mdash; <em>Type</em>.</p>
 <p><code>HybridNetwork type</code> Explicit network or tree with the following attributes:</p>
@@ -784,15 +799,21 @@
 <li>loglik (negative log pseudolik after estimation)</li>
 <li>isRooted (true or false)</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/types.jl#L102-L117' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/types.jl#L102-L117' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.ParamsBM' href='#PhyloNetworks.ParamsBM'>#</a>
 <strong><code>PhyloNetworks.ParamsBM</code></strong> &mdash; <em>Type</em>.</p>
-<p><code>ParamsBM &lt;: ParamsProcess</code></p>
+<div class="codehilite"><pre><span></span>ParamsBM &lt;: ParamsProcess
+</pre></div>
+
+
 <p>Type for a BM process on a network. Fields are <code>mu</code> (expectation), <code>sigma2</code> (variance), <code>randomRoot</code> (whether the root is random, default to <code>false</code>), and <code>varRoot</code> (if the root is random, the variance of the root, defalut to <code>NaN</code>).</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L764-L771' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L842-L849' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.PhyloNetworkLinearModel' href='#PhyloNetworks.PhyloNetworkLinearModel'>#</a>
 <strong><code>PhyloNetworks.PhyloNetworkLinearModel</code></strong> &mdash; <em>Type</em>.</p>
-<p><code>PhyloNetworkLinearModel&lt;:LinPredModel</code></p>
+<div class="codehilite"><pre><span></span>PhyloNetworkLinearModel&lt;:LinPredModel
+</pre></div>
+
+
 <p>Regression object for a phylogenetic regression. Result of fitting function <a href="./#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a>. Dominated by the <code>LinPredModel</code> class, from package <code>GLM</code>.</p>
 <p>The following StatsBase functions can be applied to it: <code>coef</code>, <code>nobs</code>, <code>vcov</code>, <code>stderror</code>, <code>confint</code>, <code>coeftable</code>, <code>dof_residual</code>, <code>dof</code>, <code>deviance</code>, <code>residuals</code>, <code>model_response</code>, <code>predict</code>, <code>loglikelihood</code>, <code>nulldeviance</code>, <code>nullloglikelihood</code>, <code>r2</code>, <code>adjr2</code>, <code>aic</code>, <code>aicc</code>, <code>bic</code>.</p>
 <p>The following StatsModels functions can also be applied to it: <code>ModelFrame</code>, <code>ModelMatrix</code>, <code>Formula</code>.</p>
@@ -800,7 +821,7 @@
 <p>If a Pagel's lambda model is fitted, the parameter can be retrieved with function <a href="./#PhyloNetworks.lambda_estim"><code>lambda_estim</code></a>.</p>
 <p>An ancestral state reconstruction can be performed from this fitted object using function: <a href="./#PhyloNetworks.ancestralStateReconstruction"><code>ancestralStateReconstruction</code></a>.</p>
 <p>The <code>PhyloNetworkLinearModel</code> object has fields: <code>lm</code>, <code>V</code>, <code>Vy</code>, <code>RL</code>, <code>Y</code>, <code>X</code>, <code>logdetVy</code>, <code>ind</code>, <code>msng</code>, <code>model</code>, <code>lambda</code>. Type in "?PhyloNetworkLinearModel.field" to get help on a specific field.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1032-L1057' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L1110-L1135' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.Quartet' href='#PhyloNetworks.Quartet'>#</a>
 <strong><code>PhyloNetworks.Quartet</code></strong> &mdash; <em>Type</em>.</p>
 <p><code>Quartet type</code></p>
@@ -813,17 +834,23 @@
 <li>ngenes (number of gene trees used to compute the observed CF: -1 if unknown)</li>
 <li>qnet (internal topological structure that saves the expCF after snaq estimation to emphasize that the expCF depend on a specific network, not the data)</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/types.jl#L202-L213' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/types.jl#L202-L213' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.ReconstructedStates' href='#PhyloNetworks.ReconstructedStates'>#</a>
 <strong><code>PhyloNetworks.ReconstructedStates</code></strong> &mdash; <em>Type</em>.</p>
-<p><code>ReconstructedStates</code></p>
+<div class="codehilite"><pre><span></span>ReconstructedStates
+</pre></div>
+
+
 <p>Type containing the inferred information about the law of the ancestral states given the observed tips values. The missing tips are considered as ancestral states.</p>
 <p>The following functions can be applied to it: <a href="./#PhyloNetworks.expectations"><code>expectations</code></a> (vector of expectations at all nodes), <code>stderror</code> (the standard error), <code>predint</code> (the prediction interval).</p>
 <p>The <code>ReconstructedStates</code> object has fields: <code>traits_nodes</code>, <code>variances_nodes</code>, <code>NodeNumbers</code>, <code>traits_tips</code>, <code>tipNumbers</code>, <code>model</code>. Type in "?ReconstructedStates.field" to get help on a specific field.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1812-L1824' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L1920-L1932' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.ShiftNet' href='#PhyloNetworks.ShiftNet'>#</a>
 <strong><code>PhyloNetworks.ShiftNet</code></strong> &mdash; <em>Type</em>.</p>
-<p><code>ShiftNet</code></p>
+<div class="codehilite"><pre><span></span>ShiftNet
+</pre></div>
+
+
 <p>Shifts associated to a <a href="./#PhyloNetworks.HybridNetwork"><code>HybridNetwork</code></a> sorted in topological order. Its <code>shift</code> field is a vector of shift values, one for each node, corresponding to the shift on the parent edge of the node (which makes sense for tree nodes only: they have a single parent edge).</p>
 <p>Two <code>ShiftNet</code> objects on the same network can be concatened with <code>*</code>.</p>
 <p><code>ShiftNet(node::Vector{Node}, value::Vector{T} where T&lt;:Real, net::HybridNetwork; checkPreorder=true::Bool)</code></p>
@@ -831,14 +858,17 @@
 <p><code>ShiftNet(edge::Vector{Edge}, value::Vector{T} where T&lt;:Real, net::HybridNetwork; checkPreorder=true::Bool)</code></p>
 <p>Constructor from a vector of edges and associated values. Warning, shifts on hybrid edges are not allowed.</p>
 <p>Extractors: <a href="./#PhyloNetworks.getShiftEdgeNumber"><code>getShiftEdgeNumber</code></a>, <a href="./#PhyloNetworks.getShiftValue"><code>getShiftValue</code></a></p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L627-L649' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L705-L727' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.TraitSimulation' href='#PhyloNetworks.TraitSimulation'>#</a>
 <strong><code>PhyloNetworks.TraitSimulation</code></strong> &mdash; <em>Type</em>.</p>
-<p><code>TraitSimulation</code></p>
+<div class="codehilite"><pre><span></span>TraitSimulation
+</pre></div>
+
+
 <p>Result of a trait simulation on an <a href="./#PhyloNetworks.HybridNetwork"><code>HybridNetwork</code></a> with function <a href="./#PhyloNetworks.simulate"><code>simulate</code></a>.</p>
 <p>The following functions and extractors can be applied to it: <a href="./#PhyloNetworks.tipLabels"><code>tipLabels</code></a>, <code>obj[:Tips]</code>, <code>obj[:InternalNodes]</code> (see documentation for function <a href="./#Base.getindex-Tuple{PhyloNetworks.TraitSimulation,Symbol}"><code>getindex(::TraitSimulation, ::Symbol)</code></a>).</p>
 <p>The <code>TraitSimulation</code> object has fields: <code>M</code>, <code>params</code>, <code>model</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L823-L831' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L901-L909' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.TraitSubstitutionModel' href='#PhyloNetworks.TraitSubstitutionModel'>#</a>
 <strong><code>PhyloNetworks.TraitSubstitutionModel</code></strong> &mdash; <em>Type</em>.</p>
 <div class="codehilite"><pre><span></span>TraitSubstitutionModel
@@ -847,7 +877,7 @@
 
 <p>Abstract type for discrete trait substitution models, using a continous time Markov model on a phylogeny. Adapted from the substitutionModels module in BioJulia. The same <a href="./#PhyloNetworks.Q"><code>Q</code></a> and <a href="./#PhyloNetworks.P"><code>P</code></a> function names are used for the transition rates and probabilities.</p>
 <p>see <a href="./#PhyloNetworks.BinaryTraitSubstitutionModel"><code>BinaryTraitSubstitutionModel</code></a>, <a href="./#PhyloNetworks.EqualRatesSubstitutionModel"><code>EqualRatesSubstitutionModel</code></a>, <a href="./#PhyloNetworks.TwoBinaryTraitSubstitutionModel"><code>TwoBinaryTraitSubstitutionModel</code></a></p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L1-L13' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L1-L13' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.TwoBinaryTraitSubstitutionModel' href='#PhyloNetworks.TwoBinaryTraitSubstitutionModel'>#</a>
 <strong><code>PhyloNetworks.TwoBinaryTraitSubstitutionModel</code></strong> &mdash; <em>Type</em>.</p>
 <div class="codehilite"><pre><span></span>TwoBinaryTraitSubstitutionModel(rate [, label])
@@ -865,7 +895,7 @@
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L177-L200' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L177-L200' class='documenter-source'>source</a><br></p>
 <p><a id='utilities-1'></a></p>
 <h2 id="utilities">utilities</h2>
 <p><a id='PhyloNetworks.tipLabels' href='#PhyloNetworks.tipLabels'>#</a>
@@ -876,7 +906,7 @@
 
 <p>Return a vector of taxon names at the leaves, for objects of various types: <code>HybridNetwork</code>, Vector of <code>HybridNetwork</code>s (in which case the union is taken then sorted), Vector of <code>Quartet</code>s, <code>DataCF</code>, <code>TraitSimulation</code>, <code>MatrixTopologicalOrder</code>.</p>
 <p>For a network, the taxon names are coerced to strings.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/descriptive.jl#L4-L15' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/descriptive.jl#L4-L15' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.sorttaxa!' href='#PhyloNetworks.sorttaxa!'>#</a>
 <strong><code>PhyloNetworks.sorttaxa!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>sorttaxa!(DataFrame, columns)
@@ -891,7 +921,7 @@ sorttaxa!(Quartet, permutation_tax, permutation_cf)
 
 <p>Reorder the 4 taxa in each element of the DataCF <code>quartet</code>. For a given Quartet, reorder the 4 taxa in its fields <code>taxon</code> and <code>qnet.quartetTaxon</code> (if non-empty) and reorder the 3 concordance values accordingly, in <code>obsCF</code> and <code>qnet.expCF</code>.</p>
 <p><code>permutation_tax</code> and <code>permutation_cf</code> should be vectors of short integers (Int8) of length 4 and 3 respectively, whose memory allocation gets reused. Their length is <em>not checked</em>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/auxiliary.jl#L1275-L1292' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/auxiliary.jl#L1275-L1292' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.printEdges' href='#PhyloNetworks.printEdges'>#</a>
 <strong><code>PhyloNetworks.printEdges</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>printEdges(net)
@@ -900,7 +930,7 @@ printEdges(io::IO, net)
 
 
 <p>Print information on the edges of a <code>HybridNetwork</code> or <code>QuartetNetwork</code> object <code>net</code>: edge number, numbers of nodes attached to it, edge length, whether it's a hybrid edge, its γ inheritance value, whether it's a major edge, if it could contain the root (this field is not always updated, though) and attributes pertaining to level-1 networks used in SNaQ: in which cycle it is contained (-1 if no cycle), and if the edge length is identifiable (based on quartet concordance factors).</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/auxiliary.jl#L651-L662' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/auxiliary.jl#L651-L662' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.printNodes' href='#PhyloNetworks.printNodes'>#</a>
 <strong><code>PhyloNetworks.printNodes</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>printNodes(net)
@@ -909,7 +939,7 @@ printNodes(io, net)
 
 
 <p>Print information on the nodes of a <code>HybridNetwork</code> net: node number, whether it's a leaf, whether it's a hybrid node, whether it's connected to one or more hybrid edges, it's name (label), the cycle in which it is belong (-1 if no cycle; makes sense for level-1 networks), and the list of edges attached to it, by their numbers.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/auxiliary.jl#L690-L699' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/auxiliary.jl#L690-L699' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.summarizeDataCF' href='#PhyloNetworks.summarizeDataCF'>#</a>
 <strong><code>PhyloNetworks.summarizeDataCF</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>summarizeDataCF(d::DataCF)</code></p>
@@ -918,7 +948,7 @@ printNodes(io, net)
 <li>filename: if provided, the summary will be saved in the filename, not to screen</li>
 <li>pc (number between (0,1)): threshold of percentage of missing genes to identify 4-taxon subsets with fewer genes than the threshold</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readData.jl#L759-L765' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readData.jl#L764-L770' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.directEdges!' href='#PhyloNetworks.directEdges!'>#</a>
 <strong><code>PhyloNetworks.directEdges!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">directEdges</span><span class="o">!(</span><span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">;</span> <span class="nt">checkMajor</span><span class="o">=</span><span class="nt">true</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
@@ -928,12 +958,12 @@ printNodes(io, net)
 <p>Updates the edges' attribute <code>isChild1</code>, according to the root placement. Also updates edges' attribute <code>containRoot</code>, for other possible root placements compatible with the direction of existing hybrid edges. Relies on hybrid nodes having exactly 1 major hybrid parent edge, but checks for that if checkMajor=true.</p>
 <p>Warning: Assumes that isChild1 is correct on hybrid edges (to avoid changing the identity of which nodes are hybrids and which are not).</p>
 <p>Returns the network. Throws a 'RootMismatch' Exception if the root was found to conflict with the direction of any hybrid edge.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/manipulateNet.jl#L437-L451' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/manipulateNet.jl#L438-L452' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.preorder!' href='#PhyloNetworks.preorder!'>#</a>
 <strong><code>PhyloNetworks.preorder!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>preorder!(net::HybridNetwork)</code></p>
 <p>Updates attribute net.nodes_changed in which the nodes are pre-ordered (also called topological sorting), such that each node is visited after its parent(s). The edges' direction needs to be correct before calling preorder!, using directEdges!</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/manipulateNet.jl#L585-L591' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/manipulateNet.jl#L586-L592' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.cladewiseorder!' href='#PhyloNetworks.cladewiseorder!'>#</a>
 <strong><code>PhyloNetworks.cladewiseorder!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>cladewiseorder!(net::HybridNetwork)
@@ -941,41 +971,41 @@ printNodes(io, net)
 
 
 <p>Updates attribute net.cladewiseorder_nodeIndex. Used for plotting the network. In the major tree, all nodes in a given clade are consecutive. On a tree, this function also provides a pre-ordering of the nodes. The edges' direction needs to be correct before calling <a href="./#PhyloNetworks.cladewiseorder!"><code>cladewiseorder!</code></a>, using <a href="./#PhyloNetworks.directEdges!"><code>directEdges!</code></a></p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/manipulateNet.jl#L628-L636' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/manipulateNet.jl#L629-L637' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.rootatnode!' href='#PhyloNetworks.rootatnode!'>#</a>
 <strong><code>PhyloNetworks.rootatnode!</code></strong> &mdash; <em>Function</em>.</p>
-<div class="codehilite"><pre><span></span><span class="nt">rootatnode</span><span class="o">!(</span><span class="nt">HybridNetwork</span><span class="o">,</span> <span class="nt">nodeNumber</span><span class="p">::</span><span class="nd">Integer</span><span class="o">;</span> <span class="nt">index</span><span class="o">=</span><span class="nt">false</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
-<span class="nt">rootatnode</span><span class="o">!(</span><span class="nt">HybridNetwork</span><span class="o">,</span> <span class="nt">Node</span><span class="o">)</span>
-<span class="nt">rootatnode</span><span class="o">!(</span><span class="nt">HybridNetwork</span><span class="o">,</span> <span class="nt">nodeName</span><span class="p">::</span><span class="nd">AbstractString</span><span class="o">)</span>
+<div class="codehilite"><pre><span></span><span class="nt">rootatnode</span><span class="o">!(</span><span class="nt">HybridNetwork</span><span class="o">,</span> <span class="nt">nodeNumber</span><span class="p">::</span><span class="nd">Integer</span><span class="o">;</span> <span class="nt">index</span><span class="o">=</span><span class="nt">false</span><span class="p">::</span><span class="nd">Bool</span><span class="o">,</span> <span class="nt">verbose</span><span class="o">=</span><span class="nt">true</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
+<span class="nt">rootatnode</span><span class="o">!(</span><span class="nt">HybridNetwork</span><span class="o">,</span> <span class="nt">Node</span><span class="o">;</span> <span class="nt">verbose</span><span class="o">=</span><span class="nt">true</span><span class="o">)</span>
+<span class="nt">rootatnode</span><span class="o">!(</span><span class="nt">HybridNetwork</span><span class="o">,</span> <span class="nt">nodeName</span><span class="p">::</span><span class="nd">AbstractString</span><span class="o">;</span> <span class="nt">verbose</span><span class="o">=</span><span class="nt">true</span><span class="o">)</span>
 </pre></div>
 
 
-<p>Roots the network/tree object at the node with name 'nodeName' or number 'nodeNumber' (by default) or with index 'nodeNumber' if index=true. Attributes isChild1 and containRoot are updated along the way. Use <code>plot(net, showNodeNumber=true, showEdgeLength=false)</code> to visualize and identify a node of interest. (see package <a href="https://github.com/cecileane/PhyloPlots.jl">PhyloPlots</a>)</p>
-<p>Returns the network.</p>
+<p>Root the network/tree object at the node with name 'nodeName' or number 'nodeNumber' (by default) or with index 'nodeNumber' if index=true. Attributes isChild1 and containRoot are updated along the way. Use <code>plot(net, showNodeNumber=true, showEdgeLength=false)</code> to visualize and identify a node of interest. (see package <a href="https://github.com/cecileane/PhyloPlots.jl">PhyloPlots</a>)</p>
+<p>Return the network.</p>
 <p>Warnings:</p>
 <ul>
-<li>If the node is a leaf, the root will be placed along the edge adjacent to the leaf, with a message. This might add a new node.</li>
+<li>If the node is a leaf, the root will be placed along the edge adjacent to the leaf. This might add a new node.</li>
 <li>
 <p>If the desired root placement is incompatible with one or more hybrids, then</p>
 <ul>
-<li>a RootMismatch error is thrown</li>
+<li>a RootMismatch error is thrown; use <code>verbose=false</code> to silence the root mismatch info printed before the error is thrown.</li>
 <li>the input network will still have some attributes modified.</li>
 </ul>
 </li>
 </ul>
 <p>See also: <a href="./#PhyloNetworks.rootonedge!"><code>rootonedge!</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/manipulateNet.jl#L222-L246' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/manipulateNet.jl#L222-L247' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.rootonedge!' href='#PhyloNetworks.rootonedge!'>#</a>
 <strong><code>PhyloNetworks.rootonedge!</code></strong> &mdash; <em>Function</em>.</p>
-<div class="codehilite"><pre><span></span><span class="nt">rootonedge</span><span class="o">!(</span><span class="nt">HybridNetwork</span><span class="o">,</span> <span class="nt">edgeNumber</span><span class="p">::</span><span class="nd">Integer</span><span class="o">;</span> <span class="nt">index</span><span class="o">=</span><span class="nt">false</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
-<span class="nt">rootonedge</span><span class="o">!(</span><span class="nt">HybridNetwork</span><span class="o">,</span> <span class="nt">Edge</span><span class="o">)</span>
+<div class="codehilite"><pre><span></span><span class="nt">rootonedge</span><span class="o">!(</span><span class="nt">HybridNetwork</span><span class="o">,</span> <span class="nt">edgeNumber</span><span class="p">::</span><span class="nd">Integer</span><span class="o">;</span> <span class="nt">index</span><span class="o">=</span><span class="nt">false</span><span class="p">::</span><span class="nd">Bool</span><span class="o">,</span> <span class="nt">verbose</span><span class="o">=</span><span class="nt">true</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
+<span class="nt">rootonedge</span><span class="o">!(</span><span class="nt">HybridNetwork</span><span class="o">,</span> <span class="nt">Edge</span><span class="o">;</span> <span class="nt">verbose</span><span class="o">=</span><span class="nt">true</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
 </pre></div>
 
 
-<p>Roots the network/tree object along an edge with number 'edgeNumber' (by default) or with index 'edgeNumber if index=true. Attributes isChild1 and containRoot are updated along the way.</p>
+<p>Root the network/tree along an edge with number <code>edgeNumber</code> (by default) or with index <code>edgeNumber</code> if <code>index=true</code>. Attributes <code>isChild1</code> and <code>containRoot</code> are updated along the way.</p>
 <p>This adds a new node and a new edge to the network. Use <code>plot(net, showEdgeNumber=true, showEdgeLength=false)</code> to visualize and identify an edge of interest. (see package <a href="https://github.com/cecileane/PhyloPlots.jl">PhyloPlots</a>)</p>
 <p>See also: <a href="./#PhyloNetworks.rootatnode!"><code>rootatnode!</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/manipulateNet.jl#L301-L315' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/manipulateNet.jl#L302-L316' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.hybridatnode!' href='#PhyloNetworks.hybridatnode!'>#</a>
 <strong><code>PhyloNetworks.hybridatnode!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>hybridatnode!(net::HybridNetwork, nodeNumber::Integer)
@@ -993,18 +1023,18 @@ printNodes(io, net)
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/manipulateNet.jl#L97-L117' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/manipulateNet.jl#L97-L117' class='documenter-source'>source</a><br></p>
 <div class="codehilite"><pre><span></span>hybridatnode!(net, hybrid::Node, newNode::Node)
 </pre></div>
 
 
 <p>Move the reticulation from <code>hybrid</code> to <code>newNode</code>, which must in the same cycle. <code>net</code> is assumed to be of level 1, but <strong>no checks</strong> are made and fields are supposed up-to-date.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/manipulateNet.jl#L143-L149' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/manipulateNet.jl#L143-L149' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.setLength!' href='#PhyloNetworks.setLength!'>#</a>
 <strong><code>PhyloNetworks.setLength!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>setLength!(Edge,new length)</code></p>
 <p>set a new length for an object Edge. The new length needs to be positive. For example, if you have a HybridNetwork object net, and do printEdges(net), you can see the list of Edges and their lengths. You can then change the length of the 3rd edge with setLength!(net.edge[3],1.2). If <code>new length</code> is above 10, the value 10 will be used, as an upper limit to coalescent units that can be reliably estimated.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/auxiliary.jl#L870-L877' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/auxiliary.jl#L870-L877' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.setGamma!' href='#PhyloNetworks.setGamma!'>#</a>
 <strong><code>PhyloNetworks.setGamma!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>setGamma!(Edge, new γ)
@@ -1015,7 +1045,7 @@ setGamma!(Edge, new γ, change other=true::Bool)
 <p>Set inheritance probability γ for an edge, which must be a hybrid edge. The new γ needs to be in [0,1]. The γ of the "partner" hybrid edge is changed accordingly, to 1-γ. The field <code>isMajor</code> is also changed accordingly. If the new γ is approximately 0.5, <code>Edge</code> is set to the major parent, its partner is set to the minor parent.</p>
 <p>If <code>net</code> is a HybridNetwork object, <code>printEdges(net)</code> will show the list of edges and their γ's. The γ of the third hybrid edge (say) can be changed to 0.2 with <code>setGamma!(net.edge[3],0.2)</code>. This will automatically set γ of the partner hybrid edge to 0.8.</p>
 <p>The last argument is true by default. If false: the partner edge is not updated.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/auxiliary.jl#L895-L911' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/auxiliary.jl#L895-L911' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.deleteleaf!' href='#PhyloNetworks.deleteleaf!'>#</a>
 <strong><code>PhyloNetworks.deleteleaf!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">deleteleaf</span><span class="o">!(</span><span class="nt">HybridNetwork</span><span class="o">,</span> <span class="nt">leafName</span><span class="p">::</span><span class="nd">AbstractString</span><span class="o">;</span> <span class="nt">simplify</span><span class="o">=</span><span class="nt">true</span><span class="o">)</span>
@@ -1028,7 +1058,7 @@ setGamma!(Edge, new γ, change other=true::Bool)
 <p>simplify: if true and if deleting the node results in 2 hybrid edges forming a cycle of k=2 nodes, then these hybrid edges are merged and simplified as a single tree edge.</p>
 <p>The first 2 versions require that <code>node</code> is a leaf. The 3rd version does <strong>not</strong> require that <code>node</code> is a leaf. If <code>node</code> has degree 3 or more, nothing happens. If it has degree 1 or 2, it is deleted.</p>
 <p>Warning: does <strong>not</strong> update attributes related to level-1 networks, such as inCycle, partition, gammaz, etc. Does not require branch lengths, and designed to work on networks of all levels.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/manipulateNet.jl#L719-L739' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/manipulateNet.jl#L720-L740' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.deleteHybridThreshold!' href='#PhyloNetworks.deleteHybridThreshold!'>#</a>
 <strong><code>PhyloNetworks.deleteHybridThreshold!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>deleteHybridThreshold!(net::HybridNetwork, threshold::Float64, keepNodes=false)
@@ -1046,7 +1076,7 @@ setGamma!(Edge, new γ, change other=true::Bool)
 <li>by default, <code>keepNodes</code> is false, and partner hybrid edges have their γ changed to 1.0. If <code>keepNodes</code> is true: the γ's of partner hybrid edges are unchanged.</li>
 <li>assumes correct isMajor attributes.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/compareNetworks.jl#L261-L277' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/compareNetworks.jl#L261-L277' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.rotate!' href='#PhyloNetworks.rotate!'>#</a>
 <strong><code>PhyloNetworks.rotate!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">rotate</span><span class="o">!(</span><span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">,</span> <span class="nt">nodeNumber</span><span class="p">::</span><span class="nd">Integer</span><span class="o">;</span> <span class="nt">orderedEdgeNum</span><span class="p">::</span><span class="nd">Array</span><span class="p">{</span><span class="err">Int,1</span><span class="p">}</span><span class="o">)</span>
@@ -1071,7 +1101,7 @@ setGamma!(Edge, new γ, change other=true::Bool)
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/manipulateNet.jl#L657-L687' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/manipulateNet.jl#L658-L688' class='documenter-source'>source</a><br></p>
 <p><a id='Base.getindex-Tuple{PhyloNetworks.TraitSimulation,Symbol}' href='#Base.getindex-Tuple{PhyloNetworks.TraitSimulation,Symbol}'>#</a>
 <strong><code>Base.getindex</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>getindex(collection, key...)
@@ -1091,7 +1121,10 @@ julia&gt; getindex(A, &quot;a&quot;)
 
 
 <p><a target='_blank' href='https://github.com/JuliaLang/julia/blob/9d11f62bcb124327831206089967f93020e84200/base/docs/helpdb/Base.jl#L150-L166' class='documenter-source'>source</a><br></p>
-<p><code>getindex(obj, d)</code></p>
+<div class="codehilite"><pre><span></span>getindex(obj, d)
+</pre></div>
+
+
 <p>Getting submatrices of an object of type <a href="./#PhyloNetworks.TraitSimulation"><code>TraitSimulation</code></a>.</p>
 <p><strong>Arguments</strong></p>
 <ul>
@@ -1104,7 +1137,7 @@ julia&gt; getindex(A, &quot;a&quot;)
 </ul>
 </li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1002-L1012' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L1080-L1090' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getNodeAges' href='#PhyloNetworks.getNodeAges'>#</a>
 <strong><code>PhyloNetworks.getNodeAges</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>getNodeAges(net)
@@ -1112,7 +1145,7 @@ julia&gt; getindex(A, &quot;a&quot;)
 
 
 <p>vector of node ages in pre-order, as in <code>nodes_changed</code>, which is assumed to have been calculated before.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/pairwiseDistanceLS.jl#L15-L20' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/pairwiseDistanceLS.jl#L1-L6' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.pairwiseTaxonDistanceMatrix' href='#PhyloNetworks.pairwiseTaxonDistanceMatrix'>#</a>
 <strong><code>PhyloNetworks.pairwiseTaxonDistanceMatrix</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>pairwiseTaxonDistanceMatrix(net; keepInternal=false,
@@ -1121,14 +1154,20 @@ pairwiseTaxonDistanceMatrix!(M, net, nodeAges)
 </pre></div>
 
 
-<p>Matrix of pairwise distances between nodes in the network:</p>
+<p>Return the matrix <code>M</code> of pairwise distances between nodes in the network:</p>
 <ul>
-<li>between all nodes (internal and leaves) if <code>keepInternal=true</code></li>
-<li>between taxa only otherwise.</li>
+<li>between all nodes (internal and leaves) if <code>keepInternal=true</code>, in which case the nodes are listed in <code>M</code> in the order in which they appear in <code>net.nodes_changed</code></li>
+<li>between taxa only otherwise, in which case the nodes are listed in <code>M</code> in the order in which they appear in <code>tipLabels(net)</code> (i.e. same order as in <code>net.leaf</code>)</li>
 </ul>
-<p>Update <code>net.nodes_changed</code> to get a topological ordering if <code>checkPreorder</code> is true. The second form modifies <code>M</code> in place, assuming all nodes.</p>
-<p>If <code>nodeAges</code> is provided: this vector should list node ages in the pre-order in which they are listed in nodes_changed (including leaves), and <strong>edge lengths</strong> in <code>net</code> <strong>are modified</strong> accordingly.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/pairwiseDistanceLS.jl#L41-L56' class='documenter-source'>source</a><br></p>
+<p>The second form modifies <code>M</code> in place, assuming all nodes.</p>
+<p>The distance between the root and a given hybrid node (to take an example) is the weighted average of path lengths from the root to that node, where each path is weighted by the product of γs of all edges on that path. This distance measures the average genetic distance across the genome, if branch lengths are in substitutions/site.</p>
+<p>optional arguments:</p>
+<ul>
+<li><code>checkPreorder</code>: if true, <code>net.nodes_changed</code> is updated to get a topological ordering of nodes.</li>
+<li><code>nodeAges</code>: if not provided, i.e. empty vector, the network is <em>not</em> modified.   If provided and non-empty, <code>nodeAges</code> should list node ages in the pre-order in which nodes are listed in <code>nodes_changed</code> (including leaves), and <strong>edge lengths</strong> in <code>net</code> <strong>are modified</strong> accordingly.</li>
+</ul>
+<p>Providing node ages hence makes the network time consistent: such that all paths from the root to a given hybrid node have the same length. If node ages are not provided, the network need not be time consistent.</p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/pairwiseDistanceLS.jl#L27-L60' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.biconnectedComponents' href='#PhyloNetworks.biconnectedComponents'>#</a>
 <strong><code>PhyloNetworks.biconnectedComponents</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>biconnectedComponents(network, ignoreTrivial=false)
@@ -1143,13 +1182,23 @@ pairwiseTaxonDistanceMatrix!(M, net, nodeAges)
 <li>on <a href="https://www.geeksforgeeks.org/biconnected-components/">geeksforgeeks</a>, there is an error (as of 2018-01-30): <code>elif v != parent[u] and low[u] &gt; disc[v]:</code> (python version) should be replaced by <code>elif v != parent[u] and disc[u] &gt; disc[v]:</code></li>
 <li>nice explanation at this <a href="https://www.cs.cmu.edu/~avrim/451f12/lectures/biconnected.pdf">url</a></li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/biconnectedComponents.jl#L1-L28' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/biconnectedComponents.jl#L1-L28' class='documenter-source'>source</a><br></p>
 <div class="codehilite"><pre><span></span>biconnectedComponents(node, index, S, blobs, ignoreTrivial)
 </pre></div>
 
 
 <p>Helper recursive function starting at a node (not a network). <code>index</code> is an array containing a single integer, thus mutable: order in which nodes are visited.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/biconnectedComponents.jl#L53-L59' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/biconnectedComponents.jl#L53-L59' class='documenter-source'>source</a><br></p>
+<p><a id='PhyloNetworks.blobDecomposition' href='#PhyloNetworks.blobDecomposition'>#</a>
+<strong><code>PhyloNetworks.blobDecomposition</code></strong> &mdash; <em>Function</em>.</p>
+<div class="codehilite"><pre><span></span>blobDecomposition!(network)
+blobDecomposition(network)
+</pre></div>
+
+
+<p>Find blobs using <a href="./#PhyloNetworks.biconnectedComponents"><code>biconnectedComponents</code></a>; find their roots using <a href="../internals/#PhyloNetworks.blobInfo"><code>blobInfo</code></a>; create a forest in the form of a disconnected network (for efficiency), by deconnecting the root of each non-trivial blob from its parent. The root of each blob corresponds to a new leaf (in another tree of the forest): the number of the blob's root is given to the newly created leaf.</p>
+<p>The first (bang) version modifies the network and returns the array of blob roots. The second version copies the network then returns a tuple: the forest and the blob roots.</p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/biconnectedComponents.jl#L186-L201' class='documenter-source'>source</a><br></p>
 <p><a id='data-and-topology-read/write-1'></a></p>
 <h2 id="data-and-topology-readwrite">data and topology read/write</h2>
 <p><a id='PhyloNetworks.readTopology' href='#PhyloNetworks.readTopology'>#</a>
@@ -1161,7 +1210,7 @@ readTopology(parenthetical description)
 
 <p>Read tree or network topology from parenthetical format (extended Newick). If the root node has a single child: ignore (i.e. delete from the topology) the root node and its child edge.</p>
 <p>Input: text file or parenthetical format directly. The file name may not start with a left parenthesis, otherwise the file name itself would be interpreted as the parenthetical description.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readwrite.jl#L471-L482' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readwrite.jl#L471-L482' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.readTopologyLevel1' href='#PhyloNetworks.readTopologyLevel1'>#</a>
 <strong><code>PhyloNetworks.readTopologyLevel1</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>readTopologyLevel1(filename)
@@ -1171,23 +1220,23 @@ readTopologyLevel1(parenthetical format)
 
 <p>same as readTopology, reads a tree or network from parenthetical format, but this function enforces the necessary conditions for any starting topology in SNaQ: non-intersecting cycles, no polytomies, unrooted. It sets any missing branch length to 1.0.</p>
 <p>If the network has a bad diamond II (in which edge lengths are γ's are not identifiable) and if the edge below this diamond has a length <code>t</code> different from 0, then this length is set back to 0 and the major parent hybrid edge is lengthened by <code>t</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readwrite.jl#L878-L890' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readwrite.jl#L878-L890' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.readInputTrees' href='#PhyloNetworks.readInputTrees'>#</a>
 <strong><code>PhyloNetworks.readInputTrees</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>readInputTrees(file)</code></p>
 <p>Read a text file with a list of trees/networks in parenthetical format (one tree per line) and transform them like <a href="./#PhyloNetworks.readTopologyLevel1"><code>readTopologyLevel1</code></a> does: to be unrooted, with resolved polytomies, missing branch lengths set to 1.0, etc. See <a href="./#PhyloNetworks.readMultiTopology"><code>readMultiTopology</code></a> to read multiple trees or networks with no modification.</p>
 <p>Output: array of HybridNetwork objects.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readData.jl#L182-L192' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readData.jl#L182-L192' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.readMultiTopology' href='#PhyloNetworks.readMultiTopology'>#</a>
 <strong><code>PhyloNetworks.readMultiTopology</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>readMultiTopology(file)</code></p>
 <p>Read a text file with a list of networks in parenthetical format (one per line). Each network is read with <a href="./#PhyloNetworks.readTopology"><code>readTopology</code></a>. Return an array of HybridNetwork object.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readwrite.jl#L1244-L1250' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readwrite.jl#L1244-L1250' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.readSnaqNetwork' href='#PhyloNetworks.readSnaqNetwork'>#</a>
 <strong><code>PhyloNetworks.readSnaqNetwork</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>readSnaqNetwork(output file)</code></p>
 <p>function to read the estimated network from an .out file generated by the snaq function</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readwrite.jl#L1208-L1212' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readwrite.jl#L1208-L1212' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.readTrees2CF' href='#PhyloNetworks.readTrees2CF'>#</a>
 <strong><code>PhyloNetworks.readTrees2CF</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>readTrees2CF(treefile)
@@ -1204,8 +1253,9 @@ readTrees2CF(vector of trees)
 <li>CFfile: name of file to save the observedCF (default tableCF.txt)</li>
 <li>writeQ=true: save intermediate files with the list of all 4-taxon subsets and chosen random sample (default false).</li>
 <li>writeSummary: write descriptive stats of input data (default: true)</li>
+<li>nexus: if true, it assumes the gene trees are written in nexus file (default: false)</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readData.jl#L639-L655' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readData.jl#L639-L656' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.readTableCF' href='#PhyloNetworks.readTableCF'>#</a>
 <strong><code>PhyloNetworks.readTableCF</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>readTableCF(file)
@@ -1221,7 +1271,7 @@ readTableCF!(data frame)
 <li>delim (for the first form only): to specify how columns are delimited, with single quotes: delim=';'. Default is a <code>csv</code> file, i.e. <code>delim=','</code>.</li>
 </ul>
 <p>The last version modifies the input data frame, if species are represented by multiple alleles for instance (see <code>readTableCF!</code>).</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readData.jl#L42-L63' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readData.jl#L42-L63' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.readTableCF!' href='#PhyloNetworks.readTableCF!'>#</a>
 <strong><code>PhyloNetworks.readTableCF!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>readTableCF!(data frame, columns)
@@ -1235,7 +1285,7 @@ readTableCF!(data frame)
 
 
 <p>Modify the <code>.quartet.obsCF</code> values in the <code>DataCF</code> object with those read from the data frame in columns numbered <code>columns</code>. <code>columns</code> should have <strong>3</strong> columns numbers for the 3 CFs in this order: 12_34, 13_24 and 14_23. Assume the same 4-taxon sets in <code>DataCF</code> and in the data frame, and in the same order, but this assumption is <em>not checked</em> (for speed, e.g. during bootstrapping).</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readData.jl#L141-L164' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readData.jl#L141-L164' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.readBootstrapTrees' href='#PhyloNetworks.readBootstrapTrees'>#</a>
 <strong><code>PhyloNetworks.readBootstrapTrees</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>readBootstrapTrees(filename)
@@ -1244,7 +1294,7 @@ readTableCF!(data frame)
 
 <p>input: name of file containing the path/name to multiple bootstrap files, one per line. Each bootstrap file corresponds to bootstrap trees from a single gene.</p>
 <p>output: vector of vectors of trees.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/bootstrap.jl#L5-L12' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/bootstrap.jl#L5-L12' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.writeSubTree!' href='#PhyloNetworks.writeSubTree!'>#</a>
 <strong><code>PhyloNetworks.writeSubTree!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>writeSubTree!(IO, network, dendroscope::Bool, names::Bool,
@@ -1253,7 +1303,7 @@ readTableCF!(data frame)
 
 
 <p>Write to IO the extended newick format (parenthetical description) of a network. If written for dendroscope, inheritance γ's are not written. If <code>names</code> is true, taxon names are written, otherwise taxon numbers are written instead of taxon names. If unspecified, branch lengths and γ's are rounded to 3 digits.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readwrite.jl#L927-L937' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readwrite.jl#L927-L937' class='documenter-source'>source</a><br></p>
 <div class="codehilite"><pre><span></span>writeSubTree!(IO, node, edge, dendroscope::Bool, names::Bool,
               round_branch_lengths::Bool, digits::Integer)
 </pre></div>
@@ -1270,7 +1320,7 @@ readTableCF!(data frame)
 
 
 <p>Used by <a href="./#PhyloNetworks.writeTopology"><code>writeTopology</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readwrite.jl#L958-L979' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readwrite.jl#L958-L979' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.writeTopology' href='#PhyloNetworks.writeTopology'>#</a>
 <strong><code>PhyloNetworks.writeTopology</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>writeTopology(net)
@@ -1288,7 +1338,7 @@ writeTopology(net, IO)
 </ul>
 <p>If the current root placement is not admissible, other placements are tried. The network is updated with this new root placement, if successful.</p>
 <p>Uses lower-level function <a href="./#PhyloNetworks.writeSubTree!"><code>writeSubTree!</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readwrite.jl#L1317-L1335' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readwrite.jl#L1317-L1335' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.writeMultiTopology' href='#PhyloNetworks.writeMultiTopology'>#</a>
 <strong><code>PhyloNetworks.writeMultiTopology</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>writeMultiTopology(nets, file_name; append=false)
@@ -1311,7 +1361,7 @@ writeMultiTopology(nets, IO)
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/readwrite.jl#L1272-L1294' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/readwrite.jl#L1272-L1294' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.mapAllelesCFtable' href='#PhyloNetworks.mapAllelesCFtable'>#</a>
 <strong><code>PhyloNetworks.mapAllelesCFtable</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>mapAllelesCFtable(mapping file, CF file; filename, columns, delim)
@@ -1334,7 +1384,7 @@ writeMultiTopology(nets, IO)
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/multipleAlleles.jl#L7-L38' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/multipleAlleles.jl#L7-L38' class='documenter-source'>source</a><br></p>
 <p><a id='network-inference-1'></a></p>
 <h2 id="network-inference">network inference</h2>
 <p><a id='PhyloNetworks.snaq!' href='#PhyloNetworks.snaq!'>#</a>
@@ -1370,12 +1420,12 @@ writeMultiTopology(nets, IO)
 <p>At the end, branch lengths and γ's are optimized on the last "best" network with different and very thorough tolerance parameters: 1e-12 for ftolRel, 1e-10 for ftolAbs, xtolRel, xtolAbs.</p>
 <p>See also: <code>topologyMaxQPseudolik!</code> to optimize parameters on a fixed topology, and <code>topologyQPseudolik!</code> to get the deviance (pseudo log-likelihood up to a constant) of a fixed topology with fixed parameters.</p>
 <p>Reference: Claudia Solís-Lemus and Cécile Ané (2016). Inferring phylogenetic networks with maximum pseudolikelihood under incomplete lineage sorting. <a href="http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1005896">PLoS Genetics</a> 12(3):e1005896</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/optimization.jl#L1863-L1930' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/optimization.jl#L1863-L1930' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.snaqDebug' href='#PhyloNetworks.snaqDebug'>#</a>
 <strong><code>PhyloNetworks.snaqDebug</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>snaqDebug(currT::HybridNetwork,d::DataCF)</code></p>
 <p>function to replicate a given run that produces error according to the .err file generated by snaq. The same settings used in that run should be used in this function, specially the seed. See the readme file online for more details.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/optimization.jl#L1977-L1982' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/optimization.jl#L1977-L1982' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.topologyMaxQPseudolik!' href='#PhyloNetworks.topologyMaxQPseudolik!'>#</a>
 <strong><code>PhyloNetworks.topologyMaxQPseudolik!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>topologyMaxQPseudolik!(net::HybridNetwork, d::DataCF)</code></p>
@@ -1386,14 +1436,14 @@ writeMultiTopology(nets, IO)
 <li>verbose (false): if true, information on the numerical optimization is printed to screen</li>
 <li>ftolRel (1e-5), ftolAbs (1e-6), xtolRel (1e-3), xtolAbs (1e-4): absolute and relative tolerance values for the pseudo-deviance function and the parameters</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/optimization.jl#L404-L421' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/optimization.jl#L404-L421' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.topologyQPseudolik!' href='#PhyloNetworks.topologyQPseudolik!'>#</a>
 <strong><code>PhyloNetworks.topologyQPseudolik!</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>topologyQPseudolik!(net::HybridNetwork, d::DataCF)</code></p>
 <p>Calculate the quartet pseudo-deviance of a given network/tree for DataCF <code>d</code>. This is the negative log pseudo-likelihood, up to an additive constant, such that a perfect fit corresponds to a deviance of 0.0.</p>
 <p>Be careful if the net object does not have all internal branch lengths specified because then the pseudolikelihood will be meaningless.</p>
 <p>The loglik attribute of the network is undated, and <code>d</code> is updated with the expected concordance factors under the input network.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/pseudolik.jl#L1291-L1304' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/pseudolik.jl#L1291-L1304' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.fittedQuartetCF' href='#PhyloNetworks.fittedQuartetCF'>#</a>
 <strong><code>PhyloNetworks.fittedQuartetCF</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>fittedQuartetCF(d::DataCF, format::Symbol)</code></p>
@@ -1403,7 +1453,7 @@ writeMultiTopology(nets, IO)
 <li>if long, the output has one row per quartet, i.e. 3 rows per 4-taxon sets, and 7 columns: 4 columns for the taxon names, one column to give the quartet resolution, one column for the observed CF and the last column for the expected CF.</li>
 </ul>
 <p>see also: <code>topologyQPseudolik!</code> and <code>topologyMaxQPseudolik!</code> to update the fitted CF expected under a specific network, inside the DataCF object <code>d</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/descriptive.jl#L23-L38' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/descriptive.jl#L23-L38' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.bootsnaq' href='#PhyloNetworks.bootsnaq'>#</a>
 <strong><code>PhyloNetworks.bootsnaq</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>bootsnaq(T::HybridNetwork, df::DataFrame)
@@ -1423,7 +1473,7 @@ bootsnaq(T::HybridNetwork, vector of tree lists)
 <li>prcnet (0): percentage of runs starting on otherNet; error if different than 0.0, and otherNet not specified.</li>
 <li>ftolRel, ftolAbs, xtolRel, xtolAbs, liktolAbs, Nfail: see <code>snaq!</code>, same defaults.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/bootstrap.jl#L293-L318' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/bootstrap.jl#L293-L318' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.calibrateFromPairwiseDistances!' href='#PhyloNetworks.calibrateFromPairwiseDistances!'>#</a>
 <strong><code>PhyloNetworks.calibrateFromPairwiseDistances!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>calibrateFromPairwiseDistances!(net, distances::Matrix{Float64},
@@ -1441,7 +1491,7 @@ bootsnaq(T::HybridNetwork, vector of tree lists)
 <li>tolerance values to control when the optimization is stopped: ftolRel (1e-12), ftolAbs (1e-10) on the criterion, and xtolRel (1e-10), xtolAbs (1e-10) on branch lengths / divergence times.</li>
 <li>verbose (false)</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/pairwiseDistanceLS.jl#L209-L235' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/pairwiseDistanceLS.jl#L213-L239' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.ticr' href='#PhyloNetworks.ticr'>#</a>
 <strong><code>PhyloNetworks.ticr</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>ticr!(net, D::DataFrame, optimizeBL::Bool)
@@ -1470,7 +1520,7 @@ ticr(D::DataCF)
 </ul>
 <p><strong>References</strong></p>
 <p>NWM Stenz, B Larget, DA Baum and C Ané (2015). Exploring tree-like and non-tree-like patterns using genome sequences: An example using the inbreeding plant species <em>Arabidopsis thaliana</em> (L.) Heynh. Systematic Biology, 64(5):809-823. doi: 10.1093/sysbio/syv039</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/ticr.jl#L72' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/ticr.jl#L72' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.ticr!' href='#PhyloNetworks.ticr!'>#</a>
 <strong><code>PhyloNetworks.ticr!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>ticr!(net, D::DataFrame, optimizeBL::Bool)
@@ -1499,7 +1549,7 @@ ticr(D::DataCF)
 </ul>
 <p><strong>References</strong></p>
 <p>NWM Stenz, B Larget, DA Baum and C Ané (2015). Exploring tree-like and non-tree-like patterns using genome sequences: An example using the inbreeding plant species <em>Arabidopsis thaliana</em> (L.) Heynh. Systematic Biology, 64(5):809-823. doi: 10.1093/sysbio/syv039</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/ticr.jl#L1-L54' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/ticr.jl#L1-L54' class='documenter-source'>source</a><br></p>
 <p><a id='network-Comparisons-1'></a></p>
 <h2 id="network-comparisons">network Comparisons</h2>
 <p><a id='PhyloNetworks.majorTree' href='#PhyloNetworks.majorTree'>#</a>
@@ -1507,7 +1557,7 @@ ticr(D::DataCF)
 <p><code>majorTree(net::HybridNetwork)</code></p>
 <p>Warning: assumes correct isMajor attributes.</p>
 <p>Extracts the major tree displayed in a network, keeping the major edge and dropping the minor edge at each hybrid node. Returns a HybridNetwork object.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/compareNetworks.jl#L374-L381' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/compareNetworks.jl#L374-L381' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.minorTreeAt' href='#PhyloNetworks.minorTreeAt'>#</a>
 <strong><code>PhyloNetworks.minorTreeAt</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>minorTreeAt(net::HybridNetwork, hybindex::Integer, keepNodes=false)
@@ -1516,7 +1566,7 @@ ticr(D::DataCF)
 
 <p>Extract the tree displayed in the network, following the major hybrid edge at each hybrid node, except at the ith hybrid node (i=<code>hybindex</code>), where the minor hybrid edge is kept instead of the major hybrid edge. If <code>keepNodes</code> is true, all nodes are kept during edge removal.</p>
 <p>Warning: assume correct <code>isMajor</code> fields.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/compareNetworks.jl#L397-L406' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/compareNetworks.jl#L397-L406' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.displayedTrees' href='#PhyloNetworks.displayedTrees'>#</a>
 <strong><code>PhyloNetworks.displayedTrees</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">displayedTrees</span><span class="o">(</span><span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">,</span> <span class="nt">gamma</span><span class="p">::</span><span class="nd">Float64</span><span class="o">;</span> <span class="nt">keepNodes</span><span class="o">=</span><span class="nt">false</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
@@ -1530,7 +1580,7 @@ ticr(D::DataCF)
 <li>if <code>keepNodes</code> is true: the retained partner hybrid edges have their γ values unchanged, but their <code>isMajor</code> is changed to true</li>
 <li>assume correct <code>isMajor</code> attributes.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/compareNetworks.jl#L315-L330' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/compareNetworks.jl#L315-L330' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.displayedNetworkAt!' href='#PhyloNetworks.displayedNetworkAt!'>#</a>
 <strong><code>PhyloNetworks.displayedNetworkAt!</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>displayedNetworkAt!(net::HybridNetwork, node::Node, keepNodes=false)
@@ -1539,7 +1589,7 @@ ticr(D::DataCF)
 
 <p>Delete all the minor hybrid edges, except at input node. The network is left with a single hybridization, and otherwise displays the same major tree as before. If <code>keepNodes</code> is true, all nodes are kept during edge removal.</p>
 <p>Warning: assume correct <code>isMajor</code> fields.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/compareNetworks.jl#L418-L426' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/compareNetworks.jl#L418-L426' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.hardwiredClusters' href='#PhyloNetworks.hardwiredClusters'>#</a>
 <strong><code>PhyloNetworks.hardwiredClusters</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>hardwiredClusters(net::HybridNetwork, S::Union{Vector{String},Vector{Int}})</code></p>
@@ -1550,7 +1600,7 @@ ticr(D::DataCF)
 <li>next columns: 0/1 values. 1=descendant of edge, 0=not a descendant, or missing taxon.</li>
 <li>last column:  10/11 values. 10=tree edge, 11=hybrid edge</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/compareNetworks.jl#L62-L77' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/compareNetworks.jl#L62-L77' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.hardwiredCluster' href='#PhyloNetworks.hardwiredCluster'>#</a>
 <strong><code>PhyloNetworks.hardwiredCluster</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>hardwiredCluster(edge::Edge,taxa::Union{Vector{String},Vector{Int}})
@@ -1586,13 +1636,13 @@ julia&gt; hardwiredCluster(net5.edge[12], taxa) # descendants of 12th edge = CEF
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/compareNetworks.jl#L145-L182' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/compareNetworks.jl#L145-L182' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.hardwiredClusterDistance' href='#PhyloNetworks.hardwiredClusterDistance'>#</a>
 <strong><code>PhyloNetworks.hardwiredClusterDistance</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>hardwiredClusterDistance(net1::HybridNetwork, net2::HybridNetwork, rooted::Bool)</code></p>
 <p>Takes 2 networks and returns their hardwired cluster distance, that is, the number of hardwired clusters found in one network and not in the other. Note that this is not a distance per se on the full space of hybrid networks: there are pairs of different networks for which this measure is 0. But it is a distance on some network subspaces.</p>
 <p>If the 2 networks are trees, this is the Robinson-Foulds distance. If rooted=false, the trees are considered unrooted.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/compareNetworks.jl#L438-L449' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/compareNetworks.jl#L438-L449' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.treeEdgesBootstrap' href='#PhyloNetworks.treeEdgesBootstrap'>#</a>
 <strong><code>PhyloNetworks.treeEdgesBootstrap</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>treeEdgesBootstrap(boot_net::Vector{HybridNetwork}, ref_net::HybridNetwork)</code></p>
@@ -1602,7 +1652,7 @@ julia&gt; hardwiredCluster(net5.edge[12], taxa) # descendants of 12th edge = CEF
 <li>a data frame with one row per tree edge and two columns: edge number, bootstrap support (as a percentage)</li>
 <li>the major tree from the reference network, where minor hybrid edges (with γ&lt;0.5) have been removed.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/bootstrap.jl#L475-L489' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/bootstrap.jl#L475-L489' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.hybridBootstrapSupport' href='#PhyloNetworks.hybridBootstrapSupport'>#</a>
 <strong><code>PhyloNetworks.hybridBootstrapSupport</code></strong> &mdash; <em>Function</em>.</p>
 <p><code>hybridBootstrapSupport(boot_net::Vector{HybridNetwork}, ref_net::HybridNetwork; rooted=false)</code></p>
@@ -1613,17 +1663,10 @@ julia&gt; hardwiredCluster(net5.edge[12], taxa) # descendants of 12th edge = CEF
 <ol>
 <li>a "node" data frame (see below)</li>
 <li>an "edge" data frame (see below)</li>
-<li>a "clade" data frame to describe the make up of all clades found as hybrids or sisters,</li>
+<li>a "clade" data frame to describe the make up of all clades found as hybrids or sisters, starting with a column <code>taxa</code> that lists all taxa. All other columns correspond to a given clade and contain true/false values. <code>true</code> means that a given taxon belongs in a given clade. For a clade named <code>H1</code>, for instance, and if the data frame was named <code>cla</code>, the list of taxa in this clade can be obtained with <code>cla[:taxa][cla[:H1]]</code>.</li>
+<li>an array of gamma values, with one row for each bootstrap network and two columns (major/minor) for each hybrid edge in the reference network. If this hybrid edge was found in the bootstrap network (i.e. same hybrid and sister clades, after removal of all other hybrid nodes), its bootstrap gamma value is recorded here. Otherwise, the gamma entry is 0.0.</li>
+<li>a vector with the number of each hybrid edge in the reference network, in the same order as for the columns in the array of gamma values above.</li>
 </ol>
-<p>starting with a column <code>taxa</code> that lists all taxa. All other columns correspond to a given   clade and contain true/false values. <code>true</code> means that a given taxon belongs in a given clade.   For a clade named <code>H1</code>, for instance, and if the data frame was named <code>cla</code>, the   list of taxa in this clade can be obtained with <code>cla[:taxa][cla[:H1]]</code>.</p>
-<ol>
-<li>an array of gamma values, with one row for each bootstrap network and two columns (major/minor)</li>
-</ol>
-<p>for each hybrid edge in the reference network. If this hybrid edge was found in the bootstrap network   (i.e. same hybrid and sister clades, after removal of all other hybrid nodes),   its bootstrap gamma value is recorded here. Otherwise, the gamma entry is 0.0.</p>
-<ol>
-<li>a vector with the number of each hybrid edge in the reference network, in the same order</li>
-</ol>
-<p>as for the columns in the array of gamma values above.</p>
 <p>The "node" data frame has one row per clade and 9 columns giving:</p>
 <ul>
 <li><strong>clade</strong>: the clade's name, like the taxon name (if a hybrid is a single taxon) or the hybrid tag (like 'H1') in the reference network</li>
@@ -1647,12 +1690,15 @@ julia&gt; hardwiredCluster(net5.edge[12], taxa) # descendants of 12th edge = CEF
 <li><strong>BS_major</strong>: percentage of bootstrap networks in which 'edge' is found to be a major hybrid  edge, i.e. when 'hybrid' is found to be a hybrid clade and 'sister' is found to be its  major sister.</li>
 <li><strong>BS_minor</strong>: same as previous, but minor</li>
 </ul>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/bootstrap.jl#L626-L696' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/bootstrap.jl#L626-L696' class='documenter-source'>source</a><br></p>
 <p><a id='continuous-trait-evolution-1'></a></p>
 <h2 id="continuous-trait-evolution">continuous trait evolution</h2>
 <p><a id='PhyloNetworks.simulate' href='#PhyloNetworks.simulate'>#</a>
 <strong><code>PhyloNetworks.simulate</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>simulate(net::HybridNetwork, params::ParamsProcess, checkPreorder=true::Bool)</code></p>
+<div class="codehilite"><pre><span></span>simulate(net::HybridNetwork, params::ParamsProcess, checkPreorder=true::Bool)
+</pre></div>
+
+
 <p>Simualte some traits on <code>net</code> using the parameters <code>params</code>. For now, only parameters of type <a href="./#PhyloNetworks.ParamsBM"><code>ParamsBM</code></a> (Brownian Motion) are accepted.</p>
 <p>Assumes that the network is in the pre-order. If <code>checkPreorder=true</code> (default), then it runs function <code>preoder</code> on the network beforehand.</p>
 <p>Returns an object of type <a href="./#PhyloNetworks.TraitSimulation"><code>TraitSimulation</code></a>.</p>
@@ -1696,22 +1742,31 @@ julia&gt; traits = sim[:Tips] # Extract simulated values at the tips.
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L851-L902' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L929-L980' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.shiftHybrid' href='#PhyloNetworks.shiftHybrid'>#</a>
 <strong><code>PhyloNetworks.shiftHybrid</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>shiftHybrid(value::Vector{T} where T&lt;:Real, net::HybridNetwork; checkPreorder=true::Bool)</code></p>
+<div class="codehilite"><pre><span></span><span class="nt">shiftHybrid</span><span class="o">(</span><span class="nt">value</span><span class="p">::</span><span class="nd">Vector</span><span class="p">{</span><span class="err">T</span><span class="p">}</span> <span class="nt">where</span> <span class="nt">T</span><span class="o">&lt;</span><span class="p">:</span><span class="nd">Real</span><span class="o">,</span> <span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">;</span> <span class="nt">checkPreorder</span><span class="o">=</span><span class="nt">true</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
+</pre></div>
+
+
 <p>Construct an object <a href="./#PhyloNetworks.ShiftNet"><code>ShiftNet</code></a> with shifts on all the edges below hybrid nodes, with values provided. The vector of values must have the same length as the number of hybrids in the network.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L685-L692' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L763-L770' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getShiftEdgeNumber' href='#PhyloNetworks.getShiftEdgeNumber'>#</a>
 <strong><code>PhyloNetworks.getShiftEdgeNumber</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>getShiftEdgeNumber(shift::ShiftNet)</code></p>
+<div class="codehilite"><pre><span></span>getShiftEdgeNumber(shift::ShiftNet)
+</pre></div>
+
+
 <p>Get the edge numbers where the shifts are located, for an object <a href="../@ef"><code>ShiftNet</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L703-L707' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L781-L785' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.getShiftValue' href='#PhyloNetworks.getShiftValue'>#</a>
 <strong><code>PhyloNetworks.getShiftValue</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>getShiftValue(shift::ShiftNet)</code></p>
+<div class="codehilite"><pre><span></span>getShiftValue(shift::ShiftNet)
+</pre></div>
+
+
 <p>Get the values of the shifts, for an object <a href="../@ef"><code>ShiftNet</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L719-L723' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L797-L801' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.phyloNetworklm' href='#PhyloNetworks.phyloNetworklm'>#</a>
 <strong><code>PhyloNetworks.phyloNetworklm</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>phyloNetworklm(f, fr, net, model=&quot;BM&quot;,
@@ -1877,26 +1932,44 @@ julia&gt; predict(fitBM)
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1351-L1516' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L1456-L1621' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.sigma2_estim' href='#PhyloNetworks.sigma2_estim'>#</a>
 <strong><code>PhyloNetworks.sigma2_estim</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>sigma2_estim(m::PhyloNetworkLinearModel)</code> Estimated variance for a fitted object.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1664-L1667' class='documenter-source'>source</a><br></p>
+<div class="codehilite"><pre><span></span>sigma2_estim(m::PhyloNetworkLinearModel)
+</pre></div>
+
+
+<p>Estimated variance for a fitted object.</p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L1769-L1773' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.mu_estim' href='#PhyloNetworks.mu_estim'>#</a>
 <strong><code>PhyloNetworks.mu_estim</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>mu_estim(m::PhyloNetworkLinearModel)</code> Estimated root value for a fitted object.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1673-L1676' class='documenter-source'>source</a><br></p>
+<div class="codehilite"><pre><span></span>mu_estim(m::PhyloNetworkLinearModel)
+</pre></div>
+
+
+<p>Estimated root value for a fitted object.</p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L1779-L1783' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.lambda_estim' href='#PhyloNetworks.lambda_estim'>#</a>
 <strong><code>PhyloNetworks.lambda_estim</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>lambda_estim(m::PhyloNetworkLinearModel)</code> Estimated lambda parameter for a fitted object.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1696-L1699' class='documenter-source'>source</a><br></p>
+<div class="codehilite"><pre><span></span>lambda_estim(m::PhyloNetworkLinearModel)
+</pre></div>
+
+
+<p>Estimated lambda parameter for a fitted object.</p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L1803-L1807' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.ancestralStateReconstruction' href='#PhyloNetworks.ancestralStateReconstruction'>#</a>
 <strong><code>PhyloNetworks.ancestralStateReconstruction</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>ancestralStateReconstruction(net::HybridNetwork, Y::Vector, params::ParamsBM)</code></p>
+<div class="codehilite"><pre><span></span>ancestralStateReconstruction(net::HybridNetwork, Y::Vector, params::ParamsBM)
+</pre></div>
+
+
 <p>Compute the conditional expectations and variances of the ancestral (un-observed) traits values at the internal nodes of the phylogenetic network (<code>net</code>), given the values of the traits at the tips of the network (<code>Y</code>) and some known parameters of the process used for trait evolution (<code>params</code>, only BM with fixed root works for now).</p>
 <p>This function assumes that the parameters of the process are known. For a more general function, see <code>ancestralStateReconstruction(obj::PhyloNetworkLinearModel[, X_n::Matrix])</code>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1943-L1955' class='documenter-source'>source</a><br></p>
-<p><code>ancestralStateReconstruction(obj::PhyloNetworkLinearModel[, X_n::Matrix])</code></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L2055-L2067' class='documenter-source'>source</a><br></p>
+<div class="codehilite"><pre><span></span>ancestralStateReconstruction(obj::PhyloNetworkLinearModel[, X_n::Matrix])
+</pre></div>
+
+
 <p>Function to find the ancestral traits reconstruction on a network, given an object fitted by function <a href="./#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a>. By default, the function assumes that the regressor is just an intercept. If the value of the regressor for all the ancestral states is known, it can be entered in X_n, a matrix with as many columns as the number of predictors used, and as many lines as the number of unknown nodes or tips.</p>
 <p>Returns an object of type <a href="./#PhyloNetworks.ReconstructedStates"><code>ReconstructedStates</code></a>. See documentation for this type and examples for functions that can be applied to it.</p>
 <p><strong>Examples</strong></p>
@@ -2160,12 +2233,15 @@ julia<span class="o">&gt;</span> plot<span class="p">(</span>phy<span class="p">
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L2066-L2340' class='documenter-source'>source</a><br></p>
-<p><code>ancestralStateReconstruction(fr::AbstractDataFrame, net::HybridNetwork; kwargs...)</code></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L2178-L2452' class='documenter-source'>source</a><br></p>
+<div class="codehilite"><pre><span></span><span class="nt">ancestralStateReconstruction</span><span class="o">(</span><span class="nt">fr</span><span class="p">::</span><span class="nd">AbstractDataFrame</span><span class="o">,</span> <span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">;</span> <span class="nt">kwargs</span><span class="o">...)</span>
+</pre></div>
+
+
 <p>Function to find the ancestral traits reconstruction on a network, given some data at the tips. Uses function <a href="./#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a> to perform a phylogenetic regression of the data against an intercept (amounts to fitting an evolutionary model on the network, BM being the only option available for now).</p>
 <p>See documentation on <a href="./#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a> and <code>ancestralStateReconstruction(obj::PhyloNetworkLinearModel[, X_n::Matrix])</code> for further details.</p>
 <p>Returns an object of type <a href="./#PhyloNetworks.ReconstructedStates"><code>ReconstructedStates</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L2361-L2373' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L2473-L2485' class='documenter-source'>source</a><br></p>
 <div class="codehilite"><pre><span></span>ancestralStateReconstruction(obj::SSM, trait::Integer)
 ancestralStateReconstruction(obj::SSM)
 </pre></div>
@@ -2213,32 +2289,54 @@ ancestralStateReconstruction(obj::SSM)
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traitsLikDiscrete.jl#L465-L526' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traitsLikDiscrete.jl#L465-L526' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.expectations' href='#PhyloNetworks.expectations'>#</a>
 <strong><code>PhyloNetworks.expectations</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>expectations(obj::ReconstructedStates)</code> Estimated reconstructed states at the nodes and tips.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1840-L1843' class='documenter-source'>source</a><br></p>
+<div class="codehilite"><pre><span></span>expectations(obj::ReconstructedStates)
+</pre></div>
+
+
+<p>Estimated reconstructed states at the nodes and tips.</p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L1948-L1952' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.predint' href='#PhyloNetworks.predint'>#</a>
 <strong><code>PhyloNetworks.predint</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>predint(obj::ReconstructedStates; level=0.95::Real)</code> Prediction intervals with level <code>level</code> for internal nodes and missing tips.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1878-L1881' class='documenter-source'>source</a><br></p>
+<div class="codehilite"><pre><span></span><span class="nt">predint</span><span class="o">(</span><span class="nt">obj</span><span class="p">::</span><span class="nd">ReconstructedStates</span><span class="o">;</span> <span class="nt">level</span><span class="o">=</span><span class="nt">0</span><span class="p">.</span><span class="nc">95</span><span class="p">::</span><span class="nd">Real</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Prediction intervals with level <code>level</code> for internal nodes and missing tips.</p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L1988-L1992' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.expectationsPlot' href='#PhyloNetworks.expectationsPlot'>#</a>
 <strong><code>PhyloNetworks.expectationsPlot</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>expectationsPlot(obj::ReconstructedStates)</code> Compute and format the expected reconstructed states for the plotting function. The resulting dataframe can be readily used as a <code>nodeLabel</code> argument to <code>plot</code> from package <a href="https://github.com/cecileane/PhyloPlots.jl"><code>PhyloPlots</code></a>. Keyword argument <code>markMissing</code> is a string that is appended to predicted tip values, so that they can be distinguished from the actual datapoints. Default to "*". Set to "" to remove any visual cue.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1848-L1856' class='documenter-source'>source</a><br></p>
+<div class="codehilite"><pre><span></span>expectationsPlot(obj::ReconstructedStates)
+</pre></div>
+
+
+<p>Compute and format the expected reconstructed states for the plotting function. The resulting dataframe can be readily used as a <code>nodeLabel</code> argument to <code>plot</code> from package <a href="https://github.com/cecileane/PhyloPlots.jl"><code>PhyloPlots</code></a>. Keyword argument <code>markMissing</code> is a string that is appended to predicted tip values, so that they can be distinguished from the actual datapoints. Default to "*". Set to "" to remove any visual cue.</p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L1957-L1966' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.predintPlot' href='#PhyloNetworks.predintPlot'>#</a>
 <strong><code>PhyloNetworks.predintPlot</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>predintPlot(obj::ReconstructedStates; level=0.95::Real, withExp=false::Bool)</code> Compute and format the prediction intervals for the plotting function. The resulting dataframe can be readily used as a <code>nodeLabel</code> argument to <code>plot</code> from package <a href="https://github.com/cecileane/PhyloPlots.jl"><code>PhyloPlots</code></a>. Keyworks argument <code>level</code> control the confidence level of the prediction interval. If <code>withExp</code> is set to true, then the best predicted value is also shown along with the interval.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L1900-L1908' class='documenter-source'>source</a><br></p>
+<div class="codehilite"><pre><span></span><span class="nt">predintPlot</span><span class="o">(</span><span class="nt">obj</span><span class="p">::</span><span class="nd">ReconstructedStates</span><span class="o">;</span> <span class="nt">level</span><span class="o">=</span><span class="nt">0</span><span class="p">.</span><span class="nc">95</span><span class="p">::</span><span class="nd">Real</span><span class="o">,</span> <span class="nt">withExp</span><span class="o">=</span><span class="nt">false</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Compute and format the prediction intervals for the plotting function. The resulting dataframe can be readily used as a <code>nodeLabel</code> argument to <code>plot</code> from package <a href="https://github.com/cecileane/PhyloPlots.jl"><code>PhyloPlots</code></a>. Keyworks argument <code>level</code> control the confidence level of the prediction interval. If <code>withExp</code> is set to true, then the best predicted value is also shown along with the interval.</p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L2011-L2020' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.descendenceMatrix' href='#PhyloNetworks.descendenceMatrix'>#</a>
 <strong><code>PhyloNetworks.descendenceMatrix</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>descendenceMatrix(net::HybridNetwork; checkPreorder=true::Bool)</code></p>
+<div class="codehilite"><pre><span></span><span class="nt">descendenceMatrix</span><span class="o">(</span><span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">;</span> <span class="nt">checkPreorder</span><span class="o">=</span><span class="nt">true</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
+</pre></div>
+
+
 <p>This function computes the inciednce matrix between all the nodes of a network. It assumes that the network is in the pre-order. If checkPreorder is true (default), then it runs function <code>preoder</code> on the network beforehand.</p>
 <p>Returns an object of type <a href="../internals/#PhyloNetworks.MatrixTopologicalOrder"><code>MatrixTopologicalOrder</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L341-L350' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L419-L428' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.regressorShift' href='#PhyloNetworks.regressorShift'>#</a>
 <strong><code>PhyloNetworks.regressorShift</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>regressorShift(node::Vector{Node}, net::HybridNetwork; checkPreorder=true::Bool)</code></p>
+<div class="codehilite"><pre><span></span><span class="nt">regressorShift</span><span class="o">(</span><span class="nt">node</span><span class="p">::</span><span class="nd">Vector</span><span class="p">{</span><span class="err">Node</span><span class="p">}</span><span class="o">,</span> <span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">;</span> <span class="nt">checkPreorder</span><span class="o">=</span><span class="nt">true</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
+</pre></div>
+
+
 <p><code>regressorShift(edge::Vector{Edge}, net::HybridNetwork; checkPreorder=true::Bool)</code></p>
 <p>Compute the regressor vectors associated with shifts on edges that are above nodes <code>node</code>, or on edges <code>edge</code>, on a network <code>net</code>. It uses function <a href="./#PhyloNetworks.descendenceMatrix"><code>descendenceMatrix</code></a>, so <code>net</code> might be modified to sort it in a pre-order. Return a <code>DataFrame</code> with as many rows as there are tips in net, and a column for each shift, each labelled according to the pattern shift_{number_of_edge}. It has an aditional column labelled <code>tipNames</code> to allow easy fitting afterward (see example).</p>
 <p><strong>Examples</strong></p>
@@ -2317,10 +2415,13 @@ ancestralStateReconstruction(obj::SSM)
 
 <p><strong>See also</strong></p>
 <p><a href="./#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a>, <a href="./#PhyloNetworks.descendenceMatrix"><code>descendenceMatrix</code></a>, <a href="./#PhyloNetworks.regressorHybrid"><code>regressorHybrid</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L387-L476' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L465-L554' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.regressorHybrid' href='#PhyloNetworks.regressorHybrid'>#</a>
 <strong><code>PhyloNetworks.regressorHybrid</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>regressorHybrid(net::HybridNetwork; checkPreorder=true::Bool)</code></p>
+<div class="codehilite"><pre><span></span><span class="nt">regressorHybrid</span><span class="o">(</span><span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">;</span> <span class="nt">checkPreorder</span><span class="o">=</span><span class="nt">true</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
+</pre></div>
+
+
 <p>Compute the regressor vectors associated with shifts on edges that imediatly below all hybrid nodes of <code>net</code>. It uses function <a href="./#PhyloNetworks.descendenceMatrix"><code>descendenceMatrix</code></a> through a call to <a href="./#PhyloNetworks.regressorShift"><code>regressorShift</code></a>, so <code>net</code> might be modified to sort it in a pre-order. Return a <code>DataFrame</code> with as many rows as there are tips in net, and a column for each hybrid, each labelled according to the pattern shift_{number_of_edge}. It has an aditional column labelled <code>tipNames</code> to allow easy fitting afterward (see example).</p>
 <p>This function can be used to test for heterosis.</p>
 <p><strong>Examples</strong></p>
@@ -2398,13 +2499,73 @@ ancestralStateReconstruction(obj::SSM)
 
 <p><strong>See also</strong></p>
 <p><a href="./#PhyloNetworks.phyloNetworklm"><code>phyloNetworklm</code></a>, <a href="./#PhyloNetworks.descendenceMatrix"><code>descendenceMatrix</code></a>, <a href="./#PhyloNetworks.regressorShift"><code>regressorShift</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L521-L609' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L599-L687' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.sharedPathMatrix' href='#PhyloNetworks.sharedPathMatrix'>#</a>
 <strong><code>PhyloNetworks.sharedPathMatrix</code></strong> &mdash; <em>Function</em>.</p>
-<p><code>sharedPathMatrix(net::HybridNetwork; checkPreorder=true::Bool)</code></p>
+<div class="codehilite"><pre><span></span><span class="nt">sharedPathMatrix</span><span class="o">(</span><span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">;</span> <span class="nt">checkPreorder</span><span class="o">=</span><span class="nt">true</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
+</pre></div>
+
+
 <p>This function computes the shared path matrix between all the nodes of a network. It assumes that the network is in the pre-order. If checkPreorder is true (default), then it runs function <code>preoder</code> on the network beforehand.</p>
 <p>Returns an object of type <a href="../internals/#PhyloNetworks.MatrixTopologicalOrder"><code>MatrixTopologicalOrder</code></a>.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traits.jl#L279-L288' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L357-L366' class='documenter-source'>source</a><br></p>
+<p><a id='PhyloNetworks.vcv' href='#PhyloNetworks.vcv'>#</a>
+<strong><code>PhyloNetworks.vcv</code></strong> &mdash; <em>Function</em>.</p>
+<div class="codehilite"><pre><span></span><span class="nt">vcv</span><span class="o">(</span><span class="nt">net</span><span class="p">::</span><span class="nd">HybridNetwork</span><span class="o">;</span> <span class="nt">model</span><span class="o">=</span><span class="s2">&quot;BM&quot;</span><span class="p">::</span><span class="nd">AbstractString</span><span class="o">,</span> 
+                        <span class="nt">corr</span><span class="o">=</span><span class="nt">false</span><span class="p">::</span><span class="nd">Bool</span><span class="o">,</span>
+                        <span class="nt">checkPreorder</span><span class="o">=</span><span class="nt">true</span><span class="p">::</span><span class="nd">Bool</span><span class="o">)</span>
+</pre></div>
+
+
+<p>This function computes the variance covariance matrix between the tips of the network, assuming a Brownian model of trait evolution (with unit variance). If optional argument <code>corr</code> is set to <code>true</code>, then the correlation matrix is returned instead.</p>
+<p>The function returns a <code>DataFrame</code> object, with columns named by the tips of the network.</p>
+<p>The calculation of the covariance matrix requires a pre-ordering of nodes to be fast. If <code>checkPreorder</code> is true (default), then <code>preorder</code> is run on the network beforehand. Otherwise, the network is assumed to be already in pre-order.</p>
+<p>This function internally calls <a href="./#PhyloNetworks.sharedPathMatrix"><code>sharedPathMatrix</code></a>, that computes the variance matrix between all the nodes of the network.</p>
+<p><strong>Examples</strong></p>
+<div class="codehilite"><pre><span></span><span class="nt">julia</span><span class="o">&gt;</span> <span class="nt">tree_str</span> <span class="o">=</span> <span class="s2">&quot;(((t2:0.14,t4:0.33):0.59,t3:0.96):0.14,(t5:0.70,t1:0.18):0.90);&quot;</span><span class="o">;</span>
+
+<span class="nt">julia</span><span class="o">&gt;</span> <span class="nt">tree</span> <span class="o">=</span> <span class="nt">readTopology</span><span class="o">(</span><span class="nt">tree_str</span><span class="o">);</span>
+
+<span class="nt">julia</span><span class="o">&gt;</span> <span class="nt">C</span> <span class="o">=</span> <span class="nt">vcv</span><span class="o">(</span><span class="nt">tree</span><span class="o">)</span>
+<span class="nt">5</span><span class="err">×</span><span class="nt">5</span> <span class="nt">DataFrames</span><span class="p">.</span><span class="nc">DataFrame</span>
+<span class="err">│</span> <span class="nt">Row</span> <span class="err">│</span> <span class="nt">t2</span>   <span class="err">│</span> <span class="nt">t4</span>   <span class="err">│</span> <span class="nt">t3</span>   <span class="err">│</span> <span class="nt">t5</span>  <span class="err">│</span> <span class="nt">t1</span>   <span class="err">│</span>
+<span class="err">├─────┼──────┼──────┼──────┼─────┼──────┤</span>
+<span class="err">│</span> <span class="nt">1</span>   <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">87</span> <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">73</span> <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">14</span> <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span> <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span>  <span class="err">│</span>
+<span class="err">│</span> <span class="nt">2</span>   <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">73</span> <span class="err">│</span> <span class="nt">1</span><span class="p">.</span><span class="nc">06</span> <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">14</span> <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span> <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span>  <span class="err">│</span>
+<span class="err">│</span> <span class="nt">3</span>   <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">14</span> <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">14</span> <span class="err">│</span> <span class="nt">1</span><span class="p">.</span><span class="nc">1</span>  <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span> <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span>  <span class="err">│</span>
+<span class="err">│</span> <span class="nt">4</span>   <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span>  <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span>  <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span>  <span class="err">│</span> <span class="nt">1</span><span class="p">.</span><span class="nc">6</span> <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">9</span>  <span class="err">│</span>
+<span class="err">│</span> <span class="nt">5</span>   <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span>  <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span>  <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span>  <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">9</span> <span class="err">│</span> <span class="nt">1</span><span class="p">.</span><span class="nc">08</span> <span class="err">│</span>
+</pre></div>
+
+
+<p>The following block needs <code>ape</code> to be installed (not run):</p>
+<div class="codehilite"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="k">using</span> <span class="n">RCall</span> <span class="c"># Comparison with ape vcv function</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">R</span><span class="s">&quot;ape::vcv(ape::read.tree(text = </span><span class="si">$tree_str</span><span class="s">))&quot;</span>
+<span class="n">RCall</span><span class="o">.</span><span class="n">RObject</span><span class="p">{</span><span class="n">RCall</span><span class="o">.</span><span class="n">RealSxp</span><span class="p">}</span>
+     <span class="n">t2</span>   <span class="n">t4</span>   <span class="n">t3</span>  <span class="n">t5</span>   <span class="n">t1</span>
+<span class="n">t2</span> <span class="mf">0.87</span> <span class="mf">0.73</span> <span class="mf">0.14</span> <span class="mf">0.0</span> <span class="mf">0.00</span>
+<span class="n">t4</span> <span class="mf">0.73</span> <span class="mf">1.06</span> <span class="mf">0.14</span> <span class="mf">0.0</span> <span class="mf">0.00</span>
+<span class="n">t3</span> <span class="mf">0.14</span> <span class="mf">0.14</span> <span class="mf">1.10</span> <span class="mf">0.0</span> <span class="mf">0.00</span>
+<span class="n">t5</span> <span class="mf">0.00</span> <span class="mf">0.00</span> <span class="mf">0.00</span> <span class="mf">1.6</span> <span class="mf">0.90</span>
+<span class="n">t1</span> <span class="mf">0.00</span> <span class="mf">0.00</span> <span class="mf">0.00</span> <span class="mf">0.9</span> <span class="mf">1.08</span>
+</pre></div>
+
+
+<p>The covariance can also be calculated on a network (for the model, see for Bastide et al. 2018)</p>
+<div class="codehilite"><pre><span></span><span class="nt">julia</span><span class="o">&gt;</span> <span class="nt">net</span> <span class="o">=</span> <span class="nt">readTopology</span><span class="o">(</span><span class="s2">&quot;((t1:1.0,#H1:0.1::0.30):0.5,((t2:0.9)#H1:0.2::0.70,t3:1.1):0.4);&quot;</span><span class="o">);</span>
+
+<span class="nt">julia</span><span class="o">&gt;</span> <span class="nt">C</span> <span class="o">=</span> <span class="nt">vcv</span><span class="o">(</span><span class="nt">net</span><span class="o">)</span>
+<span class="nt">3</span><span class="err">×</span><span class="nt">3</span> <span class="nt">DataFrames</span><span class="p">.</span><span class="nc">DataFrame</span>
+<span class="err">│</span> <span class="nt">Row</span> <span class="err">│</span> <span class="nt">t1</span>   <span class="err">│</span> <span class="nt">t2</span>    <span class="err">│</span> <span class="nt">t3</span>   <span class="err">│</span>
+<span class="err">├─────┼──────┼───────┼──────┤</span>
+<span class="err">│</span> <span class="nt">1</span>   <span class="err">│</span> <span class="nt">1</span><span class="p">.</span><span class="nc">5</span>  <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">15</span>  <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span>  <span class="err">│</span>
+<span class="err">│</span> <span class="nt">2</span>   <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">15</span> <span class="err">│</span> <span class="nt">1</span><span class="p">.</span><span class="nc">248</span> <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">28</span> <span class="err">│</span>
+<span class="err">│</span> <span class="nt">3</span>   <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">0</span>  <span class="err">│</span> <span class="nt">0</span><span class="p">.</span><span class="nc">28</span>  <span class="err">│</span> <span class="nt">1</span><span class="p">.</span><span class="nc">5</span>  <span class="err">│</span>
+</pre></div>
+
+
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traits.jl#L279-L342' class='documenter-source'>source</a><br></p>
 <p><a id='discrete-trait-evolution-1'></a></p>
 <h2 id="discrete-trait-evolution">discrete trait evolution</h2>
 <p><a id='PhyloNetworks.parsimonySoftwired' href='#PhyloNetworks.parsimonySoftwired'>#</a>
@@ -2414,21 +2575,21 @@ parsimonySoftwired(net, species, sequences)
 </pre></div>
 
 
-<p>Calculate the most parsimonious (MP) score of a network given a discrete character at the tips using the dynamic programming algorithm given in Fischer et al. (2015). The softwired parsimony concept is used: where the number of state transitions is minimized over all trees displayed in the network.</p>
+<p>Calculate the most parsimonious (MP) score of a network given a discrete character at the tips. The softwired parsimony concept is used: where the number of state transitions is minimized over all trees displayed in the network.</p>
 <p>Data can given in one of the following:</p>
 <ul>
-<li><code>tipdata</code>: data frame for a single trait, in which case the taxon names</li>
-</ul>
-<p>are to appear in column 1 or in a column named "taxon" or "species", and trait values are to appear in column 2 or in a column named "trait".</p>
-<ul>
+<li><code>tipdata</code>: data frame for a single trait, in which case the taxon names  are to appear in column 1 or in a column named "taxon" or "species", and  trait values are to appear in column 2 or in a column named "trait".</li>
 <li><code>tipdata</code>: dictionary taxon =&gt; state, for a single trait.</li>
 <li><code>species</code>: array of strings, and <code>sequences</code>: array of sequences,  in the order corresponding to the order of species names.</li>
 </ul>
-<p><strong>References</strong></p>
+<p><strong>algorithm</strong></p>
+<p>The dynamic programming algorithm by Fischer et al. (2015) is used. The function loops over all the displayed subtrees within a blob (biconnected component), so its complexity is of the order of <code>n * m * c^2 * 2^level</code> where <code>n</code> is the number of tips, <code>m</code> the number of traits, <code>c</code> the number of states, and <code>level</code> is the level of the network: the maximum number of hybridizations within a blob.</p>
+<p>See <a href="./#PhyloNetworks.parsimonyGF"><code>parsimonyGF</code></a> for a different algorithm, slower but extendable to other parsimony criteria.</p>
+<p><strong>references</strong></p>
 <ol>
 <li>Fischer, M., van Iersel, L., Kelk, S., Scornavacca, C. (2015). On computing the Maximum Parsimony score of a phylogenetic network. SIAM J. Discrete Math., 29(1):559-585.</li>
 </ol>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/parsimony.jl#L212-L235' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/parsimony.jl#L212-L247' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.parsimonyGF' href='#PhyloNetworks.parsimonyGF'>#</a>
 <strong><code>PhyloNetworks.parsimonyGF</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>parsimonyGF(net, tip_dictionary, criterion=:softwired)
@@ -2436,23 +2597,23 @@ parsimonyGF(net, species, sequenceData, criterion=:softwired)
 </pre></div>
 
 
-<p>Calculate the most parsimonious score of a network given discrete characters at the tips using a general framework (Van Iersel et al. 2018) allowing for various parsimony criteria: softwired (default), hardwired, parental etc. The complexity of the algorithm is exponential in the level of the network, that is, the maximum number of hybridizations in a single blob (Fischer et al. 2015).</p>
+<p>Calculate the most parsimonious score of a network given discrete characters at the tips using a general framework (Van Iersel et al. 2018) allowing for various parsimony criteria: softwired (default), hardwired, parental etc. Only softwired is implemented at the moment.</p>
 <p>Data can given in one of the following:</p>
 <ul>
-<li><code>tipdata</code>: data frame for a single trait, in which case the taxon names</li>
-</ul>
-<p>are to appear in column 1 or in a column named "taxon" or "species", and trait values are to appear in column 2 or in a column named "trait".</p>
-<ul>
+<li><code>tipdata</code>: data frame for a single trait, in which case the taxon names  are to appear in column 1 or in a column named "taxon" or "species", and  trait values are to appear in column 2 or in a column named "trait".</li>
 <li><code>tipdata</code>: dictionary taxon =&gt; state, for a single trait.</li>
 <li><code>species</code>: array of strings, and <code>sequences</code>: array of sequences,   in the order corresponding to the order of species names.</li>
 </ul>
-<p><strong>References</strong></p>
+<p><strong>algorithm</strong></p>
+<p>The complexity of the algorithm is exponential in the level of the network, that is, the maximum number of hybridizations in a single blob, or biconnected component (Fischer et al. 2015). The function loops over all the state assignments of the minor parent of each hybrid node within a blob, so its complexity is of the order of <code>n * m * c^2 * c^level</code> where <code>n</code> is the number of tips, <code>m</code> the number of traits and <code>c</code> the number of states.</p>
+<p>See <a href="./#PhyloNetworks.parsimonySoftwired"><code>parsimonySoftwired</code></a> for a faster algorithm, but solving the softwired criterion only.</p>
+<p><strong>references</strong></p>
 <ol>
 <li>Leo Van Iersel, Mark Jones, Celine Scornavacca (2017). Improved Maximum Parsimony Models for Phylogenetic Networks, Systematic Biology, (https://doi.org/10.1093/sysbio/syx094).</li>
 <li>Fischer, M., van Iersel, L., Kelk, S., Scornavacca, C. (2015). On computing the Maximum Parsimony score of a phylogenetic network. SIAM J. Discrete Math., 29(1):559-585.</li>
 </ol>
 <p>Use the recursive helper function <a href="../internals/#PhyloNetworks.parsimonyBottomUpGF!-Tuple{PhyloNetworks.Node,PhyloNetworks.Node,Integer,AbstractArray,AbstractArray,AbstractArray,AbstractArray}"><code>parsimonyBottomUpGF!</code></a>. Use the fields <code>isChild1</code>, <code>isExtBadTriangle</code> to know which nodes are at the root of a blob, and <code>fromBadDiamondI</code> to know which edges are cut (below the minor parent of each hybrid).</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/parsimony.jl#L391-L426' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/parsimony.jl#L453-L499' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.nStates' href='#PhyloNetworks.nStates'>#</a>
 <strong><code>PhyloNetworks.nStates</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>nStates(model)
@@ -2460,7 +2621,7 @@ parsimonyGF(net, species, sequenceData, criterion=:softwired)
 
 
 <p>Number of character states for a given trait evolution model.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L19-L23' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L19-L23' class='documenter-source'>source</a><br></p>
 <p><strong>Examples</strong></p>
 <div class="codehilite"><pre><span></span>julia&gt; m1 = BinaryTraitSubstitutionModel([1.0,2.0], [&quot;low&quot;,&quot;high&quot;])
 julia&gt; nStates(m1)
@@ -2468,7 +2629,7 @@ julia&gt; nStates(m1)
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L134-L142' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L134-L142' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.Q' href='#PhyloNetworks.Q'>#</a>
 <strong><code>PhyloNetworks.Q</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>Q(model)
@@ -2476,14 +2637,14 @@ julia&gt; nStates(m1)
 
 
 <p>Substitution rate matrix for a given substitution model: Q[i,j] is the rate of transitioning from state i to state j.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L34-L39' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L34-L39' class='documenter-source'>source</a><br></p>
 <p>For a BinaryTraitSubstitutionModel, the rate matrix Q is of the form:</p>
 <div class="codehilite"><pre><span></span>-α  α
  β -β
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L149-L154' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L149-L154' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.P' href='#PhyloNetworks.P'>#</a>
 <strong><code>PhyloNetworks.P</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>P(mod, t)
@@ -2499,13 +2660,13 @@ P[k,1] ... P[k,k]
 
 
 <p>where P[i,j] is the probability of ending in state j after time t, given that the process started in state i.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L72-L84' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L72-L84' class='documenter-source'>source</a><br></p>
 <div class="codehilite"><pre><span></span>P(mod, t::Array{Float64})
 </pre></div>
 
 
 <p>When applied to a general substitution model, matrix exponentiation is used. The time argument <code>t</code> can be an array.</p>
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L90-L95' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L90-L95' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.randomTrait' href='#PhyloNetworks.randomTrait'>#</a>
 <strong><code>PhyloNetworks.randomTrait</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>randomTrait(model, t, start)
@@ -2529,7 +2690,7 @@ julia&gt; randomTrait(m1, 0.2, [1,2,1,2,2])
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L289-L311' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L289-L311' class='documenter-source'>source</a><br></p>
 <div class="codehilite"><pre><span></span>randomTrait(model, net; ntraits=1, keepInternal=true, checkPreorder=true)
 </pre></div>
 
@@ -2568,7 +2729,7 @@ julia&gt; randomTrait(m1, 0.2, [1,2,1,2,2])
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/substitutionModels.jl#L327-L369' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/substitutionModels.jl#L327-L369' class='documenter-source'>source</a><br></p>
 <p><a id='PhyloNetworks.fitDiscrete' href='#PhyloNetworks.fitDiscrete'>#</a>
 <strong><code>PhyloNetworks.fitDiscrete</code></strong> &mdash; <em>Function</em>.</p>
 <div class="codehilite"><pre><span></span>fitDiscrete(net, model, tipdata)
@@ -2652,7 +2813,36 @@ julia&gt; [n.number for n in net.node]
 </pre></div>
 
 
-<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/af3ed83b22702ec98d1b5a408015eed31aa805f8/src/traitsLikDiscrete.jl#L61-L160' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/traitsLikDiscrete.jl#L61-L160' class='documenter-source'>source</a><br></p>
+<p><a id='PhyloNetworks.maxParsimonyNet' href='#PhyloNetworks.maxParsimonyNet'>#</a>
+<strong><code>PhyloNetworks.maxParsimonyNet</code></strong> &mdash; <em>Function</em>.</p>
+<div class="codehilite"><pre><span></span>maxParsimonyNet(T::HybridNetwork, df::DataFrame)
+</pre></div>
+
+
+<p>Search for the most parsimonious network (or tree). A level-1 network is assumed. <code>df</code> should be a data frame containing the species names in column 1, or in a column named <code>species</code> or <code>taxon</code>. Trait data are assumed to be in all other columns. The search starts from topology <code>T</code>, which can be a tree or a network with no more than <code>hmax</code> hybrid nodes (see optional arguments below for <code>hmax</code>).</p>
+<p>Output:</p>
+<ul>
+<li>estimated network in file <code>.out</code> (also in <code>.log</code>): best network overall and list of networks from each individual run.</li>
+<li>if any error occurred, file <code>.err</code> provides information (seed) to reproduce the error.</li>
+</ul>
+<p>Optional arguments include</p>
+<ul>
+<li>hmax: maximum number of hybridizations allowed (default 1)</li>
+<li>runs: number of starting points for the search (default 10); each starting point is <code>T</code> with probability <code>probST</code>=0.3 or a modification of <code>T</code> otherwise (using a NNI move, or a hybrid edge direction change)</li>
+<li>Nfail: number of failures (proposed networks with equal or worse score) before the search is aborted. 75 by default: this is quite small, which is okay for a first trial. Larger values are recommended.</li>
+<li>outgroup: outgroup taxon.           It can be a taxon name (String) or Node number (Integer).           If none provided, or if the outgroup conflicts the starting           topology, the function returns an error</li>
+<li>filename: root name for the output files. Default is "mp". If empty (""), files are <em>not</em> created, progress log goes to the screen only (standard out).</li>
+<li>seed: seed to replicate a given search</li>
+<li>criterion: parsimony score could be hardwired, softwired (default) or parental. Currently,            only softwired is implemented</li>
+</ul>
+<p><strong>References</strong></p>
+<ol>
+<li>Leo Van Iersel, Mark Jones, Celine Scornavacca (2017). Improved Maximum Parsimony Models for Phylogenetic Networks, Systematic Biology, (https://doi.org/10.1093/sysbio/syx094).</li>
+<li>Fischer, M., van Iersel, L., Kelk, S., Scornavacca, C. (2015). On computing the Maximum Parsimony score of a phylogenetic network. SIAM J. Discrete Math., 29(1):559-585.</li>
+</ol>
+<p>For a roadmap of the functions inside maxParsimonyNet, see <a href="../internals/#PhyloNetworks.maxParsimonyNetRun1!"><code>maxParsimonyNetRun1!</code></a>.</p>
+<p><a target='_blank' href='https://github.com/pbastide/PhyloNetworks.jl/blob/992641711289c8a07c66e3bafc5c88ec1b9e44d0/src/parsimony.jl#L1026-L1075' class='documenter-source'>source</a><br></p>
                 
                   
                 
@@ -2673,7 +2863,7 @@ julia&gt; [n.number for n in net.node]
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../man/trait_tree/" title="Continuous Trait Evolution" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../man/parsimony/" title="Parsimony on networks" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2682,7 +2872,7 @@ julia&gt; [n.number for n in net.node]
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Continuous Trait Evolution
+                Parsimony on networks
               </span>
             </div>
           </a>
@@ -2724,7 +2914,7 @@ julia&gt; [n.number for n in net.node]
       
     </div>
     
-      <script src="../../assets/javascripts/application.a59e2a89.js"></script>
+      <script src="../../assets/javascripts/application.30f6b8b1.js"></script>
       
       <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
       
