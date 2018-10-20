@@ -218,6 +218,7 @@ info("will run SNaQ with h=",h,
 addprocs(nruns)
 @everywhere using PhyloNetworks
 net0 = readTopology("astraltree.tre");
+using CSV
 df_sp = CSV.read("tableCF_speciesNames.csv", categorical=false);
 d_sp = readTableCF!(df_sp);
 net = snaq!(net0, d_sp, hmax=h, filename=outputfile, seed=seed, runs=nruns)
@@ -238,7 +239,7 @@ They are most likely to be specific to your cluster.
 The main idea here is to use a slurm "array" from 0 to 3, to run our
 julia script multiple times, 4 times actually: from hmax=0 to hmax=3.
 Each would do 30 runs.
-Then log out of the cluster and go for coffee... 😃
+Then log out of the cluster and go for coffee.
 
 ```bash
 #!/bin/bash

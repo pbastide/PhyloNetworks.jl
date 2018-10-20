@@ -51,6 +51,7 @@ getindex(::TraitSimulation, ::Symbol)
 getNodeAges
 pairwiseTaxonDistanceMatrix
 biconnectedComponents
+blobDecomposition
 ```
 
 ## data and topology read/write
@@ -120,6 +121,7 @@ descendenceMatrix
 regressorShift
 regressorHybrid
 sharedPathMatrix
+vcv
 ```
 
 ## discrete trait evolution
@@ -132,6 +134,7 @@ Q
 P
 randomTrait
 fitDiscrete
+maxParsimonyNet
 ```
 
 ```@meta
