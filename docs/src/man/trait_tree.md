@@ -30,7 +30,7 @@ the sake of clarity.
 using PhyloPlots, RCall
 R"name <- function(x) file.path('..', 'assets', 'figures', x)"
 R"svg(name('truenet.svg'), width=8, height=4)"
-R"par(mar = c(0, 0, 0, 0))"
+R"par"(mar=[0,0,0,0])
 plot(truenet, :R, useEdgeLength=true, showGamma=true);
 R"dev.off()"
 nothing # hide
@@ -44,11 +44,13 @@ Brownian Motion (BM) in time, it is possible to compute the expected variance
 covariance matrix between tip measurements. This can be done using function
 [`vcv`](@ref), whose syntax is inspired from the well known corresponding
 [`ape`](https://CRAN.R-project.org/package=ape) function.
-```@example tree_trait
+```@repl tree_trait
 C = vcv(truenet)
 ```
 The matrix is returned as a `DataFrame`, with columns named by the
 tips of the network to allow for easy identification.
+Each row also corresponds to a tip in the network, and rows are
+ordered in the same way as columns.
 
 The computation of this matrix is based on the more general function
 [`sharedPathMatrix`](@ref). It is at the core of all the Phylogenetic
@@ -70,7 +72,8 @@ nothing # hide
 We then simulate the independent traits according to these parameters, using
 function [`simulate`](@ref) (fixing the seed, for reproducibility).
 ```@example tree_trait
-srand(18480224);
+using Random
+Random.seed!(18480224);
 sim1 = simulate(truenet, params_trait1) # simulate a BM on truenet
 sim2 = simulate(truenet, params_trait2)
 nothing # hide
@@ -96,9 +99,9 @@ nothing # hide
 Finally, we generate the last trait correlated with trait 1
 (but not trait 2), with phylogenetic noise.
 ```@example tree_trait
-srand(18700904);
+Random.seed!(18700904);
 noise = simulate(truenet, ParamsBM(0, 0.1)) # phylogenetic residuals
-trait3 = 10 + 2 * trait1 + noise[:Tips] # trait to study. independent of trait2
+trait3 = 10 .+ 2 * trait1 .+ noise[:Tips] # trait to study. independent of trait2
 nothing # hide
 ```
 
@@ -111,7 +114,7 @@ regression.
 In order to avoid confusion, the function takes in a `DataFrame`, that has an
 extra column with the names of the tips of the network, labeled `tipNames`.
 Here, we generated the traits ourselves, so they are all in the same order.
-```@example tree_trait
+```@repl tree_trait
 using DataFrames
 dat = DataFrame(trait1 = trait1, trait2 = trait2, trait3 = trait3,
                 tipNames = tipLabels(sim1))
@@ -120,7 +123,7 @@ dat = DataFrame(trait1 = trait1, trait2 = trait2, trait3 = trait3,
 Phylogenetic regression / ANOVA is based on the
 [GLM](https://github.com/JuliaStats/GLM.jl) package, with the network as an
 extra argument, using function [`phyloNetworklm`](@ref).
-```@example tree_trait
+```@repl tree_trait
 using StatsModels # for statistical model formulas
 fitTrait3 = phyloNetworklm(@formula(trait3 ~ trait1 + trait2), dat, truenet)
 ```
@@ -171,7 +174,7 @@ We can plot the ancestral states or prediction intervals on the tree, using the
 ```@example tree_trait
 ancExpe = expectationsPlot(ancTrait1); # format expected ancestral states for the plot
 R"svg(name('ancestral_expe.svg'), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
+R"par"(mar=[0,0,0,0]) # hide
 plot(truenet, :R, nodeLabel = ancExpe);
 R"dev.off()" # hide
 nothing # hide
@@ -181,7 +184,7 @@ nothing # hide
 ```@example tree_trait
 ancInt = predintPlot(ancTrait1) # format the prediction intervals for the plot
 R"svg(name('ancestral_predint.svg'), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
+R"par"(mar=[0,0,0,0]) # hide
 plot(truenet,:R, nodeLabel = ancInt);
 R"dev.off()" # hide
 nothing # hide
@@ -204,7 +207,7 @@ These plots tend to be quite busy, even for small networks.
 
 As we know the true ancestral states here, we can compare them to our
 estimation.
-```@example tree_trait
+```@repl tree_trait
 predictions = DataFrame(infPred=predint(ancTrait1)[1:7, 1],
                         trueValue=sim1[:InternalNodes],
                         supPred=predint(ancTrait1)[1:7, 2])
@@ -232,7 +235,7 @@ The output is an object of the same [`ReconstructedStates`](@ref) type as earlie
 and the same extractors can be applied to it:
 ```@example tree_trait
 R"svg(name('ancestral1.svg'), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
+R"par"(mar=[0,0,0,0]) # hide
 plot(truenet, :R, nodeLabel = expectationsPlot(ancTrait1Approx));
 R"dev.off()" # hide
 nothing # hide
@@ -250,7 +253,7 @@ nothing # hide
 ```
 ```@example tree_trait
 R"svg(name('ancestral2.svg'), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
+R"par"(mar=[0,0,0,0]) # hide
 plot(truenet, :R, nodeLabel = predintPlot(ancTrait1Approx, level=0.9));
 R"dev.off()" # hide
 nothing # hide
@@ -268,14 +271,14 @@ network. Consequently, the previous [`ancestralStateReconstruction`](@ref)
 function can be used to do data imputation. To see this, let's add some missing
 values in trait 1.
 ```@example tree_trait
-datTrait1[:trait1] = allowmissing(datTrait1[:trait1]);
-datTrait1[[2], :trait1] = missing; # second row: for taxon C
+allowmissing!(datTrait1, :trait1)
+datTrait1[2, :trait1] = missing; # second row: for taxon C
 ancTrait1Approx = ancestralStateReconstruction(datTrait1, truenet)
 nothing # hide
 ```
 ```@example tree_trait
 R"svg(name('ancestral3.svg'), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
+R"par"(mar=[0,0,0,0]) # hide
 plot(truenet, :R, nodeLabel = predintPlot(ancTrait1Approx));
 R"dev.off()" # hide
 nothing # hide
@@ -309,7 +312,7 @@ nothing # hide
 ```
 ```@example tree_trait
 R"svg(name('ancestral4.svg'), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
+R"par"(mar=[0,0,0,0]) # hide
 plot(truenet, :R, nodeLabel = predintPlot(ancTrait3));
 R"dev.off()" # hide
 nothing # hide
@@ -426,7 +429,7 @@ To see this, let's first plot the network with its associated edges and node
 numbers.
 ```@example tree_trait
 R"svg(name('truenet_with_numbers.svg'), width=8, height=4)" # hide
-R"par(mar = c(0, 0, 0, 0))" # hide
+R"par"(mar=[0,0,0,0]) # hide
 plot(truenet, :R, useEdgeLength=true, showEdgeNumber=true);
 R"dev.off()" # hide
 nothing # hide
@@ -464,7 +467,7 @@ nothing # hide
 The traits are simulated using the same function [`simulate`](@ref), and
 extracted at the tips as before.
 ```@example tree_trait
-srand(18700904)
+Random.seed!(18700904)
 sim_sh = simulate(truenet, params_sh) # simulate a shifted BM on truenet
 trait_sh = sim_sh[:Tips]              # trait at the tips (data)
 nothing # hide
