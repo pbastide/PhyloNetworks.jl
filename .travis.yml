@@ -32,6 +32,7 @@ jobs:
     - stage: "Documentation"
       julia: 1.0
       os: linux
+      python: "3.6"
       script:
         - julia --project=docs/ -e 'using Pkg; Pkg.instantiate();
                                     Pkg.develop(PackageSpec(path=pwd()))'
