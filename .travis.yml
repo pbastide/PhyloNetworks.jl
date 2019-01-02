@@ -7,7 +7,6 @@ os:
 julia:
   - 0.7
   - 1.0
-python: "3.6"
 env:
   - DOCUMENTER_DEBUG="true"
 
