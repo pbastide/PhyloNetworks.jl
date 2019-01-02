@@ -7,7 +7,9 @@ os:
 julia:
   - 0.7
   - 1.0
-python: 2.7.9
+python: "3.6"
+env:
+  - DOCUMENTER_DEBUG="true"
 
 notifications:
   email: false
@@ -31,9 +33,7 @@ jobs:
     - stage: "Documentation"
       julia: 1.0
       os: linux
-      python: 2.7.9
-      env:
-        - DOCUMENTER_DEBUG="true"
+      python: "3.6"
       script:
         - julia --project=docs/ -e 'using Pkg; Pkg.instantiate();
                                     Pkg.develop(PackageSpec(path=pwd()))'
