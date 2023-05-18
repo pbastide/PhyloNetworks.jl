@@ -17,16 +17,12 @@ writeExpCF(d::DataCF) = writeExpCF(d.quartet)
 """
     writeTableCF(vector of Quartet objects)
     writeTableCF(DataCF)
-    writeTableCF(vector of QuartetT objects [, taxonames])
 
 Build a DataFrame containing observed quartet concordance factors,
 with columns named:
-- `:tx1`, `:tx2`, `:tx3`, `:tx4` for the four taxon names in each quartet
--  `:CF12_34`, `:CF13_24`, `:CF14_23` for the 3 quartets of a given four-taxon set
-- `:ngenes` if this information is available for some quartets
-
-If the input are [`QuartetT`](@ref) objects, their `data` field needs to
-contain vectors of 4 values.
+- `t1`, `t2`, `t3`, `t4` for the four taxon names in each quartet
+- `CF12_34`, `CF13_24`, `CF14_23` for the 3 quartets of a given four-taxon set
+- `ngenes` if this information is available for some quartets
 """
 function writeTableCF(quartets::Array{Quartet,1})
     df = DataFrames.DataFrame(t1=String[],t2=String[],t3=String[],t4=String[],
@@ -46,21 +42,84 @@ end
 
 writeTableCF(d::DataCF) = writeTableCF(d.quartet)
 
+
+"""
+    writeTableCF(quartetlist::Vector{QuartetT} [, taxonnames]; colnames)
+
+Convert a vector of [`QuartetT`](@ref) objects to a data frame, with 1 row for
+each four-taxon set in the list. Each four-taxon set contains quartet data of
+some type `T`, which determines the number of columns in the data frame.
+This data type `T` should be a vector of length 3 or 4, or a 3×n matrix.
+
+In the output data frame, the columns are, in this order:
+- `qind`: contains the quartet's `number`
+- `t1, t2, t3, t4`: contain the quartet's `taxonnumber`s if no `taxonnames`
+  are given, or the taxon names otherwise. The name of taxon number `i` is
+  taken to be `taxonnames[i]`.
+- 3 columns for each column in the quartet's `data`.
+  The first 3 columns are named `CF12_34, CF13_24, CF14_23`. The next
+  columns are named `V2_12_34, V2_13_24, V2_14_23` and contain the data in
+  the second column of the quartet's data matrix. And so on.
+  For the data frame to have non-default column names, provide the desired
+  3, 4, or 3×n names as a vector via the optional argument `colnames`.
+"""
 function writeTableCF(quartets::Vector{QuartetT{T}},
-                      taxa::AbstractVector{<:AbstractString}=Vector{String}()) where T<:AbstractVector
-    V = eltype(T) # would expect Float64, but Int would be reasonable if counts are not normalized
-    V <: Real || error("CFs need to take real values")
-    df = DataFrames.DataFrame(t1=String[],t2=String[],t3=String[],t4=String[],
-                              CF12_34=V[],CF13_24=V[],CF14_23=V[], ngenes=V[])
-    ntaxa = length(taxa)
-    taxstring = x -> ( x>ntaxa ? string(x) : taxa[x] )
+            taxa::AbstractVector{<:AbstractString}=Vector{String}();
+            colnames=nothing) where
+            T <: Union{StaticVector{3}, StaticVector{4}, StaticMatrix{3,N} where N}
+    V = eltype(T)
+    colnames_data = quartetdata_columnnames(T)
+    if !isnothing(colnames)
+        if length(colnames) == length(colnames_data)
+            colnames_data = colnames
+        else
+          @error "'colnames' needs to be of length $(length(colnames_data)).\nwill use default column names."
+        end
+    end
+    translate = !isempty(taxa)
+    tnT = (translate ? eltype(taxa) : Int) # Type for taxon names
+    if translate
+        taxstring = x -> taxa[x] # will error if a taxonnumber > length(taxa): okay
+    else
+        taxstring = x -> x
+    end
+    df = DataFrames.DataFrame(qind=Int[], t1=tnT[],t2=tnT[],t3=tnT[],t4=tnT[])
+    for cn in colnames_data
+        df[:,Symbol(cn)] = V[]
+    end
     for q in quartets
-        length(q.data) == 4 || error("quartet $(q.data) does not have 4 data points: CF12, CF13, CF14, ngenes")
-        qn = taxstring.(q.taxonnumber)
-        push!(df, [qn[1],qn[2],qn[3],qn[4],q.data[1],q.data[2],q.data[3],q.data[4]])
+      push!(df, (q.number, taxstring.(q.taxonnumber)..., q.data...) )
     end
     return df
 end
+
+"""
+    quartetdata_columnnames(T) where T <: StaticArray
+
+Vector of column names to hold the quartet data of type `T` in a data frame.
+If T is a length-3 vector type, they are "CF12_34","CF13_24","CF14_23".
+If T is a length-4 vector type, the 4th name is "ngenes".
+If T is a 3×n matrix type, the output vector contains 3×n names,
+3 for each of "CF", "V2_", "V3_", ... "Vn_".
+
+Used by [`writeTableCF`](@ref) to build a data frame from a vector of
+[`QuartetT`](@ref) objects.
+"""
+function quartetdata_columnnames(::Type{T}) where T <: StaticArray{Tuple{3},S,1} where S
+    return ["CF12_34","CF13_24","CF14_23"]
+end
+function quartetdata_columnnames(::Type{T}) where T <: StaticArray{Tuple{4},S,1} where S
+    return ["CF12_34","CF13_24","CF14_23","ngenes"]
+end
+function quartetdata_columnnames(::Type{T}) where # for a 3×N matrix: N names
+                T <: StaticArray{Tuple{3,N},S,2} where {N,S}
+    N > 0 || error("expected at least 1 column of data")
+    colnames_q = ["12_34","13_24","14_23"]
+    colnames = "CF" .* colnames_q
+    for i in 2:N append!(colnames, "V$(i)_" .* colnames_q); end
+    return colnames
+end
+
 
 """
     readTableCF(file)
@@ -103,28 +162,28 @@ end
 
 function readTableCF!(df::DataFrames.DataFrame; summaryfile=""::AbstractString, kwargs...)
     @debug "assume the numbers for the taxon read from the observed CF table match the numbers given to the taxon when creating the object network"
+    taxoncolnames = [[:t1, :tx1, :tax1, :taxon1], [:t2, :tx2, :tax2, :taxon2],
+                     [:t3, :tx3, :tax3, :taxon3], [:t4, :tx4, :tax4, :taxon4] ]
+    taxoncol = [findfirst(x-> x ∈ taxoncolnames[1], DataFrames.propertynames(df)),
+                findfirst(x-> x ∈ taxoncolnames[2], DataFrames.propertynames(df)),
+                findfirst(x-> x ∈ taxoncolnames[3], DataFrames.propertynames(df)),
+                findfirst(x-> x ∈ taxoncolnames[4], DataFrames.propertynames(df))]
     alternativecolnames = [ # obsCF12 is as exported by fittedQuartetCF()
-        [:CF12_34, Symbol("CF12.34"), :obsCF12],
-        [:CF13_24, Symbol("CF13.24"), :obsCF13],
-        [:CF14_23, Symbol("CF14.23"), :obsCF14]
+        [:CF12_34, Symbol("CF12.34"), :obsCF12, :CF1234],
+        [:CF13_24, Symbol("CF13.24"), :obsCF13, :CF1324],
+        [:CF14_23, Symbol("CF14.23"), :obsCF14, :CF1423]
     ]
     obsCFcol = [findfirst(x-> x ∈ alternativecolnames[1], DataFrames.propertynames(df)),
                 findfirst(x-> x ∈ alternativecolnames[2], DataFrames.propertynames(df)),
                 findfirst(x-> x ∈ alternativecolnames[3], DataFrames.propertynames(df))]
     ngenecol =  findfirst(isequal(:ngenes), DataFrames.propertynames(df))
     withngenes = ngenecol !== nothing
-    if nothing in obsCFcol # one or more col names for CFs were not found
-        size(df,2) == (withngenes ? 8 : 7) ||
-          @warn """Column names for quartet concordance factors (CFs) were not recognized.
-          Was expecting CF12_34, CF13_24 and CF14_23 for the columns with CF values,
-          or CF12.34 or obsCF12, etc.
-          Will assume that the first 4 columns give the taxon names, and that columns 5-7 give the CFs."""
-        obsCFcol = [5,6,7] # assuming CFs are in columns 5,6,7, with colname mismatch
-    end
-    minimum(obsCFcol) > 4 ||
-        error("CFs found in columns $obsCFcol, but taxon labels expected in columns 1-4")
-    # fixit: what about columns giving the taxon names: always assumed to be columns 1-4? No warning if not?
-    columns = [[1,2,3,4]; obsCFcol]
+    nothing in taxoncol && error("columns for taxon names were not found")
+    nothing in obsCFcol && error(
+      """Could not identify columns with quartet concordance factors (qCFs).
+      Was expecting CF12_34, CF13_24 and CF14_23 for the columns with CF values,
+      or CF12.34 or obsCF12, etc.""")
+    columns = [taxoncol; obsCFcol]
     if withngenes  push!(columns, ngenecol)  end
 
     d = readTableCF!(df, columns; kwargs...)
@@ -602,15 +661,16 @@ data: [1.0, 0.0, 0.0, 0.5]
 julia> df = writeTableCF(q,t); # to get a DataFrame that can be saved to a file later
 
 julia> show(df, allcols=true)
-5×8 DataFrame
- Row │ t1      t2      t3      t4      CF12_34  CF13_24  CF14_23  ngenes  
-     │ String  String  String  String  Float64  Float64  Float64  Float64 
-─────┼────────────────────────────────────────────────────────────────────
-   1 │ A       B       D       E          0.25     0.25      0.5      2.0
-   2 │ A       B       D       O          0.5      0.5       0.0      1.0
-   3 │ A       B       E       O          1.0      0.0       0.0      0.5
-   4 │ A       D       E       O          1.0      0.0       0.0      0.5
-   5 │ B       D       E       O          0.0      0.0       0.0      0.0
+5×9 DataFrame
+ Row │ qind   t1      t2      t3      t4      CF12_34  CF13_24  CF14_23  ngenes  
+     │ Int64  String  String  String  String  Float64  Float64  Float64  Float64 
+─────┼───────────────────────────────────────────────────────────────────────────
+   1 │     1  A       B       D       E          0.25     0.25      0.5      2.0
+   2 │     2  A       B       D       O          0.5      0.5       0.0      1.0
+   3 │     3  A       B       E       O          1.0      0.0       0.0      0.5
+   4 │     4  A       D       E       O          1.0      0.0       0.0      0.5
+   5 │     5  B       D       E       O          0.0      0.0       0.0      0.0
+
 julia> # using CSV; CSV.write(df, "filename.csv");
 
 julia> tree2 = readTopology("((A,(B,D)),E);");
@@ -621,15 +681,15 @@ Reading in trees, looking at 5 quartets in each...
   **
 
 julia> show(writeTableCF(q,t), allcols=true)
-5×8 DataFrame
- Row │ t1      t2      t3      t4      CF12_34   CF13_24   CF14_23   ngenes  
-     │ String  String  String  String  Float64   Float64   Float64   Float64 
-─────┼───────────────────────────────────────────────────────────────────────
-   1 │ A       B       D       E       0.333333  0.333333  0.333333      3.0
-   2 │ A       B       D       O       0.5       0.5       0.0           2.0
-   3 │ A       B       E       O       1.0       0.0       0.0           1.0
-   4 │ A       D       E       O       1.0       0.0       0.0           1.0
-   5 │ B       D       E       O       0.0       0.0       0.0           0.0
+5×9 DataFrame
+ Row │ qind   t1      t2      t3      t4      CF12_34   CF13_24   CF14_23   ngenes  
+     │ Int64  String  String  String  String  Float64   Float64   Float64   Float64 
+─────┼──────────────────────────────────────────────────────────────────────────────
+   1 │     1  A       B       D       E       0.333333  0.333333  0.333333      3.0
+   2 │     2  A       B       D       O       0.5       0.5       0.0           2.0
+   3 │     3  A       B       E       O       1.0       0.0       0.0           1.0
+   4 │     4  A       D       E       O       1.0       0.0       0.0           1.0
+   5 │     5  B       D       E       O       0.0       0.0       0.0           0.0
 ```
 """
 function countquartetsintrees(tree::Vector{HybridNetwork},
@@ -963,7 +1023,9 @@ function readTrees2CF(treefile::AbstractString; quartetfile="none"::AbstractStri
                       writeTab=true::Bool, CFfile="none"::AbstractString,
                       taxa::AbstractVector=Vector{String}(),
                       writeQ=false::Bool, writeSummary=true::Bool, nexus=false::Bool)
-    trees = (nexus ? readNexusTrees(treefile, readTopologyUpdate, false, false) : readInputTrees(treefile))
+    trees = (nexus ?
+             readnexus_treeblock(treefile, readTopologyUpdate, false, false; reticulate=false) :
+             readInputTrees(treefile))
     if length(taxa)==0        # unionTaxa(trees) NOT default argument:
       taxa = unionTaxa(trees) # otherwise: tree file is read twice
     end
@@ -1275,49 +1337,3 @@ function createQuartet(taxa::Union{Vector{<:AbstractString},Vector{Int}}, qvec::
     end
     return Quartet(num,names,[1.0,0.0,0.0])
 end
-
-"""
-    readNexusTrees(filename::AbstractString, treereader=readTopology::Function [, args...])
-
-Read trees in nexus-formatted file and return a vector of `HybridNetwork`s.
-For the nexus format, see Maddison, Swofford & Maddison (1997)
-https://doi.org/10.1093/sysbio/46.4.590.
-The optional arguments are passed onto the individual tree reader.
-
-Warnings:
-- "translate" tables are not supported yet
-- only the first tree block is read
-"""
-function readNexusTrees(file::AbstractString, treereader=readTopology::Function, args...)
-    vnet = HybridNetwork[]
-    rx_start = r"^\s*begin\s+trees\s*;"i
-    rx_end = r"^\s*end\s*;"i
-    rx_tree = r"^\s*tree\s+[^(]+(\([^;]*;)"i
-    # spaces,"Tree",spaces,any_symbols_other_than_(, then we capture:
-    # ( any_symbols_other_than_; ;
-    treeblock = false # whether we are currently reading the TREE block or not
-    open(file) do s
-        numl = 0
-        for line in eachline(s)
-            numl += 1
-            if treeblock # currently reading trees, check for END signal
-                occursin(rx_end, line) && break # break if end of tree block
-            else # not reading trees: check for the BEGIN signal
-                if occursin(rx_start, line) treeblock=true; end
-                continue # to next line, either way
-            end
-            # if we get there, it's that we are inside the treeblock (true) and no END signal yet
-            m = match(rx_tree, line)
-            m != nothing || continue # continue to next line if no match
-            phy = m.captures[1] # string
-            try
-                push!(vnet, treereader(phy, args...)) # readTopologyUpdate(phy,false)
-            catch err
-                print("skipped phylogeny on line $(numl) of file $file: ")
-                if :msg in fieldnames(typeof(err)) println(err.msg); else println(typeof(err)); end
-            end
-        end
-    end
-    return vnet # consistent output type: HybridNetwork vector. might be of length 0.
-end
-
